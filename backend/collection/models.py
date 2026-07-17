@@ -21,3 +21,22 @@ class StudentLocation(models.Model):
 
     def __str__(self):
         return f'{self.roll_no} – {self.name}'
+
+
+class RoadSegment(models.Model):
+    """
+    A single road LineString from the SelectiveRoadTopology dataset.
+    coordinates is stored as a JSON list of [lng, lat] pairs (GeoJSON order).
+    """
+    osm_id = models.BigIntegerField(unique=True)
+    name = models.CharField(max_length=200, blank=True, default='')
+    highway = models.CharField(max_length=60, blank=True, default='')
+    coordinates = models.JSONField()          # [[lng, lat], [lng, lat], ...]
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Road Segment'
+        verbose_name_plural = 'Road Segments'
+
+    def __str__(self):
+        return f'{self.highway} – {self.name or self.osm_id}'

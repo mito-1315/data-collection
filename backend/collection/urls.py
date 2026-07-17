@@ -14,4 +14,7 @@ urlpatterns = [
 
     # ── Stats ──────────────────────────────────────────────────────
     path('stats/',             views.stats_view,              name='stats'),
+
+    # ── Road segments (public) ─────────────────────────────────────
+    path('roads/',             views.roads_view,              name='roads'),
 ]

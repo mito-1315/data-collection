@@ -10,7 +10,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from .models import StudentLocation
+from django.http import JsonResponse
+from .models import StudentLocation, RoadSegment
 from .serializers import StudentLocationSerializer
 
 
@@ -176,4 +177,23 @@ def stats_view(request):
 
     return Response({
         'total_entries': StudentLocation.objects.count(),
+        'total_road_segments': RoadSegment.objects.count(),
     })
+
+
+# ─── Road Segments ────────────────────────────────────────────────────────────
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def roads_view(request):
+    """
+    GET /api/roads/
+    Returns all road polyline coordinates as a lightweight JSON list.
+    No auth required — data is public bus route geometry.
+    Response: { "segments": [ [[lng,lat], ...], ... ] }
+    """
+    segments = list(
+        RoadSegment.objects.values_list('coordinates', flat=True)
+    )
+    return JsonResponse({'segments': segments})
