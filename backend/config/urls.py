@@ -1,8 +1,7 @@
 """config URL configuration."""
-from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # Removed Django admin to prevent confusion with Next.js frontend admin
     path('api/', include('collection.urls')),
 ]

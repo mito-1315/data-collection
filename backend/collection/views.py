@@ -216,6 +216,40 @@ def roads_view(request):
     return JsonResponse({'segments': segments})
 
 
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def departments_list(request):
+    """
+    GET /api/departments/
+    Returns unique departments from students.
+    """
+    deps = Student.objects.values_list('department', flat=True).distinct()
+    deps = [d for d in deps if d]
+    return JsonResponse({'departments': deps})
+
+
+def is_admin_authorized(request):
+    print(f"DEBUG: request.method={request.method}")
+    print(f"DEBUG: request.session.session_key={request.session.session_key}")
+    print(f"DEBUG: dict(request.session)={dict(request.session)}")
+    print(f"DEBUG: request.COOKIES={request.COOKIES}")
+    
+    if request.session.get('is_admin', False):
+        return True
+    
+    # Check if a Django Admin user is logged in
+    user_id = request.session.get('_auth_user_id')
+    if user_id:
+        from django.contrib.auth.models import User
+        try:
+            user = User.objects.get(pk=user_id)
+            return user.is_staff
+        except User.DoesNotExist:
+            pass
+    return False
+
+
 # ─── Student Management ────────────────────────────────────────────────────────
 
 @csrf_exempt
@@ -226,8 +260,7 @@ def student_list(request):
     GET  /api/students/
     POST /api/students/ (single create)
     """
-    is_admin = request.session.get('is_admin', False)
-    if not is_admin:
+    if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     if request.method == 'GET':
@@ -256,8 +289,7 @@ def student_detail(request, pk):
     PUT    /api/students/<pk>/
     DELETE /api/students/<pk>/
     """
-    is_admin = request.session.get('is_admin', False)
-    if not is_admin:
+    if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     try:
@@ -289,8 +321,7 @@ def student_bulk(request):
     POST /api/students/bulk/
     Receives JSON array of students to create.
     """
-    is_admin = request.session.get('is_admin', False)
-    if not is_admin:
+    if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     students_data = request.data
@@ -325,8 +356,7 @@ def student_bulk_delete(request):
     POST /api/students/bulk_delete/
     Receives { "ids": [1, 2, 3] }
     """
-    is_admin = request.session.get('is_admin', False)
-    if not is_admin:
+    if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     ids = request.data.get('ids', [])

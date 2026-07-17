@@ -18,6 +18,20 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
   const [form, setForm] = useState({
     name: '', email: '', password: '', department: '', roll_number: ''
   });
+  const [departments, setDepartments] = useState<string[]>([]);
+
+  // Fetch departments on mount
+  useState(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/departments/`)
+      .then(r => r.json())
+      .then(d => {
+        if (d.departments) {
+          setDepartments(d.departments);
+          if (d.departments.length > 0) setForm(f => ({ ...f, department: d.departments[0] }));
+        }
+      })
+      .catch(console.error);
+  });
 
   // Validation logic
   const validateRollNumber = (roll: string) => {
@@ -39,6 +53,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/students/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(form)
       });
       if (res.ok) {
@@ -91,6 +106,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/students/bulk/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(rows)
           });
           const data = await res.json();
@@ -112,7 +128,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
   };
 
   const downloadSample = () => {
-    const csvContent = "data:text/csv;charset=utf-8,name,email,password,department,roll_number\nJohn Doe,john@example.com,secret123,CSE,211723010\n";
+    const csvContent = "data:text/csv;charset=utf-8,name,email,password,department,roll_number\nMonkey D Luffy,luffy@example.com,secret123,Computer Science,230701184\n";
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -176,7 +192,10 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
               </div>
               <div className="form-field" style={{ marginBottom: 0, flex: 1 }}>
                 <label className="form-label">Department</label>
-                <input type="text" className="form-input" required value={form.department} onChange={e => setForm({...form, department: e.target.value})} />
+                <select className="form-input" required value={form.department} onChange={e => setForm({...form, department: e.target.value})}>
+                  <option value="" disabled>Select department...</option>
+                  {departments.map(d => <option key={d} value={d}>{d}</option>)}
+                </select>
               </div>
             </div>
             <div className="form-field" style={{ marginBottom: 0 }}>

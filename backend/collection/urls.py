@@ -23,4 +23,7 @@ urlpatterns = [
     path('students/bulk/',         views.student_bulk,        name='student-bulk'),
     path('students/bulk_delete/',  views.student_bulk_delete, name='student-bulk-delete'),
     path('students/<int:pk>/',     views.student_detail,      name='student-detail'),
+
+    # ── Departments ────────────────────────────────────────────────
+    path('departments/',           views.departments_list,    name='departments-list'),
 ]
