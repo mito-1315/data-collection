@@ -1,0 +1,112 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${API}/api/auth/login/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',          // send/receive session cookie
+        body: JSON.stringify({ username: username.trim(), password }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        // Keep the username in sessionStorage so the form page can display it
+        sessionStorage.setItem('rec_auth', data.username);
+        router.push('/form');
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.detail ?? 'Invalid username or password. Please try again.');
+      }
+    } catch {
+      setError('Could not reach the server. Is the backend running?');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="login-page">
+      <div className="login-bg-glow" />
+
+      <div className="login-card">
+        {/* Logo */}
+        <div className="login-logo">
+          <div className="login-logo-icon">🎓</div>
+          <div className="login-logo-text">
+            Rajalakshmi Engineering College
+            <span>Transport Data Collection</span>
+          </div>
+        </div>
+
+        {/* Heading */}
+        <h1 className="login-title">Welcome back</h1>
+        <p className="login-subtitle">
+          Sign in to access the student location data collection portal.
+        </p>
+
+        {/* Form */}
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label className="form-label" htmlFor="username">
+              Roll Number
+            </label>
+            <input
+              id="username"
+              type="text"
+              className="form-input"
+              placeholder="e.g. 2116230101001"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoComplete="username"
+              required
+            />
+          </div>
+
+          <div className="form-field">
+            <label className="form-label" htmlFor="password">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="form-input"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              required
+            />
+          </div>
+
+          {error && <div className="login-error">{error}</div>}
+
+          <button
+            id="login-submit-btn"
+            type="submit"
+            className="btn-primary"
+            disabled={loading || !username || !password}
+          >
+            {loading ? 'Signing in…' : 'Sign in →'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
