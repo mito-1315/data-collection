@@ -11,8 +11,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from django.http import JsonResponse
-from .models import StudentLocation, RoadSegment
-from .serializers import StudentLocationSerializer
+from django.contrib.auth import authenticate, login
+from .models import StudentLocation, RoadSegment, Student
+from .serializers import StudentLocationSerializer, StudentSerializer
 
 
 # ─── Auth ────────────────────────────────────────────────────────────────────
@@ -23,16 +24,31 @@ from .serializers import StudentLocationSerializer
 def login_view(request):
     """
     POST /api/auth/login/
-    Body: { "username": "2116230101001", "password": "student123" }
+    Body: { "username": "2116230101001", "password": "password" }
     """
     username = request.data.get('username', '').strip()
     password = request.data.get('password', '')
 
-    student_password = getattr(settings, 'PORTAL_STUDENT_PASSWORD', 'student123')
-    if password == student_password and username:
+    if not username or not password:
+        return Response({'detail': 'Username and password required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # 1. Check if admin
+    admin_user = authenticate(request, username=username, password=password)
+    if admin_user is not None:
+        login(request, admin_user)
         request.session['portal_user'] = username
-        request.session.save()
-        return Response({'username': username})
+        request.session['is_admin'] = True
+        return Response({'username': username, 'role': 'admin'})
+
+    # 2. Check if student
+    try:
+        student = Student.objects.get(roll_number=username)
+        if student.check_password(password):
+            request.session['portal_user'] = username
+            request.session['is_admin'] = False
+            return Response({'username': username, 'role': 'student'})
+    except Student.DoesNotExist:
+        pass
 
     return Response(
         {'detail': 'Invalid username or password.'},
@@ -58,8 +74,9 @@ def me_view(request):
     Returns the current portal user if they have an active session.
     """
     portal_user = request.session.get('portal_user')
+    is_admin = request.session.get('is_admin', False)
     if portal_user:
-        return Response({'username': portal_user})
+        return Response({'username': portal_user, 'role': 'admin' if is_admin else 'student'})
     return Response({'detail': 'Not authenticated.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -197,3 +214,124 @@ def roads_view(request):
         RoadSegment.objects.values_list('coordinates', flat=True)
     )
     return JsonResponse({'segments': segments})
+
+
+# ─── Student Management ────────────────────────────────────────────────────────
+
+@csrf_exempt
+@api_view(['GET', 'POST'])
+@permission_classes([AllowAny])
+def student_list(request):
+    """
+    GET  /api/students/
+    POST /api/students/ (single create)
+    """
+    is_admin = request.session.get('is_admin', False)
+    if not is_admin:
+        return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    if request.method == 'GET':
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data)
+
+    # POST (Single Add)
+    serializer = StudentSerializer(data=request.data)
+    if serializer.is_valid():
+        raw_pwd = request.data.get('password')
+        if not raw_pwd:
+            return Response({'detail': 'Password required.'}, status=status.HTTP_400_BAD_REQUEST)
+        student = serializer.save()
+        student.set_password(raw_pwd)
+        student.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@csrf_exempt
+@api_view(['PUT', 'DELETE'])
+@permission_classes([AllowAny])
+def student_detail(request, pk):
+    """
+    PUT    /api/students/<pk>/
+    DELETE /api/students/<pk>/
+    """
+    is_admin = request.session.get('is_admin', False)
+    if not is_admin:
+        return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = StudentSerializer(student, data=request.data, partial=True)
+        if serializer.is_valid():
+            raw_pwd = request.data.get('password')
+            student = serializer.save()
+            if raw_pwd:
+                student.set_password(raw_pwd)
+                student.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # DELETE
+    student.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def student_bulk(request):
+    """
+    POST /api/students/bulk/
+    Receives JSON array of students to create.
+    """
+    is_admin = request.session.get('is_admin', False)
+    if not is_admin:
+        return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    students_data = request.data
+    if not isinstance(students_data, list):
+        return Response({'detail': 'Expected a list of objects.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    created_count = 0
+    errors = []
+    
+    for item in students_data:
+        serializer = StudentSerializer(data=item)
+        if serializer.is_valid():
+            raw_pwd = item.get('password')
+            if not raw_pwd:
+                errors.append({'roll_number': item.get('roll_number'), 'detail': 'Missing password.'})
+                continue
+            student = serializer.save()
+            student.set_password(raw_pwd)
+            student.save()
+            created_count += 1
+        else:
+            errors.append({'roll_number': item.get('roll_number'), 'errors': serializer.errors})
+
+    return Response({'created': created_count, 'errors': errors})
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def student_bulk_delete(request):
+    """
+    POST /api/students/bulk_delete/
+    Receives { "ids": [1, 2, 3] }
+    """
+    is_admin = request.session.get('is_admin', False)
+    if not is_admin:
+        return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    ids = request.data.get('ids', [])
+    if not ids:
+        return Response({'detail': 'No IDs provided.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    deleted_count, _ = Student.objects.filter(id__in=ids).delete()
+    return Response({'deleted': deleted_count})

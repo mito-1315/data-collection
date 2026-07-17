@@ -49,10 +49,12 @@ function MapLayer({
   roads,
   markerPos,
   onSnappedClick,
+  onZoomChange,
 }: {
   roads: RoadLine[];
   markerPos: { lat: number; lng: number } | null;
   onSnappedClick: (lat: number, lng: number) => void;
+  onZoomChange: (isZoomedIn: boolean) => void;
 }) {
   const map = useMap();
   const mapsLib = useMapsLibrary('maps');
@@ -99,11 +101,14 @@ function MapLayer({
     polylinesRef.current = [];
     polyListenersRef.current = [];
 
+    const currentZoom = map.getZoom() ?? DEFAULT_ZOOM;
+    const shouldShow = currentZoom >= 14;
+
     roads.forEach((coords) => {
       const path = coords.map(([lng, lat]) => ({ lat, lng }));
       const poly = new google.maps.Polyline({
         path,
-        map,
+        map: shouldShow ? map : null,
         strokeColor: '#9b59f5',
         strokeOpacity: 0.85,
         strokeWeight: 4, // slightly thicker for easier clicking
@@ -121,6 +126,27 @@ function MapLayer({
       polyListenersRef.current = [];
     };
   }, [map, mapsLib, roads, handleMapOrPolyClick]);
+
+  // Handle zoom changes
+  useEffect(() => {
+    if (!map) return;
+    
+    // Set initial
+    const initialZoom = map.getZoom() ?? DEFAULT_ZOOM;
+    onZoomChange(initialZoom >= 14);
+
+    const listener = map.addListener('zoom_changed', () => {
+      const z = map.getZoom() ?? DEFAULT_ZOOM;
+      const shouldShow = z >= 14;
+      onZoomChange(shouldShow);
+      
+      polylinesRef.current.forEach((p) => p.setMap(shouldShow ? map : null));
+    });
+
+    return () => {
+      google.maps.event.removeListener(listener);
+    };
+  }, [map, onZoomChange]);
 
   // Click → snap → callback
   useEffect(() => {
@@ -170,6 +196,7 @@ export default function FormPage() {
   const [user, setUser] = useState<string | null>(null);
   const [roads, setRoads] = useState<RoadLine[]>([]);
   const [roadsLoaded, setRoadsLoaded] = useState(false);
+  const [isZoomedIn, setIsZoomedIn] = useState(false);
 
   const [form, setForm] = useState<FormData>({
     rollNo: '',
@@ -351,6 +378,18 @@ export default function FormPage() {
 
                 {/* Map */}
                 <div className="map-picker-container">
+                  {!isZoomedIn && roadsLoaded && (
+                    <div className="map-zoom-hint">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" strokeWidth="2.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/>
+                        <line x1="8" y1="11" x2="14" y2="11"/>
+                      </svg>
+                      Zoom in closer to view the bus routes
+                    </div>
+                  )}
                   {!roadsLoaded && (
                     <div className="map-loading-overlay">
                       <div className="spinner" />
@@ -369,6 +408,7 @@ export default function FormPage() {
                       roads={roads}
                       markerPos={markerPos}
                       onSnappedClick={handleSnappedClick}
+                      onZoomChange={setIsZoomedIn}
                     />
                   </Map>
                 </div>

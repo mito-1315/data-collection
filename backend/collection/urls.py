@@ -17,4 +17,10 @@ urlpatterns = [
 
     # ── Road segments (public) ─────────────────────────────────────
     path('roads/',             views.roads_view,              name='roads'),
+
+    # ── Student management ─────────────────────────────────────────
+    path('students/',              views.student_list,        name='student-list'),
+    path('students/bulk/',         views.student_bulk,        name='student-bulk'),
+    path('students/bulk_delete/',  views.student_bulk_delete, name='student-bulk-delete'),
+    path('students/<int:pk>/',     views.student_detail,      name='student-detail'),
 ]
