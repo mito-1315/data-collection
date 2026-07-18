@@ -22,6 +22,7 @@ interface FormData {
   lat: number | null;
   lng: number | null;
   address: string;
+  email: string;
 }
 
 type LatLng = [number, number]; // [lng, lat] — GeoJSON order
@@ -204,6 +205,7 @@ export default function FormPage() {
     lat: null,
     lng: null,
     address: '',
+    email: '',
   });
 
   const [markerPos, setMarkerPos] = useState<{ lat: number; lng: number } | null>(null);
@@ -226,13 +228,14 @@ export default function FormPage() {
   // Auth guard
   useEffect(() => {
     const stored = sessionStorage.getItem('rec_auth');
-    if (!stored) { router.replace('/'); return; }
+    const token = localStorage.getItem('token');
+    if (!stored || !token) { router.replace('/'); return; }
 
-    fetch(`${API}/api/auth/me/`, { credentials: 'include' })
+    fetch(`${API}/api/auth/me/`, { headers: { 'Authorization': `Bearer ${token}` } })
       .then((res) => { if (res.ok) return res.json(); throw new Error(); })
       .then((data) => {
-        setUser(data.username);
-        setForm((f) => ({ ...f, rollNo: data.username }));
+        setUser(data.email);
+        setForm((f) => ({ ...f, rollNo: data.email, email: data.email }));
       })
       .catch(() => { sessionStorage.removeItem('rec_auth'); router.replace('/'); });
   }, [router]);
@@ -276,15 +279,17 @@ export default function FormPage() {
     try {
       const res = await fetch(`${API}/api/entries/`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ roll_no: form.rollNo, name: form.name, lat: form.lat, lng: form.lng, address: form.address }),
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ email: form.email, name: form.name, lat: form.lat, lng: form.lng, address: form.address }),
       });
       if (res.ok) {
         setSuccess(true);
       } else {
         const data = await res.json().catch(() => ({}));
-        setError(data.roll_no?.[0] ?? data.detail ?? 'Failed to save. Please try again.');
+        setError(data.email?.[0] ?? data.detail ?? 'Failed to save. Please try again.');
       }
     } catch {
       setError('Could not reach the server. Is the backend running?');
@@ -341,9 +346,9 @@ export default function FormPage() {
               <div className="form-step-body">
                 <div className="field-row">
                   <div className="form-field">
-                    <label className="form-label" htmlFor="rollNo">Roll Number</label>
-                    <input id="rollNo" type="text" className="form-input form-input-readonly"
-                      value={form.rollNo} readOnly disabled />
+                    <label className="form-label" htmlFor="email">Email Address</label>
+                    <input id="email" type="email" className="form-input form-input-readonly"
+                      value={form.email} readOnly disabled />
                   </div>
                   <div className="form-field">
                     <label className="form-label" htmlFor="studentName">Full Name</label>

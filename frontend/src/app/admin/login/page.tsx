@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,19 +19,16 @@ export default function AdminLoginPage() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/auth/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        if (data.role === 'admin') {
-          router.replace('/admin/users');
-        } else {
-          setError('Access denied. You are not an admin.');
-        }
+      const data = await res.json();
+      
+      if (res.ok && data.role === 'admin') {
+        localStorage.setItem('token', data.access);
+        router.push('/admin/users');
       } else {
-        setError('Invalid admin credentials.');
+        setError('Access denied. You are not an admin.');
       }
     } catch (err) {
       setError('Network error. Is the backend running?');
@@ -49,13 +46,14 @@ export default function AdminLoginPage() {
         </div>
         <form onSubmit={handleLogin} className="login-form">
           <div className="form-field">
-            <label className="form-label" htmlFor="username">Username</label>
+            <label className="form-label" htmlFor="email">Email</label>
             <input
-              id="username"
-              type="text"
+              id="email"
+              type="email"
               className="form-input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="admin@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>

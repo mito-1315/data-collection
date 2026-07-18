@@ -14,11 +14,12 @@ def create_admin():
     password = os.environ.get('PORTAL_ADMIN_PASSWORD', 'admin123')
     
     if User.objects.filter(username=username).exists():
-        print(f"Admin user '{username}' already exists. Updating password to ensure it is correct...")
+        print(f"Admin user '{username}' already exists. Updating password and email...")
         user = User.objects.get(username=username)
+        user.email = email
         user.set_password(password)
         user.save()
-        print("Admin user password updated successfully.")
+        print("Admin user updated successfully.")
         return
 
     print(f"Creating superuser '{username}'...")

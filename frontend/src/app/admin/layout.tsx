@@ -18,18 +18,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
 
     const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.replace('/admin/login');
+        return;
+      }
+
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/auth/me/`, {
-          credentials: 'include',
+          headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
           const data = await res.json();
           if (data.role === 'admin') {
             setIsAdmin(true);
           } else {
+            localStorage.removeItem('token');
             router.replace('/admin/login');
           }
         } else {
+          localStorage.removeItem('token');
           router.replace('/admin/login');
         }
       } catch (e) {
@@ -40,10 +48,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }, [pathname, router]);
 
   const handleLogout = async () => {
+    localStorage.removeItem('token');
     await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/auth/logout/`, {
       method: 'POST',
-      credentials: 'include',
-    });
+    }).catch(() => {});
+    setIsAdmin(false);
     router.replace('/admin/login');
   };
 

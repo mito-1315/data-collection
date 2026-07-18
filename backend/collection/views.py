@@ -16,6 +16,9 @@ from .models import StudentLocation, RoadSegment, Student
 from .serializers import StudentLocationSerializer, StudentSerializer
 
 
+from rest_framework_simplejwt.tokens import RefreshToken
+import jwt
+
 # ─── Auth ────────────────────────────────────────────────────────────────────
 
 @csrf_exempt
@@ -24,34 +27,50 @@ from .serializers import StudentLocationSerializer, StudentSerializer
 def login_view(request):
     """
     POST /api/auth/login/
-    Body: { "username": "2116230101001", "password": "password" }
+    Body: { "email": "admin@example.com", "password": "password" }
     """
-    username = request.data.get('username', '').strip()
+    email = request.data.get('email', '').strip()
     password = request.data.get('password', '')
 
-    if not username or not password:
-        return Response({'detail': 'Username and password required.'}, status=status.HTTP_400_BAD_REQUEST)
+    if not email or not password:
+        return Response({'detail': 'Email and password required.'}, status=status.HTTP_400_BAD_REQUEST)
 
     # 1. Check if admin
-    admin_user = authenticate(request, username=username, password=password)
-    if admin_user is not None:
-        login(request, admin_user)
-        request.session['portal_user'] = username
-        request.session['is_admin'] = True
-        return Response({'username': username, 'role': 'admin'})
+    from django.contrib.auth.models import User
+    try:
+        admin_user = User.objects.get(email=email)
+        if admin_user.check_password(password) and admin_user.is_staff:
+            token = RefreshToken.for_user(admin_user)
+            token['role'] = 'admin'
+            token['email'] = email
+            return Response({
+                'email': email,
+                'role': 'admin',
+                'access': str(token.access_token),
+                'refresh': str(token)
+            })
+    except User.DoesNotExist:
+        pass
 
     # 2. Check if student
     try:
-        student = Student.objects.get(roll_number=username)
+        student = Student.objects.get(email=email)
         if student.check_password(password):
-            request.session['portal_user'] = username
-            request.session['is_admin'] = False
-            return Response({'username': username, 'role': 'student'})
+            token = RefreshToken()
+            token['user_id'] = f"student_{student.id}"
+            token['email'] = email
+            token['role'] = 'student'
+            return Response({
+                'email': email,
+                'role': 'student',
+                'access': str(token.access_token),
+                'refresh': str(token)
+            })
     except Student.DoesNotExist:
         pass
 
     return Response(
-        {'detail': 'Invalid username or password.'},
+        {'detail': 'Invalid email or password.'},
         status=status.HTTP_401_UNAUTHORIZED,
     )
 
@@ -61,8 +80,20 @@ def login_view(request):
 @permission_classes([AllowAny])
 def logout_view(request):
     """POST /api/auth/logout/"""
-    request.session.flush()
+    # JWTs are stateless, but we can return success.
     return Response({'detail': 'Logged out.'})
+
+
+def get_jwt_payload(request):
+    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    if auth_header.startswith('Bearer '):
+        token = auth_header.split(' ')[1]
+        try:
+            # SimpleJWT uses settings.SECRET_KEY by default
+            return jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+        except Exception:
+            pass
+    return None
 
 
 @csrf_exempt
@@ -71,20 +102,22 @@ def logout_view(request):
 def me_view(request):
     """
     GET /api/auth/me/
-    Returns the current portal user if they have an active session.
+    Returns the current portal user if they have a valid JWT.
     """
-    portal_user = request.session.get('portal_user')
-    is_admin = request.session.get('is_admin', False)
-    if portal_user:
-        return Response({'username': portal_user, 'role': 'admin' if is_admin else 'student'})
+    payload = get_jwt_payload(request)
+    if payload:
+        return Response({'email': payload.get('email'), 'role': payload.get('role')})
     return Response({'detail': 'Not authenticated.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 # ─── Middleware helper ────────────────────────────────────────────────────────
 
 def _require_portal_auth(request):
-    """Returns the portal username or None."""
-    return request.session.get('portal_user')
+    """Returns the portal email or None."""
+    payload = get_jwt_payload(request)
+    if payload:
+        return payload.get('email')
+    return None
 
 
 # ─── Student Location CRUD ────────────────────────────────────────────────────
@@ -230,24 +263,8 @@ def departments_list(request):
 
 
 def is_admin_authorized(request):
-    print(f"DEBUG: request.method={request.method}")
-    print(f"DEBUG: request.session.session_key={request.session.session_key}")
-    print(f"DEBUG: dict(request.session)={dict(request.session)}")
-    print(f"DEBUG: request.COOKIES={request.COOKIES}")
-    
-    if request.session.get('is_admin', False):
-        return True
-    
-    # Check if a Django Admin user is logged in
-    user_id = request.session.get('_auth_user_id')
-    if user_id:
-        from django.contrib.auth.models import User
-        try:
-            user = User.objects.get(pk=user_id)
-            return user.is_staff
-        except User.DoesNotExist:
-            pass
-    return False
+    payload = get_jwt_payload(request)
+    return payload is not None and payload.get('role') == 'admin'
 
 
 # ─── Student Management ────────────────────────────────────────────────────────

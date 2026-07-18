@@ -7,7 +7,7 @@ const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -21,14 +21,14 @@ export default function LoginPage() {
       const res = await fetch(`${API}/api/auth/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',          // send/receive session cookie
-        body: JSON.stringify({ username: username.trim(), password }),
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
       if (res.ok) {
         const data = await res.json();
-        // Keep the username in sessionStorage so the form page can display it
-        sessionStorage.setItem('rec_auth', data.username);
+        // Save token and email
+        localStorage.setItem('token', data.access);
+        sessionStorage.setItem('rec_auth', data.email);
         router.push('/form');
       } else {
         const data = await res.json().catch(() => ({}));
@@ -64,17 +64,17 @@ export default function LoginPage() {
         {/* Form */}
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-field">
-            <label className="form-label" htmlFor="username">
-              Roll Number
+            <label className="form-label" htmlFor="email">
+              Email Address
             </label>
             <input
-              id="username"
-              type="text"
+              id="email"
+              type="email"
               className="form-input"
-              placeholder="e.g. 2116230101001"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              autoComplete="username"
+              placeholder="e.g. student@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
               required
             />
           </div>
@@ -101,7 +101,7 @@ export default function LoginPage() {
             id="login-submit-btn"
             type="submit"
             className="btn-primary"
-            disabled={loading || !username || !password}
+            disabled={loading || !email || !password}
           >
             {loading ? 'Signing in…' : 'Sign in →'}
           </button>
