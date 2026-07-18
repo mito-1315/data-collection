@@ -1,6 +1,23 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
 
+
+class Department(models.Model):
+    """
+    Stores academic departments.
+    """
+    code = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ['code']
+        verbose_name = 'Department'
+        verbose_name_plural = 'Departments'
+
+    def __str__(self):
+        return f'{self.code} - {self.name}'
+
+
 class Student(models.Model):
     """
     Stores a student account that can log into the portal.
@@ -29,7 +46,6 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.roll_number} – {self.name}'
-
 
 
 class StudentLocation(models.Model):

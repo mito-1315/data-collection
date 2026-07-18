@@ -2,16 +2,15 @@ import csv
 
 from django.conf import settings
 from django.contrib.auth import login, logout
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from django.http import JsonResponse
-from django.contrib.auth import authenticate, login
 from .models import StudentLocation, RoadSegment, Student
 from .serializers import StudentLocationSerializer, StudentSerializer
 
@@ -19,7 +18,46 @@ from .serializers import StudentLocationSerializer, StudentSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 import jwt
 
-# ─── Auth ────────────────────────────────────────────────────────────────────
+
+# ─── Helpers ─────────────────────────────────────────────────────────────────
+
+def get_default_password(email: str) -> str:
+    """
+    Derives the default password from a student's email address.
+    Rule: everything before the '@' sign, followed by '@123'.
+    Example: 'mithesh@gmail.com' → 'mithesh@123'
+    """
+    prefix = email.split('@')[0] if '@' in email else email
+    return f"{prefix}@123"
+
+
+def get_jwt_payload(request):
+    """Manually decode our custom JWT without using DRF's authenticator."""
+    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    if auth_header.startswith('Bearer '):
+        token = auth_header.split(' ')[1]
+        try:
+            # SimpleJWT uses settings.SECRET_KEY by default
+            return jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+        except Exception:
+            pass
+    return None
+
+
+def _require_portal_auth(request):
+    """Returns the portal email or None."""
+    payload = get_jwt_payload(request)
+    if payload:
+        return payload.get('email')
+    return None
+
+
+def is_admin_authorized(request):
+    payload = get_jwt_payload(request)
+    return payload is not None and payload.get('role') == 'admin'
+
+
+# ─── Auth ─────────────────────────────────────────────────────────────────────
 
 @csrf_exempt
 @api_view(['POST'])
@@ -28,6 +66,10 @@ def login_view(request):
     """
     POST /api/auth/login/
     Body: { "email": "admin@example.com", "password": "password" }
+    Returns JWT access token with role ('admin' or 'student').
+    Passwords:
+      - Admin users: Django auth.User (PBKDF2-hashed) — set via create_admin.py / Django admin.
+      - Students: custom Student model (BCrypt-hashed) — default is emailprefix@123.
     """
     email = request.data.get('email', '').strip()
     password = request.data.get('password', '')
@@ -35,7 +77,7 @@ def login_view(request):
     if not email or not password:
         return Response({'detail': 'Email and password required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # 1. Check if admin
+    # 1. Check if admin (Django auth.User with is_staff=True)
     from django.contrib.auth.models import User
     try:
         admin_user = User.objects.get(email=email)
@@ -52,10 +94,12 @@ def login_view(request):
     except User.DoesNotExist:
         pass
 
-    # 2. Check if student
+    # 2. Check if student (custom Student model with BCrypt-hashed password)
     try:
         student = Student.objects.get(email=email)
         if student.check_password(password):
+            # Check if student has already submitted a location entry
+            has_submitted = StudentLocation.objects.filter(roll_no=student.roll_number).exists()
             token = RefreshToken()
             token['user_id'] = f"student_{student.id}"
             token['email'] = email
@@ -63,6 +107,7 @@ def login_view(request):
             return Response({
                 'email': email,
                 'role': 'student',
+                'has_submitted': has_submitted,
                 'access': str(token.access_token),
                 'refresh': str(token)
             })
@@ -79,21 +124,8 @@ def login_view(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def logout_view(request):
-    """POST /api/auth/logout/"""
-    # JWTs are stateless, but we can return success.
+    """POST /api/auth/logout/ — JWTs are stateless; client should discard the token."""
     return Response({'detail': 'Logged out.'})
-
-
-def get_jwt_payload(request):
-    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
-    if auth_header.startswith('Bearer '):
-        token = auth_header.split(' ')[1]
-        try:
-            # SimpleJWT uses settings.SECRET_KEY by default
-            return jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-        except Exception:
-            pass
-    return None
 
 
 @csrf_exempt
@@ -106,29 +138,59 @@ def me_view(request):
     """
     payload = get_jwt_payload(request)
     if payload:
-        return Response({'email': payload.get('email'), 'role': payload.get('role')})
+        email = payload.get('email')
+        role = payload.get('role')
+        has_submitted = False
+        if role == 'student':
+            try:
+                student = Student.objects.get(email=email)
+                has_submitted = StudentLocation.objects.filter(roll_no=student.roll_number).exists()
+            except Student.DoesNotExist:
+                pass
+        return Response({'email': email, 'role': role, 'has_submitted': has_submitted})
     return Response({'detail': 'Not authenticated.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-# ─── Middleware helper ────────────────────────────────────────────────────────
-
-def _require_portal_auth(request):
-    """Returns the portal email or None."""
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def my_entry_view(request):
+    """
+    GET /api/auth/my-entry/
+    Returns the authenticated student's existing location entry, or 404 if none.
+    Students can only submit once; this endpoint powers the read-only view.
+    """
     payload = get_jwt_payload(request)
-    if payload:
-        return payload.get('email')
-    return None
+    if not payload:
+        return Response({'detail': 'Not authenticated.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    email = payload.get('email')
+    role = payload.get('role')
+
+    if role != 'student':
+        return Response({'detail': 'Only students can access this endpoint.'}, status=status.HTTP_403_FORBIDDEN)
+
+    try:
+        student = Student.objects.get(email=email)
+    except Student.DoesNotExist:
+        return Response({'detail': 'Student not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        entry = StudentLocation.objects.get(roll_no=student.roll_number)
+        return Response(StudentLocationSerializer(entry).data)
+    except StudentLocation.DoesNotExist:
+        return Response({'detail': 'No entry found.'}, status=status.HTTP_404_NOT_FOUND)
 
 
-# ─── Student Location CRUD ────────────────────────────────────────────────────
+# ─── Student Location CRUD ─────────────────────────────────────────────────────
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def student_location_list(request):
     """
-    GET  /api/entries/        – list all submissions (portal auth required)
-    POST /api/entries/        – create a new submission (portal auth required)
+    GET  /api/entries/ – list all submissions (portal auth required)
+    POST /api/entries/ – create a new submission (portal auth required, students once only)
     """
     portal_user = _require_portal_auth(request)
     if not portal_user:
@@ -139,7 +201,23 @@ def student_location_list(request):
         serializer = StudentLocationSerializer(entries, many=True)
         return Response(serializer.data)
 
-    # POST
+    # POST — Students can only submit once
+    payload = get_jwt_payload(request)
+    if payload and payload.get('role') == 'student':
+        email = payload.get('email')
+        try:
+            student = Student.objects.get(email=email)
+            # Enforce one-submission rule
+            if StudentLocation.objects.filter(roll_no=student.roll_number).exists():
+                existing = StudentLocation.objects.get(roll_no=student.roll_number)
+                return Response(
+                    {'detail': 'You have already submitted your location. Submissions are permanent and cannot be changed.',
+                     'entry': StudentLocationSerializer(existing).data},
+                    status=status.HTTP_409_CONFLICT
+                )
+        except Student.DoesNotExist:
+            return Response({'detail': 'Student account not found.'}, status=status.HTTP_403_FORBIDDEN)
+
     serializer = StudentLocationSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(submitted_by=portal_user)
@@ -180,7 +258,7 @@ def student_location_detail(request, pk):
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# ─── CSV Export ───────────────────────────────────────────────────────────────
+# ─── CSV Export ────────────────────────────────────────────────────────────────
 
 @csrf_exempt
 @api_view(['GET'])
@@ -214,7 +292,7 @@ def export_csv(request):
     return response
 
 
-# ─── Stats ───────────────────────────────────────────────────────────────────
+# ─── Stats ────────────────────────────────────────────────────────────────────
 
 @csrf_exempt
 @api_view(['GET'])
@@ -231,7 +309,7 @@ def stats_view(request):
     })
 
 
-# ─── Road Segments ────────────────────────────────────────────────────────────
+# ─── Road Segments ─────────────────────────────────────────────────────────────
 
 @csrf_exempt
 @api_view(['GET'])
@@ -255,16 +333,11 @@ def roads_view(request):
 def departments_list(request):
     """
     GET /api/departments/
-    Returns unique departments from students.
+    Returns unique departments from the Department table.
     """
-    deps = Student.objects.values_list('department', flat=True).distinct()
-    deps = [d for d in deps if d]
-    return JsonResponse({'departments': deps})
-
-
-def is_admin_authorized(request):
-    payload = get_jwt_payload(request)
-    return payload is not None and payload.get('role') == 'admin'
+    from .models import Department
+    deps = Department.objects.all().values('code', 'name')
+    return JsonResponse({'departments': list(deps)})
 
 
 # ─── Student Management ────────────────────────────────────────────────────────
@@ -276,6 +349,10 @@ def student_list(request):
     """
     GET  /api/students/
     POST /api/students/ (single create)
+
+    Password is NOT accepted from the request. It is auto-derived from the
+    student's email address: emailprefix@123 (e.g. 'mithesh@gmail.com' → 'mithesh@123').
+    This ensures no plain-text passwords are ever transmitted in the request body.
     """
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -285,14 +362,14 @@ def student_list(request):
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
 
-    # POST (Single Add)
-    serializer = StudentSerializer(data=request.data)
+    # POST (Single Add) — password auto-derived from email
+    # Remove any password field sent by the client — we set it ourselves
+    data = {k: v for k, v in request.data.items() if k != 'password'}
+    serializer = StudentSerializer(data=data)
     if serializer.is_valid():
-        raw_pwd = request.data.get('password')
-        if not raw_pwd:
-            return Response({'detail': 'Password required.'}, status=status.HTTP_400_BAD_REQUEST)
         student = serializer.save()
-        student.set_password(raw_pwd)
+        default_pwd = get_default_password(student.email)
+        student.set_password(default_pwd)
         student.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -305,6 +382,8 @@ def student_detail(request, pk):
     """
     PUT    /api/students/<pk>/
     DELETE /api/students/<pk>/
+
+    Password field is ignored even if sent — passwords cannot be changed via this API.
     """
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -315,13 +394,11 @@ def student_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'PUT':
-        serializer = StudentSerializer(student, data=request.data, partial=True)
+        # Explicitly exclude 'password' from updates — passwords are locked
+        data = {k: v for k, v in request.data.items() if k != 'password'}
+        serializer = StudentSerializer(student, data=data, partial=True)
         if serializer.is_valid():
-            raw_pwd = request.data.get('password')
-            student = serializer.save()
-            if raw_pwd:
-                student.set_password(raw_pwd)
-                student.save()
+            serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -337,6 +414,10 @@ def student_bulk(request):
     """
     POST /api/students/bulk/
     Receives JSON array of students to create.
+
+    Password is NOT required in the payload. It is auto-derived from each
+    student's email: emailprefix@123 (e.g. 'mithesh@gmail.com' → 'mithesh@123').
+    Any 'password' field present in the payload is silently ignored.
     """
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -347,16 +428,15 @@ def student_bulk(request):
 
     created_count = 0
     errors = []
-    
+
     for item in students_data:
-        serializer = StudentSerializer(data=item)
+        # Strip any password from incoming data — we derive it ourselves
+        clean_item = {k: v for k, v in item.items() if k != 'password'}
+        serializer = StudentSerializer(data=clean_item)
         if serializer.is_valid():
-            raw_pwd = item.get('password')
-            if not raw_pwd:
-                errors.append({'roll_number': item.get('roll_number'), 'detail': 'Missing password.'})
-                continue
             student = serializer.save()
-            student.set_password(raw_pwd)
+            default_pwd = get_default_password(student.email)
+            student.set_password(default_pwd)
             student.save()
             created_count += 1
         else:
