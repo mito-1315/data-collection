@@ -312,7 +312,7 @@ export default function FormPage() {
       .then((res) => { if (res.ok) return res.json(); throw new Error(); })
       .then((data) => {
         setUser(data.email);
-        setForm((f) => ({ ...f, rollNo: data.email, email: data.email }));
+        setForm((f) => ({ ...f, rollNo: data.roll_number || data.email, email: data.email, name: data.name || f.name }));
 
         // Step 2: Check if student already has a submission
         return fetch(`${API}/api/auth/my-entry/`, { headers: { 'Authorization': `Bearer ${token}` } });

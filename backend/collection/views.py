@@ -108,6 +108,8 @@ def login_view(request):
                 'email': email,
                 'role': 'student',
                 'has_submitted': has_submitted,
+                'roll_number': student.roll_number,
+                'name': student.name,
                 'access': str(token.access_token),
                 'refresh': str(token)
             })
@@ -141,13 +143,17 @@ def me_view(request):
         email = payload.get('email')
         role = payload.get('role')
         has_submitted = False
+        roll_number = None
+        name = None
         if role == 'student':
             try:
                 student = Student.objects.get(email=email)
                 has_submitted = StudentLocation.objects.filter(roll_no=student.roll_number).exists()
+                roll_number = student.roll_number
+                name = student.name
             except Student.DoesNotExist:
                 pass
-        return Response({'email': email, 'role': role, 'has_submitted': has_submitted})
+        return Response({'email': email, 'role': role, 'has_submitted': has_submitted, 'roll_number': roll_number, 'name': name})
     return Response({'detail': 'Not authenticated.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -203,6 +209,8 @@ def student_location_list(request):
 
     # POST — Students can only submit once
     payload = get_jwt_payload(request)
+    data = request.data.copy() if hasattr(request.data, 'copy') else request.data
+    
     if payload and payload.get('role') == 'student':
         email = payload.get('email')
         try:
@@ -215,10 +223,14 @@ def student_location_list(request):
                      'entry': StudentLocationSerializer(existing).data},
                     status=status.HTTP_409_CONFLICT
                 )
+            
+            # Ensure roll_no is always set to student's roll number (not email from frontend)
+            if isinstance(data, dict):
+                data['roll_no'] = student.roll_number
         except Student.DoesNotExist:
             return Response({'detail': 'Student account not found.'}, status=status.HTTP_403_FORBIDDEN)
 
-    serializer = StudentLocationSerializer(data=request.data)
+    serializer = StudentLocationSerializer(data=data)
     if serializer.is_valid():
         serializer.save(submitted_by=portal_user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -403,7 +415,9 @@ def student_detail(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # DELETE
+    roll_number = student.roll_number
     student.delete()
+    StudentLocation.objects.filter(roll_no=roll_number).delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -460,5 +474,12 @@ def student_bulk_delete(request):
     if not ids:
         return Response({'detail': 'No IDs provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    deleted_count, _ = Student.objects.filter(id__in=ids).delete()
+    students = Student.objects.filter(id__in=ids)
+    roll_numbers = list(students.values_list('roll_number', flat=True))
+    
+    deleted_count, _ = students.delete()
+    
+    if roll_numbers:
+        StudentLocation.objects.filter(roll_no__in=roll_numbers).delete()
+        
     return Response({'deleted': deleted_count})
