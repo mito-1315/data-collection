@@ -377,6 +377,22 @@ def student_list(request):
     # POST (Single Add) — password auto-derived from email
     # Remove any password field sent by the client — we set it ourselves
     data = {k: v for k, v in request.data.items() if k != 'password'}
+
+    # Check for duplicates before attempting creation
+    roll = str(data.get('roll_number', '')).strip()
+    email_val = str(data.get('email', '')).strip()
+    existing = Student.objects.filter(roll_number=roll).first() or Student.objects.filter(email=email_val).first()
+    if existing:
+        return Response({
+            'detail': 'Student already exists.',
+            'duplicate': {
+                'roll_number': existing.roll_number,
+                'name': existing.name,
+                'email': existing.email,
+                'department': existing.department,
+            }
+        }, status=status.HTTP_409_CONFLICT)
+
     serializer = StudentSerializer(data=data)
     if serializer.is_valid():
         student = serializer.save()
@@ -432,6 +448,9 @@ def student_bulk(request):
     Password is NOT required in the payload. It is auto-derived from each
     student's email: emailprefix@123 (e.g. 'mithesh@gmail.com' → 'mithesh@123').
     Any 'password' field present in the payload is silently ignored.
+
+    Returns:
+      { created: int, duplicates: [{roll_number, name, email, department}], errors: [...] }
     """
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -441,11 +460,26 @@ def student_bulk(request):
         return Response({'detail': 'Expected a list of objects.'}, status=status.HTTP_400_BAD_REQUEST)
 
     created_count = 0
+    duplicates = []
     errors = []
 
     for item in students_data:
         # Strip any password from incoming data — we derive it ourselves
         clean_item = {k: v for k, v in item.items() if k != 'password'}
+
+        # Check for duplicates by roll_number or email before attempting create
+        roll = str(clean_item.get('roll_number', '')).strip()
+        email = str(clean_item.get('email', '')).strip()
+        existing = Student.objects.filter(roll_number=roll).first() or Student.objects.filter(email=email).first()
+        if existing:
+            duplicates.append({
+                'roll_number': existing.roll_number,
+                'name': existing.name,
+                'email': existing.email,
+                'department': existing.department,
+            })
+            continue
+
         serializer = StudentSerializer(data=clean_item)
         if serializer.is_valid():
             student = serializer.save()
@@ -456,7 +490,7 @@ def student_bulk(request):
         else:
             errors.append({'roll_number': item.get('roll_number'), 'errors': serializer.errors})
 
-    return Response({'created': created_count, 'errors': errors})
+    return Response({'created': created_count, 'duplicates': duplicates, 'errors': errors})
 
 
 @csrf_exempt
