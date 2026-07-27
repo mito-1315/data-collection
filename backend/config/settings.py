@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get(
     'dev-secret-key-change-in-production-0xDEADBEEF'
 )
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '*').split(',') if h.strip()]
 
 # ── Applications ──────────────────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -32,8 +32,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',      # must be first
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -63,12 +64,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # ── Database ──────────────────────────────────────────────────────────────────
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.environ.get('POSTGRES_DB'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', 'transport_db'),
+            'USER': os.environ.get('POSTGRES_USER', 'hostel_user'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'hostel_pass'),
+            'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # ── Password validation ────────────────────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
@@ -81,6 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
@@ -92,19 +106,22 @@ USE_I18N = True
 USE_TZ = True
 
 # ── Static files ──────────────────────────────────────────────────────────────
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage'},
+}
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ── CORS & CSRF ───────────────────────────────────────────────────────────────
-# Allow the Next.js dev server (port 3000) and any local origin during dev.
+_default_origins = 'http://localhost:3000,http://127.0.0.1:3000'
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    o.strip() for o in os.environ.get('CORS_ALLOWED_ORIGINS', _default_origins).split(',') if o.strip()
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    o.strip() for o in os.environ.get('CSRF_TRUSTED_ORIGINS', _default_origins).split(',') if o.strip()
 ]
 
 # ── Django REST Framework ─────────────────────────────────────────────────────
@@ -122,20 +139,11 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# ── Session & Cookie Settings ──────────────────────────────────────────────────
-# Using JWT, so session cookies are no longer the primary auth, but if used:
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
-# ── Security Enhancements ─────────────────────────────────────────────────────
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
-# In production, you would also set:
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = 31536000
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
-
