@@ -1,14 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
-
-// Known admin email domains / patterns — extend as needed
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL ?? 'admin@example.com';
+
+const BANNERS = ['/banner-1.jpg', '/banner-2.jpg', '/banner-3.jpg'];
 
 function isAdminEmail(email: string): boolean {
   return email.trim().toLowerCase() === ADMIN_EMAIL.toLowerCase();
@@ -20,21 +19,26 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [bannerIndex, setBannerIndex] = useState(0);
+
+  // Slideshow: advance every 4 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBannerIndex((i) => (i + 1) % BANNERS.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    // Guard: admin email in student portal
     if (isAdminEmail(email)) {
-      setError(
-        'This looks like an admin account. Please use the Admin Portal to log in.'
-      );
+      setError('This looks like an admin account. Please use the Admin Portal to log in.');
       return;
     }
 
     setLoading(true);
-
     try {
       const res = await fetch(`${API}/api/auth/login/`, {
         method: 'POST',
@@ -44,11 +48,8 @@ export default function LoginPage() {
 
       if (res.ok) {
         const data = await res.json();
-        // Guard: if backend somehow returns admin role, block it
         if (data.role === 'admin') {
-          setError(
-            'This looks like an admin account. Please use the Admin Portal to log in.'
-          );
+          setError('This looks like an admin account. Please use the Admin Portal to log in.');
           return;
         }
         localStorage.setItem('token', data.access);
@@ -65,27 +66,45 @@ export default function LoginPage() {
     }
   };
 
-  const showAdminRedirect = email.trim().length > 0 && isAdminEmail(email);
-
   return (
     <div className="login-page">
-      <div className="login-bg-glow" />
+      {/* ── Slideshow Background ── */}
+      <div className="login-slideshow">
+        {BANNERS.map((src, i) => (
+          <div
+            key={src}
+            className="login-slide"
+            style={{ opacity: i === bannerIndex ? 1 : 0 }}
+          >
+            <Image
+              src={src}
+              alt={`Campus banner ${i + 1}`}
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              priority={i === 0}
+            />
+          </div>
+        ))}
+        {/* Dark overlay so text is readable */}
+        <div className="login-slide-overlay" />
+      </div>
 
+      {/* ── Login Card ── */}
       <div className="login-card">
-        {/* College Logo */}
-        <div className="login-logo" style={{ justifyContent: 'center', marginBottom: 24 }}>
+        {/* Logo */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
           <Image
             src="/image.png"
             alt="Rajalakshmi Engineering College"
-            width={260}
-            height={72}
-            style={{ objectFit: 'contain', maxWidth: '100%' }}
+            width={220}
+            height={60}
+            style={{ objectFit: 'contain' }}
             priority
           />
         </div>
 
         {/* Heading */}
-        <h1 className="login-title">Student Portal</h1>
+        <h1 className="login-title">Login</h1>
         <p className="login-subtitle">
           Sign in with your email and the last 4 digits of your admission number as your password.
         </p>
@@ -93,14 +112,12 @@ export default function LoginPage() {
         {/* Form */}
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-field">
-            <label className="form-label" htmlFor="email">
-              Email Address
-            </label>
+            <label className="login-field-label" htmlFor="email">Email</label>
             <input
               id="email"
               type="email"
-              className="form-input"
-              placeholder="e.g. student@example.com"
+              className="login-input"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
@@ -109,14 +126,12 @@ export default function LoginPage() {
           </div>
 
           <div className="form-field">
-            <label className="form-label" htmlFor="password">
-              Password
-            </label>
+            <label className="login-field-label" htmlFor="password">Password</label>
             <input
               id="password"
               type="password"
-              className="form-input"
-              placeholder="Enter your password"
+              className="login-input"
+              placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
@@ -129,19 +144,14 @@ export default function LoginPage() {
           <button
             id="login-submit-btn"
             type="submit"
-            className="btn-primary"
+            className="login-submit-btn"
             disabled={loading || !email || !password}
           >
-            {loading ? 'Signing in…' : 'Sign in →'}
+            {loading ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: 20, fontSize: 12, color: 'var(--text-muted)' }}>
-          Are you an admin?{' '}
-          <Link href="/admin/login" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
-            Go to Admin Portal
-          </Link>
-        </p>
+
       </div>
     </div>
   );

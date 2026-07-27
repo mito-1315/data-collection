@@ -53,7 +53,7 @@ class StudentLocation(models.Model):
     Stores a single student boarding-location submission from the portal.
     """
     roll_no = models.CharField(max_length=30, unique=True)
-    name = models.CharField(max_length=120)
+    name = models.CharField(max_length=120, blank=True, default='')
     lat = models.FloatField()
     lng = models.FloatField()
     address = models.TextField(blank=True, default='')
