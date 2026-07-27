@@ -21,14 +21,15 @@ import jwt
 
 # ─── Helpers ─────────────────────────────────────────────────────────────────
 
-def get_default_password(email: str) -> str:
+def get_default_password(admission_number: str) -> str:
     """
-    Derives the default password from a student's email address.
-    Rule: everything before the '@' sign, followed by '@123'.
-    Example: 'mithesh@gmail.com' → 'mithesh@123'
+    Derives the default password from a student's admission number.
+    Rule: last 4 digits of the admission number.
+    Example: '230701184' → '1184'
+    Admission number must have at least 4 digits.
     """
-    prefix = email.split('@')[0] if '@' in email else email
-    return f"{prefix}@123"
+    digits = admission_number.strip()
+    return digits[-4:] if len(digits) >= 4 else digits
 
 
 def get_jwt_payload(request):
@@ -65,11 +66,11 @@ def is_admin_authorized(request):
 def login_view(request):
     """
     POST /api/auth/login/
-    Body: { "email": "admin@example.com", "password": "password" }
+    Body: { "email": "...", "password": "..." }
     Returns JWT access token with role ('admin' or 'student').
     Passwords:
       - Admin users: Django auth.User (PBKDF2-hashed) — set via create_admin.py / Django admin.
-      - Students: custom Student model (BCrypt-hashed) — default is emailprefix@123.
+      - Students: last 4 digits of their admission_number.
     """
     email = request.data.get('email', '').strip()
     password = request.data.get('password', '')
@@ -94,12 +95,12 @@ def login_view(request):
     except User.DoesNotExist:
         pass
 
-    # 2. Check if student (custom Student model with BCrypt-hashed password)
+    # 2. Check if student (custom Student model — password = last 4 digits of admission_number)
     try:
         student = Student.objects.get(email=email)
         if student.check_password(password):
             # Check if student has already submitted a location entry
-            has_submitted = StudentLocation.objects.filter(roll_no=student.roll_number).exists()
+            has_submitted = StudentLocation.objects.filter(roll_no=student.admission_number).exists()
             token = RefreshToken()
             token['user_id'] = f"student_{student.id}"
             token['email'] = email
@@ -108,8 +109,7 @@ def login_view(request):
                 'email': email,
                 'role': 'student',
                 'has_submitted': has_submitted,
-                'roll_number': student.roll_number,
-                'name': student.name,
+                'admission_number': student.admission_number,
                 'access': str(token.access_token),
                 'refresh': str(token)
             })
@@ -143,17 +143,20 @@ def me_view(request):
         email = payload.get('email')
         role = payload.get('role')
         has_submitted = False
-        roll_number = None
-        name = None
+        admission_number = None
         if role == 'student':
             try:
                 student = Student.objects.get(email=email)
-                has_submitted = StudentLocation.objects.filter(roll_no=student.roll_number).exists()
-                roll_number = student.roll_number
-                name = student.name
+                has_submitted = StudentLocation.objects.filter(roll_no=student.admission_number).exists()
+                admission_number = student.admission_number
             except Student.DoesNotExist:
                 pass
-        return Response({'email': email, 'role': role, 'has_submitted': has_submitted, 'roll_number': roll_number, 'name': name})
+        return Response({
+            'email': email,
+            'role': role,
+            'has_submitted': has_submitted,
+            'admission_number': admission_number,
+        })
     return Response({'detail': 'Not authenticated.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -182,7 +185,7 @@ def my_entry_view(request):
         return Response({'detail': 'Student not found.'}, status=status.HTTP_404_NOT_FOUND)
 
     try:
-        entry = StudentLocation.objects.get(roll_no=student.roll_number)
+        entry = StudentLocation.objects.get(roll_no=student.admission_number)
         return Response(StudentLocationSerializer(entry).data)
     except StudentLocation.DoesNotExist:
         return Response({'detail': 'No entry found.'}, status=status.HTTP_404_NOT_FOUND)
@@ -210,23 +213,23 @@ def student_location_list(request):
     # POST — Students can only submit once
     payload = get_jwt_payload(request)
     data = request.data.copy() if hasattr(request.data, 'copy') else request.data
-    
+
     if payload and payload.get('role') == 'student':
         email = payload.get('email')
         try:
             student = Student.objects.get(email=email)
             # Enforce one-submission rule
-            if StudentLocation.objects.filter(roll_no=student.roll_number).exists():
-                existing = StudentLocation.objects.get(roll_no=student.roll_number)
+            if StudentLocation.objects.filter(roll_no=student.admission_number).exists():
+                existing = StudentLocation.objects.get(roll_no=student.admission_number)
                 return Response(
                     {'detail': 'You have already submitted your location. Submissions are permanent and cannot be changed.',
                      'entry': StudentLocationSerializer(existing).data},
                     status=status.HTTP_409_CONFLICT
                 )
-            
-            # Ensure roll_no is always set to student's roll number (not email from frontend)
+
+            # Ensure roll_no is always set to student's admission_number
             if isinstance(data, dict):
-                data['roll_no'] = student.roll_number
+                data['roll_no'] = student.admission_number
         except Student.DoesNotExist:
             return Response({'detail': 'Student account not found.'}, status=status.HTTP_403_FORBIDDEN)
 
@@ -362,9 +365,9 @@ def student_list(request):
     GET  /api/students/
     POST /api/students/ (single create)
 
-    Password is NOT accepted from the request. It is auto-derived from the
-    student's email address: emailprefix@123 (e.g. 'mithesh@gmail.com' → 'mithesh@123').
-    This ensures no plain-text passwords are ever transmitted in the request body.
+    Only 'email' and 'admission_number' are required fields.
+    Password is NOT accepted from the request. It is auto-derived as the
+    last 4 digits of the student's admission_number.
     """
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -374,13 +377,28 @@ def student_list(request):
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
 
-    # POST (Single Add) — password auto-derived from email
-    # Remove any password field sent by the client — we set it ourselves
+    # POST (Single Add) — password auto-derived from admission_number
     data = {k: v for k, v in request.data.items() if k != 'password'}
+
+    # Check for duplicates before attempting creation
+    roll = str(data.get('roll_number', '')).strip()
+    email_val = str(data.get('email', '')).strip()
+    existing = Student.objects.filter(roll_number=roll).first() or Student.objects.filter(email=email_val).first()
+    if existing:
+        return Response({
+            'detail': 'Student already exists.',
+            'duplicate': {
+                'roll_number': existing.roll_number,
+                'name': existing.name,
+                'email': existing.email,
+                'department': existing.department,
+            }
+        }, status=status.HTTP_409_CONFLICT)
+
     serializer = StudentSerializer(data=data)
     if serializer.is_valid():
         student = serializer.save()
-        default_pwd = get_default_password(student.email)
+        default_pwd = get_default_password(student.admission_number)
         student.set_password(default_pwd)
         student.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -415,9 +433,9 @@ def student_detail(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # DELETE
-    roll_number = student.roll_number
+    admission_number = student.admission_number
     student.delete()
-    StudentLocation.objects.filter(roll_no=roll_number).delete()
+    StudentLocation.objects.filter(roll_no=admission_number).delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -429,9 +447,13 @@ def student_bulk(request):
     POST /api/students/bulk/
     Receives JSON array of students to create.
 
-    Password is NOT required in the payload. It is auto-derived from each
-    student's email: emailprefix@123 (e.g. 'mithesh@gmail.com' → 'mithesh@123').
+    Only 'email' and 'admission_number' are required per row.
+    Password is NOT required in the payload. It is auto-derived as the
+    last 4 digits of each student's admission_number.
     Any 'password' field present in the payload is silently ignored.
+
+    Returns:
+      { created: int, duplicates: [{roll_number, name, email, department}], errors: [...] }
     """
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -441,22 +463,37 @@ def student_bulk(request):
         return Response({'detail': 'Expected a list of objects.'}, status=status.HTTP_400_BAD_REQUEST)
 
     created_count = 0
+    duplicates = []
     errors = []
 
     for item in students_data:
         # Strip any password from incoming data — we derive it ourselves
         clean_item = {k: v for k, v in item.items() if k != 'password'}
+
+        # Check for duplicates by roll_number or email before attempting create
+        roll = str(clean_item.get('roll_number', '')).strip()
+        email = str(clean_item.get('email', '')).strip()
+        existing = Student.objects.filter(roll_number=roll).first() or Student.objects.filter(email=email).first()
+        if existing:
+            duplicates.append({
+                'roll_number': existing.roll_number,
+                'name': existing.name,
+                'email': existing.email,
+                'department': existing.department,
+            })
+            continue
+
         serializer = StudentSerializer(data=clean_item)
         if serializer.is_valid():
             student = serializer.save()
-            default_pwd = get_default_password(student.email)
+            default_pwd = get_default_password(student.admission_number)
             student.set_password(default_pwd)
             student.save()
             created_count += 1
         else:
-            errors.append({'roll_number': item.get('roll_number'), 'errors': serializer.errors})
+            errors.append({'admission_number': item.get('admission_number'), 'errors': serializer.errors})
 
-    return Response({'created': created_count, 'errors': errors})
+    return Response({'created': created_count, 'duplicates': duplicates, 'errors': errors})
 
 
 @csrf_exempt
@@ -475,11 +512,11 @@ def student_bulk_delete(request):
         return Response({'detail': 'No IDs provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
     students = Student.objects.filter(id__in=ids)
-    roll_numbers = list(students.values_list('roll_number', flat=True))
-    
+    admission_numbers = list(students.values_list('admission_number', flat=True))
+
     deleted_count, _ = students.delete()
-    
-    if roll_numbers:
-        StudentLocation.objects.filter(roll_no__in=roll_numbers).delete()
-        
+
+    if admission_numbers:
+        StudentLocation.objects.filter(roll_no__in=admission_numbers).delete()
+
     return Response({'deleted': deleted_count})

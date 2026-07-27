@@ -21,17 +21,17 @@ class Department(models.Model):
 class Student(models.Model):
     """
     Stores a student account that can log into the portal.
+    Only email and admission_number are required fields.
+    Password is auto-set to the last 4 digits of the admission_number.
     """
-    roll_number = models.CharField(max_length=9, unique=True)
-    name = models.CharField(max_length=120)
+    admission_number = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True)
-    department = models.CharField(max_length=100)
     password = models.CharField(max_length=128)  # Store bcrypt hash
-    
+
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
-        ordering = ['roll_number']
+        ordering = ['admission_number']
         verbose_name = 'Student'
         verbose_name_plural = 'Students'
 
@@ -42,10 +42,10 @@ class Student(models.Model):
         return check_password(raw_password, self.password)
 
     def has_marked_location(self):
-        return StudentLocation.objects.filter(roll_no=self.roll_number).exists()
+        return StudentLocation.objects.filter(roll_no=self.admission_number).exists()
 
     def __str__(self):
-        return f'{self.roll_number} – {self.name}'
+        return f'{self.admission_number} – {self.email}'
 
 
 class StudentLocation(models.Model):
