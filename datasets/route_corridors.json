@@ -1,0 +1,878 @@
+{
+  "1": {
+    "lat": 13.2145944,
+    "lng": 80.3202929,
+    "area_name": "Ennore",
+    "route_name": "Ennore"
+  },
+  "1B": {
+    "lat": 13.0870191,
+    "lng": 80.267675,
+    "area_name": "Periyamedu",
+    "route_name": "Periyamedu"
+  },
+  "1C": {
+    "lat": 13.0949098,
+    "lng": 80.2227806,
+    "area_name": "Tondiarpet RTO",
+    "route_name": "Tondiarpet (RTO Office)"
+  },
+  "2": {
+    "lat": 13.1261062,
+    "lng": 80.2879959,
+    "area_name": "Tondiarpet",
+    "route_name": "Tondiarpet"
+  },
+  "2B": {
+    "lat": 13.172193,
+    "lng": 80.30544499999999,
+    "area_name": "Ajax",
+    "route_name": "Ajax"
+  },
+  "2C": {
+    "lat": 13.0936645,
+    "lng": 80.2795663,
+    "area_name": "Mint",
+    "route_name": "Mint"
+  },
+  "3": {
+    "lat": 13.0918726,
+    "lng": 80.264191,
+    "area_name": "Choolai",
+    "route_name": "Choolai"
+  },
+  "3B": {
+    "lat": 13.0828318,
+    "lng": 80.24171050000001,
+    "area_name": "Kilpauk Kallarai",
+    "route_name": "Kilpauk Kallarai"
+  },
+  "3C": {
+    "lat": 13.0868849,
+    "lng": 80.25907649999999,
+    "area_name": "Doveton Bridge",
+    "route_name": "Doveton Bridge"
+  },
+  "4": {
+    "lat": 13.0749917,
+    "lng": 80.2697653,
+    "area_name": "Chintadripet",
+    "route_name": "Chintadripet"
+  },
+  "4C": {
+    "lat": 13.0635966,
+    "lng": 80.23409339999999,
+    "area_name": "Loyola College Chennai",
+    "route_name": "Loyola College"
+  },
+  "5": {
+    "lat": 13.0856126,
+    "lng": 80.22405359999999,
+    "area_name": "Chintamani Chennai",
+    "route_name": "Chintamani"
+  },
+  "5A": {
+    "lat": 13.0724233,
+    "lng": 80.2101773,
+    "area_name": "Arumbakkam",
+    "route_name": "Arumbakkam"
+  },
+  "5B": {
+    "lat": 13.0655842,
+    "lng": 80.1607768,
+    "area_name": "Maduravoyal",
+    "route_name": "Maduravoyal Erikarai"
+  },
+  "5C": {
+    "lat": 13.0546842,
+    "lng": 80.2129595,
+    "area_name": "Thirunagar Chennai",
+    "route_name": "Thirunagar Ambica Empire Hotel"
+  },
+  "5D": {
+    "lat": 13.014208,
+    "lng": 80.206954,
+    "area_name": "Toyota Showroom Guindy Chennai",
+    "route_name": "Toyota Showroom"
+  },
+  "6": {
+    "lat": 13.0958892,
+    "lng": 80.2207963,
+    "area_name": "New Avadi Road",
+    "route_name": "New Avadi Road Water Tank"
+  },
+  "6A": {
+    "lat": 13.0508774,
+    "lng": 80.1690222,
+    "area_name": "Krishna Nagar Chennai",
+    "route_name": "Krishna Nagar Vellammal School"
+  },
+  "7": {
+    "lat": 13.0920485,
+    "lng": 80.2236102,
+    "area_name": "Anna Nagar East",
+    "route_name": "Anna Nagar East"
+  },
+  "7C": {
+    "lat": 13.0865328,
+    "lng": 80.1892501,
+    "area_name": "Collector Nagar Chennai",
+    "route_name": "Collector Nagar"
+  },
+  "8": {
+    "lat": 13.094003,
+    "lng": 80.198826,
+    "area_name": "Anna Nagar West Depot",
+    "route_name": "Anna Nagar West Depot"
+  },
+  "8C": {
+    "lat": 13.0823732,
+    "lng": 80.21731590000002,
+    "area_name": "Waves Mall Chennai",
+    "route_name": "Waves"
+  },
+  "9": {
+    "lat": 13.0810113,
+    "lng": 80.1840177,
+    "area_name": "Mogappair East",
+    "route_name": "Mogappair East"
+  },
+  "9A": {
+    "lat": 13.0884965,
+    "lng": 80.17944279999999,
+    "area_name": "Mogappair Golden Flats",
+    "route_name": "Mogappair Golden Flat"
+  },
+  "9B": {
+    "lat": 13.0837224,
+    "lng": 80.1749627,
+    "area_name": "Mogappair",
+    "route_name": "Mogappair"
+  },
+  "9C": {
+    "lat": 13.0805983,
+    "lng": 80.1687714,
+    "area_name": "Mogappair West",
+    "route_name": "Mogappair West"
+  },
+  "10": {
+    "lat": 13.1183811,
+    "lng": 80.2594218,
+    "area_name": "Vyasarpadi",
+    "route_name": "Vyasarpadi Erikarai"
+  },
+  "10B": {
+    "lat": 13.0978271,
+    "lng": 80.2073576,
+    "area_name": "Integral Coach Factory Perambur",
+    "route_name": "ICF"
+  },
+  "10C": {
+    "lat": 13.1024151,
+    "lng": 80.2526755,
+    "area_name": "Binny Mill Chennai",
+    "route_name": "Binny Mill Church"
+  },
+  "11": {
+    "lat": 13.1295676,
+    "lng": 80.2416298,
+    "area_name": "Moolakadai",
+    "route_name": "Moolakadai"
+  },
+  "11A": {
+    "lat": 13.1157602,
+    "lng": 80.19936229999999,
+    "area_name": "Thathankuppam",
+    "route_name": "Thathankuppam DRJ"
+  },
+  "11C": {
+    "lat": 13.1081798,
+    "lng": 80.1834167,
+    "area_name": "Korattur",
+    "route_name": "Korattur"
+  },
+  "12": {
+    "lat": 13.1258413,
+    "lng": 80.262221,
+    "area_name": "MKB Nagar",
+    "route_name": "MKB Nagar"
+  },
+  "12A": {
+    "lat": 13.0394986,
+    "lng": 80.25373809999999,
+    "area_name": "Venus Colony Chennai",
+    "route_name": "Venus"
+  },
+  "12B": {
+    "lat": 13.1239583,
+    "lng": 80.2121332,
+    "area_name": "Kolathur",
+    "route_name": "Kolathur"
+  },
+  "12C": {
+    "lat": 13.1210302,
+    "lng": 80.2325781,
+    "area_name": "Perambur",
+    "route_name": "Perambur"
+  },
+  "13": {
+    "lat": 13.1178796,
+    "lng": 80.2316085,
+    "area_name": "Peravallur",
+    "route_name": "Peravallur"
+  },
+  "13A": {
+    "lat": 13.0704208,
+    "lng": 80.25506159999999,
+    "area_name": "Kolathur Don Bosco School",
+    "route_name": "Kolathur Don Bosco"
+  },
+  "13B": {
+    "lat": 13.119938,
+    "lng": 80.2342226,
+    "area_name": "TVK Nagar Chennai",
+    "route_name": "T.V.K Nagar"
+  },
+  "13C": {
+    "lat": 13.1211176,
+    "lng": 80.21342489999999,
+    "area_name": "Poombukar Nagar Chennai",
+    "route_name": "Poombukar Nagar"
+  },
+  "13D": {
+    "lat": 13.1250701,
+    "lng": 80.2056971,
+    "area_name": "Temple School Chennai",
+    "route_name": "Temple School"
+  },
+  "14": {
+    "lat": 13.1779289,
+    "lng": 80.2700737,
+    "area_name": "Manali Chennai",
+    "route_name": "Manali"
+  },
+  "14C": {
+    "lat": 13.158582,
+    "lng": 80.244041,
+    "area_name": "Veterinary College Mathur Chennai",
+    "route_name": "Veterinary College Mathur"
+  },
+  "15": {
+    "lat": 13.0983046,
+    "lng": 80.13665110000001,
+    "area_name": "Ayappakkam",
+    "route_name": "Ayappakkam"
+  },
+  "15A": {
+    "lat": 13.0988981,
+    "lng": 80.1327388,
+    "area_name": "Ayappakkam Water Tank",
+    "route_name": "Ayappakkam Water Tank"
+  },
+  "15B": {
+    "lat": 13.1307405,
+    "lng": 80.1314386,
+    "area_name": "Thirumullaivoyal",
+    "route_name": "Thirumullaivoyal"
+  },
+  "15C": {
+    "lat": 13.1198456,
+    "lng": 80.1501107,
+    "area_name": "Ambattur OT",
+    "route_name": "Ambattur OT"
+  },
+  "15D": {
+    "lat": 13.0983046,
+    "lng": 80.13665110000001,
+    "area_name": "Ayappakkam Church",
+    "route_name": "Ayappakkam Church Water Tank"
+  },
+  "15E": {
+    "lat": 13.1404463,
+    "lng": 80.2085072,
+    "area_name": "Vinayagapuram Chennai",
+    "route_name": "Vinayagapuram"
+  },
+  "15F": {
+    "lat": 13.106017,
+    "lng": 80.15089499999999,
+    "area_name": "Dunlop Chennai",
+    "route_name": "Dunlop"
+  },
+  "16": {
+    "lat": 13.1864645,
+    "lng": 80.1998776,
+    "area_name": "Redhills",
+    "route_name": "Redhills"
+  },
+  "16A": {
+    "lat": 13.136693,
+    "lng": 80.169371,
+    "area_name": "Kallikuppam",
+    "route_name": "Kallikuppam"
+  },
+  "16B": {
+    "lat": 13.1584711,
+    "lng": 80.2036881,
+    "area_name": "Puzhal",
+    "route_name": "Puzhal"
+  },
+  "16C": {
+    "lat": 13.1584711,
+    "lng": 80.2036881,
+    "area_name": "Puzhal Bypass",
+    "route_name": "Puzhal Bypass"
+  },
+  "16D": {
+    "lat": 13.1953717,
+    "lng": 80.1575111,
+    "area_name": "Gandhinagar Redhills",
+    "route_name": "Gandhinagar Police Booth Redhills"
+  },
+  "16E": {
+    "lat": 13.129026,
+    "lng": 80.15480210000001,
+    "area_name": "Oragadam Ambattur",
+    "route_name": "Oragadam Ambattur"
+  },
+  "17": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Thiruvallur",
+    "route_name": "Thiruvallur GRT"
+  },
+  "17A": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Kakkalur",
+    "route_name": "Kakkalur"
+  },
+  "17B": {
+    "lat": 13.0464305,
+    "lng": 80.201915,
+    "area_name": "Thiruvallur Bus Stand",
+    "route_name": "Thiruvallur"
+  },
+  "17C": {
+    "lat": 13.0139059,
+    "lng": 80.14266889999999,
+    "area_name": "Sevvapet",
+    "route_name": "Sevvapet"
+  },
+  "17D": {
+    "lat": 13.1181068,
+    "lng": 80.033613,
+    "area_name": "Thirunindravur",
+    "route_name": "Thirunindravur"
+  },
+  "17E": {
+    "lat": 12.9485798,
+    "lng": 80.1637901,
+    "area_name": "Nemilichery",
+    "route_name": "Nemilichery Roundana"
+  },
+  "17F": {
+    "lat": 12.9224948,
+    "lng": 80.2462638,
+    "area_name": "Thiruvallur Municipality",
+    "route_name": "Thiruvallur Municipality Office"
+  },
+  "17G": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Manavalanagar",
+    "route_name": "Manavalanagar Signal"
+  },
+  "18": {
+    "lat": 13.1067448,
+    "lng": 80.0969511,
+    "area_name": "Avadi",
+    "route_name": "Avadi"
+  },
+  "18A": {
+    "lat": 13.1255449,
+    "lng": 80.1440334,
+    "area_name": "Ambattur Stedford Hospital",
+    "route_name": "Ambattur Stedford Hospital"
+  },
+  "18B": {
+    "lat": 13.1195866,
+    "lng": 80.09324769999999,
+    "area_name": "Avadi GRT",
+    "route_name": "Avadi GRT"
+  },
+  "18C": {
+    "lat": 13.115853,
+    "lng": 80.105324,
+    "area_name": "Avadi Market",
+    "route_name": "Avadi Market"
+  },
+  "18D": {
+    "lat": 13.1839045,
+    "lng": 80.0821275,
+    "area_name": "Veerapuram Avadi",
+    "route_name": "Avadi Veerapuram"
+  },
+  "18E": {
+    "lat": 13.1473178,
+    "lng": 80.0589798,
+    "area_name": "Muthapudupet",
+    "route_name": "Muthapudupet"
+  },
+  "18F": {
+    "lat": 13.1206137,
+    "lng": 80.10198319999999,
+    "area_name": "Avadi Bus Stand",
+    "route_name": "Avadi Bus Stand"
+  },
+  "19": {
+    "lat": 12.9068283,
+    "lng": 80.14251809999999,
+    "area_name": "Selaiyur",
+    "route_name": "SP Kovil"
+  },
+  "19A": {
+    "lat": 12.9087355,
+    "lng": 80.0926333,
+    "area_name": "Perungalathur",
+    "route_name": "Perungalathur"
+  },
+  "19B": {
+    "lat": 12.937374,
+    "lng": 80.13866000000002,
+    "area_name": "Varatharaja Theatre Chrompet",
+    "route_name": "Varatharaja Theatre"
+  },
+  "19C": {
+    "lat": 12.9387231,
+    "lng": 80.14607749999999,
+    "area_name": "Hasthinapuram",
+    "route_name": "Hasthinapuram"
+  },
+  "19D": {
+    "lat": 12.8438835,
+    "lng": 80.05973639999999,
+    "area_name": "Guduvanchery",
+    "route_name": "Guduvanchery"
+  },
+  "19E": {
+    "lat": 12.9185507,
+    "lng": 80.1219215,
+    "area_name": "MCC Tambaram",
+    "route_name": "Tambaram MCC"
+  },
+  "19F": {
+    "lat": 12.7930081,
+    "lng": 80.0252383,
+    "area_name": "Maraimalai Nagar",
+    "route_name": "Maraimalai Nagar"
+  },
+  "20": {
+    "lat": 12.9348912,
+    "lng": 80.21371239999999,
+    "area_name": "Pallikaranai",
+    "route_name": "Kamatchi Hospital Pallikaranai"
+  },
+  "20A": {
+    "lat": 13.1964265,
+    "lng": 80.18094649999999,
+    "area_name": "Medavakkam X Road",
+    "route_name": "Medavakkam X Road"
+  },
+  "20B": {
+    "lat": 12.8932036,
+    "lng": 80.1797418,
+    "area_name": "Mambakkam",
+    "route_name": "Mambakkam"
+  },
+  "20C": {
+    "lat": 12.9647462,
+    "lng": 80.19608319999999,
+    "area_name": "Madipakkam",
+    "route_name": "Madipakkam"
+  },
+  "20D": {
+    "lat": 12.940278,
+    "lng": 80.1784835,
+    "area_name": "Nanmangalam",
+    "route_name": "Nanmangalam"
+  },
+  "20E": {
+    "lat": 12.951611,
+    "lng": 80.14616629999999,
+    "area_name": "Chrompet",
+    "route_name": "Chrompet"
+  },
+  "20F": {
+    "lat": 12.9078778,
+    "lng": 80.1421221,
+    "area_name": "Bharath University Selaiyur",
+    "route_name": "Bharath University"
+  },
+  "20G": {
+    "lat": 12.9234492,
+    "lng": 80.1587694,
+    "area_name": "Sembakkam",
+    "route_name": "Sembakkam"
+  },
+  "20H": {
+    "lat": 12.9451497,
+    "lng": 80.129599,
+    "area_name": "Sanatorium Tambaram",
+    "route_name": "Sanatorium"
+  },
+  "21": {
+    "lat": 12.9891813,
+    "lng": 80.2075557,
+    "area_name": "NGO Colony Velachery",
+    "route_name": "NGO Colony"
+  },
+  "21A": {
+    "lat": 12.9754605,
+    "lng": 80.2207047,
+    "area_name": "Velachery",
+    "route_name": "Velachery"
+  },
+  "21C": {
+    "lat": 12.9880288,
+    "lng": 80.20471330000001,
+    "area_name": "Adambakkam",
+    "route_name": "Adambakkam"
+  },
+  "22": {
+    "lat": 12.9009877,
+    "lng": 80.2279301,
+    "area_name": "Sholinganallur",
+    "route_name": "Sholinganallur OMR"
+  },
+  "23": {
+    "lat": 12.940865,
+    "lng": 80.1850596,
+    "area_name": "Kovilampakkam",
+    "route_name": "Kovilampakkam"
+  },
+  "23C": {
+    "lat": 12.9556074,
+    "lng": 80.1868681,
+    "area_name": "Keelkatalai",
+    "route_name": "Keelkatalai"
+  },
+  "24": {
+    "lat": 12.9807418,
+    "lng": 80.1882363,
+    "area_name": "Nanganallur",
+    "route_name": "Nanganallur"
+  },
+  "24C": {
+    "lat": 12.9692343,
+    "lng": 80.1502144,
+    "area_name": "Pallavaram Bus Stand",
+    "route_name": "Pallavaram Bus Stand"
+  },
+  "25": {
+    "lat": 12.9142743,
+    "lng": 80.25373809999999,
+    "area_name": "VGP Golden Beach",
+    "route_name": "VGP ECR"
+  },
+  "25C": {
+    "lat": 13.0011774,
+    "lng": 80.2564957,
+    "area_name": "Adyar",
+    "route_name": "Adyar"
+  },
+  "26": {
+    "lat": 13.0587485,
+    "lng": 80.2757148,
+    "area_name": "Triplicane",
+    "route_name": "Triplicane"
+  },
+  "26C": {
+    "lat": 13.0404742,
+    "lng": 80.25033350000001,
+    "area_name": "Teynampet",
+    "route_name": "Teynampet"
+  },
+  "27": {
+    "lat": 13.0300565,
+    "lng": 80.27708109999999,
+    "area_name": "Pattinapakkam",
+    "route_name": "Pattinapakkam"
+  },
+  "27C": {
+    "lat": 13.0319017,
+    "lng": 80.2788229,
+    "area_name": "Santhome",
+    "route_name": "Santhome Lighthouse"
+  },
+  "28": {
+    "lat": 13.0668019,
+    "lng": 80.2479401,
+    "area_name": "Shastri Bhavan Nungambakkam",
+    "route_name": "Nungambakkam Shastri Bhawan"
+  },
+  "28B": {
+    "lat": 13.0532086,
+    "lng": 80.1922278,
+    "area_name": "Virugambakkam",
+    "route_name": "Virugambakkam"
+  },
+  "28C": {
+    "lat": 13.0446652,
+    "lng": 80.2127862,
+    "area_name": "Lakshman Sruthi Nungambakkam",
+    "route_name": "Lakshman Sruthi"
+  },
+  "29": {
+    "lat": 13.0545488,
+    "lng": 80.2011306,
+    "area_name": "Saligramam",
+    "route_name": "Saligramam"
+  },
+  "29C": {
+    "lat": 13.0425511,
+    "lng": 80.1840192,
+    "area_name": "Alwarthirunagar",
+    "route_name": "Alwarthirunagar"
+  },
+  "30": {
+    "lat": 13.0619853,
+    "lng": 80.1990136,
+    "area_name": "Chinmaya Nagar Chennai",
+    "route_name": "Chinmaya Nagar"
+  },
+  "30C": {
+    "lat": 13.0924922,
+    "lng": 80.18680909999999,
+    "area_name": "Elango Nagar Chennai",
+    "route_name": "Elango Nagar"
+  },
+  "31": {
+    "lat": 13.0609596,
+    "lng": 80.2430459,
+    "area_name": "Valluvarkottam",
+    "route_name": "Valluvarkottam"
+  },
+  "32": {
+    "lat": 13.0311989,
+    "lng": 80.2277232,
+    "area_name": "CIT Nagar Mylapore",
+    "route_name": "CIT.Nagar"
+  },
+  "32C": {
+    "lat": 13.0373222,
+    "lng": 80.2123115,
+    "area_name": "Ashok Pillar",
+    "route_name": "Ashok Pillar"
+  },
+  "33": {
+    "lat": 13.0413974,
+    "lng": 80.20477869999999,
+    "area_name": "Sivan Park KK Nagar",
+    "route_name": "KK Nagar Sivan Park"
+  },
+  "33C": {
+    "lat": 13.0379385,
+    "lng": 80.1919681,
+    "area_name": "Nesapakkam",
+    "route_name": "Nesapakkam"
+  },
+  "34": {
+    "lat": 13.0391373,
+    "lng": 80.1434689,
+    "area_name": "Porur Ramachandra Hospital",
+    "route_name": "Porur Ramachandra"
+  },
+  "34B": {
+    "lat": 13.0380617,
+    "lng": 80.1353549,
+    "area_name": "Iyyappanthangal Depot",
+    "route_name": "Iyyappanthangal Depot"
+  },
+  "34C": {
+    "lat": 13.0380617,
+    "lng": 80.1353549,
+    "area_name": "Iyyappanthangal",
+    "route_name": "Iyyappanthangal"
+  },
+  "35": {
+    "lat": 12.9749128,
+    "lng": 80.1327824,
+    "area_name": "Pammal",
+    "route_name": "Pammal Therasa School"
+  },
+  "35A": {
+    "lat": 13.0239864,
+    "lng": 80.11446590000001,
+    "area_name": "Mangadu",
+    "route_name": "Mangadu"
+  },
+  "35B": {
+    "lat": 12.9774818,
+    "lng": 80.1308706,
+    "area_name": "Arunmathi Theatre Pammal",
+    "route_name": "Arunmathi Theatre Pammal"
+  },
+  "35C": {
+    "lat": 12.997668,
+    "lng": 80.0972003,
+    "area_name": "Kundrathur",
+    "route_name": "Kundrathur"
+  },
+  "35D": {
+    "lat": 12.9739854,
+    "lng": 80.133567,
+    "area_name": "Pammal Market",
+    "route_name": "Pammal"
+  },
+  "35E": {
+    "lat": 12.9969765,
+    "lng": 80.0961198,
+    "area_name": "Kundrathur Bus Stand",
+    "route_name": "Kundrathur"
+  },
+  "36": {
+    "lat": 13.0108473,
+    "lng": 80.1177335,
+    "area_name": "Kovur Chennai",
+    "route_name": "Kovur"
+  },
+  "36C": {
+    "lat": 13.0228386,
+    "lng": 80.1463194,
+    "area_name": "Madhanandapuram",
+    "route_name": "Madhanandapuram"
+  },
+  "37": {
+    "lat": 13.0218229,
+    "lng": 80.174532,
+    "area_name": "DLF Chennai",
+    "route_name": "DLF"
+  },
+  "37A": {
+    "lat": 13.0384287,
+    "lng": 80.1337868,
+    "area_name": "Iyyappanthangal Reliance Mart",
+    "route_name": "Iyyappanthangal Reliance Mart"
+  },
+  "37B": {
+    "lat": 13.0474398,
+    "lng": 80.1085533,
+    "area_name": "NIVH Poonamallee",
+    "route_name": "NIVH Poonamalle"
+  },
+  "37C": {
+    "lat": 13.0516882,
+    "lng": 80.0947788,
+    "area_name": "Poonamallee Bus Stand",
+    "route_name": "Poonamallee Bus Stand"
+  },
+  "37D": {
+    "lat": 13.1055738,
+    "lng": 80.20778779999999,
+    "area_name": "Poonamallee Ambedkar Statue",
+    "route_name": "Poonamallee Ambedkar Statue"
+  },
+  "38": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Housing Board Kancheepuram",
+    "route_name": "Housing Board"
+  },
+  "38B": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Ayyangarkulam Kancheepuram",
+    "route_name": "Ayyangarkulam"
+  },
+  "38C": {
+    "lat": 13.0694021,
+    "lng": 80.220222,
+    "area_name": "Kancheepuram Collectorate",
+    "route_name": "Kancheepuram Collectorate"
+  },
+  "39": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Orikkai",
+    "route_name": "Orikkai"
+  },
+  "39C": {
+    "lat": 13.0666516,
+    "lng": 80.2049016,
+    "area_name": "Kancheepuram Bus Stand",
+    "route_name": "Kanchipuram"
+  },
+  "40": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Walajabad",
+    "route_name": "Walajabad"
+  },
+  "40A": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Ayyampettai Kancheepuram",
+    "route_name": "Ayyampettai"
+  },
+  "40B": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Rangasamykulam",
+    "route_name": "Rangasamy Kulam"
+  },
+  "40C": {
+    "lat": 13.0666516,
+    "lng": 80.2049016,
+    "area_name": "Kancheepuram Bus Stand",
+    "route_name": "Kancheepuram Bus Stand"
+  },
+  "40D": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Kancheepuram",
+    "route_name": "Kancheepuram"
+  },
+  "41C": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Vellore",
+    "route_name": "Vellore Faculty Staff Only"
+  },
+  "42": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Arakkonam",
+    "route_name": "Arakkonam"
+  },
+  "42A": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "Thakkolam",
+    "route_name": "Thakkolam Koot Road"
+  },
+  "42B": {
+    "lat": 13.0843007,
+    "lng": 80.2704622,
+    "area_name": "SR Gate Arakkonam",
+    "route_name": "S R Gate"
+  },
+  "42C": {
+    "lat": 13.0464305,
+    "lng": 80.201915,
+    "area_name": "Arakkonam Bus Stand",
+    "route_name": "Arakkonam"
+  },
+  "44": {
+    "lat": 13.0538112,
+    "lng": 80.2274281,
+    "area_name": "Meenakshi College K.P.M",
+    "route_name": "Meenakshi College KPM"
+  },
+  "45": {
+    "lat": 12.8865824,
+    "lng": 80.0216481,
+    "area_name": "Padappai",
+    "route_name": "Padappai"
+  }
+}

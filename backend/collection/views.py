@@ -381,17 +381,17 @@ def student_list(request):
     data = {k: v for k, v in request.data.items() if k != 'password'}
 
     # Check for duplicates before attempting creation
-    roll = str(data.get('roll_number', '')).strip()
+    roll = str(data.get('admission_number', '')).strip()
     email_val = str(data.get('email', '')).strip()
-    existing = Student.objects.filter(roll_number=roll).first() or Student.objects.filter(email=email_val).first()
+    existing = Student.objects.filter(admission_number=roll).first() or Student.objects.filter(email=email_val).first()
     if existing:
         return Response({
             'detail': 'Student already exists.',
             'duplicate': {
-                'roll_number': existing.roll_number,
-                'name': existing.name,
+                'roll_number': existing.admission_number,
+                'name': '',
                 'email': existing.email,
-                'department': existing.department,
+                'department': '',
             }
         }, status=status.HTTP_409_CONFLICT)
 
@@ -470,16 +470,16 @@ def student_bulk(request):
         # Strip any password from incoming data — we derive it ourselves
         clean_item = {k: v for k, v in item.items() if k != 'password'}
 
-        # Check for duplicates by roll_number or email before attempting create
-        roll = str(clean_item.get('roll_number', '')).strip()
+        # Check for duplicates by admission_number or email before attempting create
+        roll = str(clean_item.get('admission_number', '')).strip()
         email = str(clean_item.get('email', '')).strip()
-        existing = Student.objects.filter(roll_number=roll).first() or Student.objects.filter(email=email).first()
+        existing = Student.objects.filter(admission_number=roll).first() or Student.objects.filter(email=email).first()
         if existing:
             duplicates.append({
-                'roll_number': existing.roll_number,
-                'name': existing.name,
+                'roll_number': existing.admission_number,
+                'name': '',
                 'email': existing.email,
-                'department': existing.department,
+                'department': '',
             })
             continue
 

@@ -18,7 +18,7 @@ from collection.models import RoadSegment
 
 DEFAULT_GEOJSON = (
     Path(__file__).resolve()
-    .parents[5]          # repo root  (backend -> collection -> management -> commands -> __ -> backend -> ..)
+    .parents[4]          # repo root: commands -> management -> collection -> backend -> data-collection
     / 'datasets'
     / 'roadTopology'
     / 'geojson'

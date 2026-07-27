@@ -591,7 +591,7 @@ export default function FormPage() {
                             <line x1="11" y1="8" x2="11" y2="14"/>
                             <line x1="8" y1="11" x2="14" y2="11"/>
                           </svg>
-                          Zoom in closer to view the bus routes
+                          Zoom in closer to view the bus routes (zoom level 14+)
                         </div>
                       )}
                       {!roadsLoaded && (
