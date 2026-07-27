@@ -58,7 +58,7 @@ export default function LoginPage() {
         {/* Heading */}
         <h1 className="login-title">Welcome back</h1>
         <p className="login-subtitle">
-          Sign in to access the student location data collection portal.
+          Sign in with your email and the last 4 digits of your admission number as your password.
         </p>
 
         {/* Form */}

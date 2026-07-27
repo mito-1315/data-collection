@@ -6,10 +6,8 @@ import AddUserModal from './components/AddUserModal';
 
 interface User {
   id: number;
-  roll_number: string;
-  name: string;
+  admission_number: string;
   email: string;
-  department: string;
   status: 'FILLED' | 'UNFILLED';
 }
 
@@ -47,8 +45,9 @@ export default function UsersPage() {
   // Filtering
   const filteredUsers = useMemo(() => {
     return users.filter(u => {
-      const matchesSearch = u.name.toLowerCase().includes(search.toLowerCase()) || 
-                            u.roll_number.toLowerCase().includes(search.toLowerCase());
+      const matchesSearch =
+        u.email.toLowerCase().includes(search.toLowerCase()) ||
+        u.admission_number.toLowerCase().includes(search.toLowerCase());
       const matchesStatus = filterStatus === 'ALL' || u.status === filterStatus;
       return matchesSearch && matchesStatus;
     });
@@ -81,7 +80,7 @@ export default function UsersPage() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/students/bulk_delete/`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
@@ -91,34 +90,33 @@ export default function UsersPage() {
         setSelectedIds(new Set());
         fetchUsers();
       }
-    } catch (e) {
-      alert("Error deleting users");
+    } catch {
+      alert('Error deleting users');
     }
   };
 
   const exportData = () => {
-    const dataToExport = selectedIds.size > 0 
+    const dataToExport = selectedIds.size > 0
       ? users.filter(u => selectedIds.has(u.id))
       : filteredUsers;
-    
+
     if (dataToExport.length === 0) return;
 
     const csv = Papa.unparse(dataToExport.map(u => ({
-      'Roll Number': u.roll_number,
-      'Name': u.name,
+      'Admission Number': u.admission_number,
       'Email': u.email,
-      'Department': u.department,
       'Status': u.status
     })));
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = url;
-    link.setAttribute("download", "students_export.csv");
+    link.setAttribute('download', 'students_export.csv');
     document.body.appendChild(link);
     link.click();
     link.remove();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -139,16 +137,16 @@ export default function UsersPage() {
         {/* Toolbar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
           <div style={{ display: 'flex', gap: 16 }}>
-            <input 
-              type="text" 
-              className="form-input" 
-              placeholder="Search by name or roll..." 
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Search by email or admission no..."
               value={search}
               onChange={e => { setSearch(e.target.value); setPage(1); }}
               style={{ width: 300 }}
             />
-            <select 
-              className="form-input" 
+            <select
+              className="form-input"
               value={filterStatus}
               onChange={e => { setFilterStatus(e.target.value); setPage(1); }}
               style={{ width: 150 }}
@@ -158,7 +156,7 @@ export default function UsersPage() {
               <option value="UNFILLED">Unfilled</option>
             </select>
           </div>
-          
+
           {selectedIds.size > 0 && (
             <button className="btn-submit" style={{ width: 'auto', background: '#ff5555', color: '#fff', padding: '8px 16px' }} onClick={handleBulkDelete}>
               🗑️ Delete Selected ({selectedIds.size})
@@ -172,34 +170,34 @@ export default function UsersPage() {
             <thead>
               <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--accent-border)' }}>
                 <th style={{ padding: '16px', width: 40 }}>
-                  <input 
-                    type="checkbox" 
+                  <input
+                    type="checkbox"
                     checked={paginatedUsers.length > 0 && selectedIds.size === paginatedUsers.length}
                     onChange={toggleSelectAll}
                   />
                 </th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Roll Number</th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Name</th>
+                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Admission Number</th>
                 <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Email</th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Department</th>
+                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Password</th>
                 <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Status</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={6} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>Loading users...</td></tr>
+                <tr><td colSpan={5} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>Loading users...</td></tr>
               ) : paginatedUsers.length === 0 ? (
-                <tr><td colSpan={6} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>No users found.</td></tr>
+                <tr><td colSpan={5} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>No users found.</td></tr>
               ) : (
                 paginatedUsers.map(u => (
                   <tr key={u.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                     <td style={{ padding: '16px' }}>
                       <input type="checkbox" checked={selectedIds.has(u.id)} onChange={() => toggleSelect(u.id)} />
                     </td>
-                    <td style={{ padding: '16px', color: '#fff' }}>{u.roll_number}</td>
-                    <td style={{ padding: '16px', color: 'var(--text-primary)' }}>{u.name}</td>
-                    <td style={{ padding: '16px', color: 'var(--text-secondary)' }}>{u.email}</td>
-                    <td style={{ padding: '16px', color: 'var(--text-secondary)' }}>{u.department}</td>
+                    <td style={{ padding: '16px', color: '#fff', fontFamily: 'monospace' }}>{u.admission_number}</td>
+                    <td style={{ padding: '16px', color: 'var(--text-primary)' }}>{u.email}</td>
+                    <td style={{ padding: '16px', color: 'var(--text-secondary)', fontFamily: 'monospace', fontSize: 13 }}>
+                      {u.admission_number.length >= 4 ? u.admission_number.slice(-4) : u.admission_number}
+                    </td>
                     <td style={{ padding: '16px' }}>
                       <span style={{
                         padding: '4px 10px',
@@ -217,7 +215,7 @@ export default function UsersPage() {
               )}
             </tbody>
           </table>
-          
+
           {/* Pagination */}
           {!loading && totalPages > 1 && (
             <div style={{ padding: '16px', borderTop: '1px solid var(--accent-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -225,12 +223,12 @@ export default function UsersPage() {
                 Showing {(page - 1) * perPage + 1} to {Math.min(page * perPage, filteredUsers.length)} of {filteredUsers.length}
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
-                <button 
+                <button
                   disabled={page === 1}
                   onClick={() => setPage(p => p - 1)}
                   style={{ padding: '6px 12px', background: 'var(--bg)', border: '1px solid var(--accent-border)', color: '#fff', borderRadius: 4, cursor: page === 1 ? 'not-allowed' : 'pointer' }}
                 >Prev</button>
-                <button 
+                <button
                   disabled={page === totalPages}
                   onClick={() => setPage(p => p + 1)}
                   style={{ padding: '6px 12px', background: 'var(--bg)', border: '1px solid var(--accent-border)', color: '#fff', borderRadius: 4, cursor: page === totalPages ? 'not-allowed' : 'pointer' }}

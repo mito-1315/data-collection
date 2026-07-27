@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 interface AddUserModalProps {
   onClose: () => void;
@@ -14,29 +15,14 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Single mode state — no password field; it's auto-derived from email
-  const [form, setForm] = useState({
-    name: '', email: '', department: '', roll_number: ''
-  });
-  const [departments, setDepartments] = useState<{code: string, name: string}[]>([]);
+  // Single mode state — only email and admission_number
+  const [form, setForm] = useState({ email: '', admission_number: '' });
 
-  // Fetch departments on mount
-  useState(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/departments/`)
-      .then(r => r.json())
-      .then(d => {
-        if (d.departments) {
-          setDepartments(d.departments);
-          if (d.departments.length > 0) setForm(f => ({ ...f, department: d.departments[0].code }));
-        }
-      })
-      .catch(console.error);
-  });
-
-  // Validation logic
-  const validateRollNumber = (roll: string) => {
-    if (roll.length !== 9) return 'Roll number must be exactly 9 digits.';
-    if (!/^\d+$/.test(roll)) return 'Roll number must contain only digits.';
+  // Validate admission number: digits only, any length >= 4
+  const validateAdmissionNumber = (num: string): string | null => {
+    if (!num) return 'Admission number is required.';
+    if (!/^\d+$/.test(num)) return 'Admission number must contain only digits.';
+    if (num.length < 4) return 'Admission number must have at least 4 digits (password uses last 4).';
     return null;
   };
 
@@ -44,8 +30,8 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
     e.preventDefault();
     setError('');
 
-    const rollError = validateRollNumber(form.roll_number);
-    if (rollError) { setError(rollError); return; }
+    const admError = validateAdmissionNumber(form.admission_number);
+    if (admError) { setError(admError); return; }
 
     setLoading(true);
     try {
@@ -55,21 +41,76 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        // Password is intentionally NOT sent — backend derives it from email
         body: JSON.stringify(form)
       });
       if (res.ok) {
-        const email = form.email;
-        const prefix = email.split('@')[0];
-        setSuccess(`User added. Default password: ${prefix}@123`);
+        const last4 = form.admission_number.slice(-4);
+        setSuccess(`Student added! Password: ${last4} (last 4 digits of admission number)`);
         onRefresh();
         setTimeout(onClose, 2500);
       } else {
         const data = await res.json();
         setError(JSON.stringify(data));
       }
-    } catch (e) {
-      setError('Failed to create user.');
+    } catch {
+      setError('Failed to create student.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const processRows = async (rows: Record<string, string>[]) => {
+    setError('');
+
+    // Required columns
+    const required = ['email', 'admission_number'];
+    const firstRow = rows[0] || {};
+    const missing = required.filter(col => !(col in firstRow));
+    if (missing.length > 0) {
+      setError(`Missing columns: ${missing.join(', ')}. Only "email" and "admission_number" columns are required.`);
+      return;
+    }
+
+    // Validate all rows
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const admError = validateAdmissionNumber(String(row.admission_number || '').trim());
+      if (admError) {
+        setError(`Row ${i + 1}: ${admError} (value: "${row.admission_number}")`);
+        return;
+      }
+      if (!row.email || !row.email.includes('@')) {
+        setError(`Row ${i + 1}: Invalid email address "${row.email}".`);
+        return;
+      }
+    }
+
+    setLoading(true);
+    try {
+      const payload = rows.map(r => ({
+        email: String(r.email).trim(),
+        admission_number: String(r.admission_number).trim(),
+      }));
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/students/bulk/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (res.ok && data.errors?.length === 0) {
+        setSuccess(`Successfully added ${data.created} students. Passwords = last 4 digits of each admission number.`);
+        onRefresh();
+        setTimeout(onClose, 2500);
+      } else {
+        setError(`Added ${data.created}. Errors: ${JSON.stringify(data.errors)}`);
+        onRefresh();
+      }
+    } catch {
+      setError('Failed to upload students.');
     } finally {
       setLoading(false);
     }
@@ -79,72 +120,64 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
     const file = e.target.files?.[0];
     if (!file) return;
 
-    Papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: async (results) => {
-        setError('');
-        const rows = results.data as any[];
+    const ext = file.name.split('.').pop()?.toLowerCase();
 
-        // Required columns (password is NOT required — it is auto-derived from email)
-        const required = ['name', 'email', 'department', 'roll_number'];
-        const firstRow = rows[0] || {};
-        const missing = required.filter(col => !(col in firstRow));
-        if (missing.length > 0) {
-          setError(`Missing columns: ${missing.join(', ')}`);
-          return;
+    if (ext === 'csv') {
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: async (results) => {
+          await processRows(results.data as Record<string, string>[]);
         }
-
-        // Validate rows
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          const rollError = validateRollNumber(String(row.roll_number));
-          if (rollError) {
-            setError(`Row ${i + 1}: ${rollError} (${row.roll_number})`);
-            return;
-          }
-        }
-
-        setLoading(true);
+      });
+    } else if (ext === 'xlsx' || ext === 'xls') {
+      const reader = new FileReader();
+      reader.onload = async (ev) => {
         try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/students/bulk/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            // Password fields in CSV are silently ignored by the backend
-            body: JSON.stringify(rows)
-          });
-          const data = await res.json();
-          if (res.ok && data.errors?.length === 0) {
-            setSuccess(`Successfully added ${data.created} users. Passwords are set to emailprefix@123.`);
-            onRefresh();
-            setTimeout(onClose, 2500);
-          } else {
-            setError(`Added ${data.created}. Errors: ${JSON.stringify(data.errors)}`);
-            onRefresh();
-          }
-        } catch (err) {
-          setError('Failed to upload users.');
-        } finally {
-          setLoading(false);
+          const data = ev.target?.result;
+          const workbook = XLSX.read(data, { type: 'array' });
+          const sheet = workbook.Sheets[workbook.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json<Record<string, string>>(sheet, { defval: '' });
+          await processRows(rows);
+        } catch {
+          setError('Failed to read Excel file. Please use a valid .xlsx or .xls file.');
         }
-      }
-    });
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      setError('Unsupported file type. Please upload a .csv, .xlsx, or .xls file.');
+    }
   };
 
-  const downloadSample = () => {
-    // Password column is intentionally omitted — passwords are auto-derived from email
-    const csvContent = "data:text/csv;charset=utf-8,name,email,department,roll_number\nMonkey D Luffy,luffy@example.com,Computer Science,230701184\nNami Shimizu,nami@example.com,Electronics,230701185\n";
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "sample_students.csv");
+  const downloadSampleCSV = () => {
+    const csvContent = 'email,admission_number\nluffy@example.com,230701184\nnami@example.com,230701185\n';
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'sample_students.csv');
     document.body.appendChild(link);
     link.click();
     link.remove();
+    URL.revokeObjectURL(url);
   };
+
+  const downloadSampleExcel = () => {
+    const ws = XLSX.utils.aoa_to_sheet([
+      ['email', 'admission_number'],
+      ['luffy@example.com', '230701184'],
+      ['nami@example.com', '230701185'],
+    ]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Students');
+    XLSX.writeFile(wb, 'sample_students.xlsx');
+  };
+
+  const admLast4 = form.admission_number.length >= 4
+    ? form.admission_number.slice(-4)
+    : form.admission_number.length > 0
+      ? `(need ${4 - form.admission_number.length} more digit${form.admission_number.length < 3 ? 's' : ''})`
+      : 'last 4 digits';
 
   return (
     <div style={{
@@ -157,7 +190,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
           <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: 20 }}>✕</button>
         </div>
 
-        {/* Password note banner */}
+        {/* Password info banner */}
         <div style={{
           background: 'rgba(155,89,245,0.1)', border: '1px solid rgba(155,89,245,0.3)',
           borderRadius: 8, padding: '10px 14px', marginBottom: 20, fontSize: 13,
@@ -165,16 +198,19 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
         }}>
           <span style={{ fontSize: 16 }}>🔑</span>
           <span>
-            Passwords are <strong style={{ color: '#fff' }}>automatically set</strong> from each student&apos;s email.{' '}
-            Example: <code style={{ color: '#9b59f5' }}>mithesh@gmail.com</code> → password: <code style={{ color: '#9b59f5' }}>mithesh@123</code>
+            Password is automatically set to the{' '}
+            <strong style={{ color: '#fff' }}>last 4 digits</strong> of the admission number.{' '}
+            Example: admission <code style={{ color: '#9b59f5' }}>230701184</code> → password:{' '}
+            <code style={{ color: '#9b59f5' }}>1184</code>
           </span>
         </div>
 
+        {/* Mode tabs */}
         <div style={{ display: 'flex', gap: 8, background: 'rgba(255,255,255,0.05)', padding: 4, borderRadius: 8, marginBottom: 24 }}>
           <button
             style={{ flex: 1, padding: '8px 0', border: 'none', borderRadius: 4, background: mode === 'multiple' ? 'var(--accent)' : 'transparent', color: mode === 'multiple' ? '#fff' : 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600 }}
             onClick={() => setMode('multiple')}
-          >Multiple (CSV)</button>
+          >Multiple (CSV / Excel)</button>
           <button
             style={{ flex: 1, padding: '8px 0', border: 'none', borderRadius: 4, background: mode === 'single' ? 'var(--accent)' : 'transparent', color: mode === 'single' ? '#fff' : 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600 }}
             onClick={() => setMode('single')}
@@ -187,51 +223,62 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
         {mode === 'multiple' ? (
           <div>
             <div style={{ border: '2px dashed var(--accent-border)', padding: 40, textAlign: 'center', borderRadius: 8, position: 'relative' }}>
-              <input type="file" accept=".csv" onChange={handleFileUpload} disabled={loading} style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer' }} />
+              <input
+                type="file"
+                accept=".csv,.xlsx,.xls"
+                onChange={handleFileUpload}
+                disabled={loading}
+                style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', width: '100%', height: '100%' }}
+              />
               <div style={{ fontSize: 24, marginBottom: 8 }}>📁</div>
-              <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Click or drag CSV file to upload</div>
+              <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Click or drag CSV / Excel file to upload</div>
               <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 4 }}>
-                Required columns: <code>name</code>, <code>email</code>, <code>department</code>, <code>roll_number</code>
+                Required columns: <code>email</code>, <code>admission_number</code>
               </div>
               <div style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 4 }}>
-                No password column needed — auto-set from email
+                Supports .csv, .xlsx, .xls — No password column needed
               </div>
             </div>
-            <div style={{ textAlign: 'center', marginTop: 16 }}>
-              <button onClick={downloadSample} style={{ background: 'transparent', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: 13, textDecoration: 'underline' }}>
-                Download Sample CSV
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginTop: 16 }}>
+              <button onClick={downloadSampleCSV} style={{ background: 'transparent', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: 13, textDecoration: 'underline' }}>
+                📄 Download Sample CSV
+              </button>
+              <button onClick={downloadSampleExcel} style={{ background: 'transparent', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: 13, textDecoration: 'underline' }}>
+                📊 Download Sample Excel
               </button>
             </div>
           </div>
         ) : (
           <form onSubmit={handleSingleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div className="form-field" style={{ marginBottom: 0 }}>
-              <label className="form-label">Full Name</label>
-              <input type="text" className="form-input" required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="e.g. Priya Rajan" />
+              <label className="form-label">Email Address</label>
+              <input
+                type="email"
+                className="form-input"
+                required
+                value={form.email}
+                onChange={e => setForm({ ...form, email: e.target.value })}
+                placeholder="e.g. student@example.com"
+              />
             </div>
             <div className="form-field" style={{ marginBottom: 0 }}>
-              <label className="form-label">Email</label>
-              <input type="email" className="form-input" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="e.g. priya@gmail.com" />
+              <label className="form-label">Admission Number</label>
+              <input
+                type="text"
+                className="form-input"
+                required
+                value={form.admission_number}
+                onChange={e => setForm({ ...form, admission_number: e.target.value.replace(/\D/g, '') })}
+                placeholder="e.g. 230701184 (digits only)"
+                inputMode="numeric"
+              />
             </div>
-            <div style={{ display: 'flex', gap: 12 }}>
-              <div className="form-field" style={{ marginBottom: 0, flex: 1 }}>
-                <label className="form-label">Roll Number</label>
-                <input type="text" className="form-input" required value={form.roll_number} onChange={e => setForm({ ...form, roll_number: e.target.value })} placeholder="9 digits" maxLength={9} />
-              </div>
-              <div className="form-field" style={{ marginBottom: 0, flex: 1 }}>
-                <label className="form-label">Department</label>
-                <select className="form-input" required value={form.department} onChange={e => setForm({ ...form, department: e.target.value })}>
-                  <option value="" disabled>Select department...</option>
-                  {departments.map(d => <option key={d.code} value={d.code}>{d.name} ({d.code})</option>)}
-                </select>
-              </div>
-            </div>
-            {/* Password field intentionally removed — auto-derived from email */}
+            {/* Live password preview */}
             <div style={{
               background: 'rgba(155,89,245,0.08)', borderRadius: 6, padding: '8px 12px',
               fontSize: 12, color: 'var(--text-secondary)',
             }}>
-              🔑 Password will be auto-set to: <strong style={{ color: '#9b59f5' }}>{form.email ? `${form.email.split('@')[0]}@123` : 'emailprefix@123'}</strong>
+              🔑 Password will be: <strong style={{ color: '#9b59f5' }}>{admLast4}</strong>
             </div>
             <button type="submit" className="btn-submit" disabled={loading} style={{ marginTop: 8 }}>
               {loading ? 'Adding...' : 'Add Student'}
