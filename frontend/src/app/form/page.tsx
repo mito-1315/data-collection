@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import NextImage from 'next/image';
 import {
   APIProvider,
   Map,
@@ -392,7 +393,6 @@ export default function FormPage() {
         },
         body: JSON.stringify({
           roll_no: form.rollNo,
-          name: form.name,
           lat: form.lat,
           lng: form.lng,
           address: form.address,
@@ -430,10 +430,14 @@ export default function FormPage() {
         {/* ── Topbar ── */}
         <header className="form-topbar">
           <div className="form-topbar-logo">
-            <div className="form-topbar-icon">🎓</div>
-            <div className="form-topbar-label">
-              Rajalakshmi Engineering College
-              <span>Student Location Collection</span>
+            <div style={{ position: 'relative', width: 160, height: 44, flexShrink: 0 }}>
+              <NextImage
+                src="/image.png"
+                alt="Rajalakshmi Engineering College"
+                fill
+                style={{ objectFit: 'contain', objectPosition: 'left center' }}
+                priority
+              />
             </div>
           </div>
           <div className="topbar-user">
@@ -477,8 +481,8 @@ export default function FormPage() {
                       <div className="form-input form-input-readonly">{existingEntry.submitted_by}</div>
                     </div>
                     <div className="form-field">
-                      <label className="form-label">Full Name</label>
-                      <div className="form-input form-input-readonly">{existingEntry.name}</div>
+                      <label className="form-label">Admission Number</label>
+                      <div className="form-input form-input-readonly">{existingEntry.roll_no}</div>
                     </div>
                   </div>
                   <div className="form-field" style={{ marginTop: 12 }}>
@@ -532,7 +536,7 @@ export default function FormPage() {
               <div className="form-heading">
                 <h1>Submit Boarding Location</h1>
                 <p>
-                  Enter your name, then <strong>click directly on a purple road line</strong> on the map.
+                  <strong>Click directly on a purple road line</strong> on the map to set your boarding location.
                   Your pin will snap to the nearest bus route point automatically.
                 </p>
               </div>
@@ -552,10 +556,9 @@ export default function FormPage() {
                           value={form.email} readOnly disabled />
                       </div>
                       <div className="form-field">
-                        <label className="form-label" htmlFor="studentName">Full Name</label>
-                        <input id="studentName" type="text" className="form-input"
-                          placeholder="e.g. Priya Rajan" value={form.name}
-                          onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} required />
+                        <label className="form-label" htmlFor="admissionNo">Admission Number</label>
+                        <input id="admissionNo" type="text" className="form-input form-input-readonly"
+                          value={form.rollNo} readOnly disabled />
                       </div>
                     </div>
                   </div>
@@ -591,7 +594,7 @@ export default function FormPage() {
                             <line x1="11" y1="8" x2="11" y2="14"/>
                             <line x1="8" y1="11" x2="14" y2="11"/>
                           </svg>
-                          Zoom in closer to view the bus routes
+                          Zoom in closer to view the bus routes (zoom level 14+)
                         </div>
                       )}
                       {!roadsLoaded && (
@@ -670,7 +673,7 @@ export default function FormPage() {
 
                 <div className="form-submit-row">
                   <button id="submit-btn" type="submit" className="btn-submit"
-                    disabled={submitting || !form.name || !form.lat || addressLoading}>
+                    disabled={submitting || !form.lat || addressLoading}>
                     {submitting ? (
                       <><div className="spinner" /> Saving…</>
                     ) : (

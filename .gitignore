@@ -53,4 +53,9 @@ env/
 *.log
 
 # Project specific
-/datasets/
+# Exclude only the massive raw indiscriminate topology (>100 MB) — too large for git.
+# The SelectiveRoadTopology and PublicTransportationTopology files ARE committed
+# because they are needed to seed the database.
+/datasets/roadTopology/geojson/IndiscriminateRoadTopology.geojson
+/datasets/roadTopology/cache/
+/datasets/raw/

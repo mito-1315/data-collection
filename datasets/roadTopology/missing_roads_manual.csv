@@ -1,0 +1,348 @@
+osm_id,highway,name,length_m,routes,status
+43158266,residential,(unnamed),2714,"Route E13, Route E17, Route E5, Route E6",DROPPED
+564896005,residential,(unnamed),1095,Route W3,DROPPED
+385630680,unclassified,(unnamed),1062,Route W1,DROPPED
+206344810,residential,(unnamed),1052,Route W4,DROPPED
+384707080,residential,(unnamed),1048,Route E1,DROPPED
+1119334740,unclassified,(unnamed),956,Route N1,DROPPED
+384427755,residential,(unnamed),873,Route E1,DROPPED
+1075636002,residential,(unnamed),839,"Route N3, Route N5",DROPPED
+831665067,service,(unnamed),812,Route W3,DROPPED
+559627816,residential,(unnamed),812,Route E5,DROPPED
+47415262,residential,Kathbada Road,777,Route E16,DROPPED
+385542613,residential,1st Main Road,775,Route N3,DROPPED
+831665085,service,(unnamed),722,Route W3,DROPPED
+68543366,residential,Deiva Nagar Main Road,707,Route E1,DROPPED
+23634186,residential,(unnamed),687,Route E12,DROPPED
+184733113,residential,(unnamed),682,"Route E16, Route E9",DROPPED
+833736245,service,(unnamed),671,Route W1,DROPPED
+384435867,residential,(unnamed),612,Route E1,DROPPED
+834160123,unclassified,(unnamed),583,Route N3,DROPPED
+389434026,service,(unnamed),553,"Route E5, Route E6",DROPPED
+834644960,residential,(unnamed),525,Route E1,DROPPED
+673294912,residential,(unnamed),508,"Route E13, Route E18, Route E20, Route E5, Route E6",DROPPED
+650598571,residential,(unnamed),505,Route E1,DROPPED
+1076491294,service,(unnamed),504,"Route E13, Route E17, Route E18, Route E5, Route E6",DROPPED
+1172691684,residential,(unnamed),502,Route N2,DROPPED
+189493180,residential,Dhandapani Street,497,Route E10,DROPPED
+384435871,residential,(unnamed),496,Route E1,DROPPED
+24240034,residential,(unnamed),485,"Route E16, Route E9",DROPPED
+1066925614,residential,6th Avenue,468,Route E1,DROPPED
+833411745,residential,(unnamed),464,Route E1,DROPPED
+23634183,residential,(unnamed),429,Route E12,DROPPED
+838413003,service,(unnamed),426,Route E20,DROPPED
+723302963,residential,(unnamed),425,Route S4,DROPPED
+23030569,residential,(unnamed),421,Route E8,DROPPED
+208174992,residential,Devaraj street,418,Route E1,DROPPED
+836972618,residential,Thiruvalluvar Street,415,"Route E13, Route E5",DROPPED
+836793562,unclassified,(unnamed),412,"Route E13, Route E17, Route E5, Route E6",DROPPED
+389566289,residential,(unnamed),410,Route N3,DROPPED
+1090950102,residential,(unnamed),401,Route E16,DROPPED
+752089414,service,(unnamed),396,Route E8,DROPPED
+834160608,residential,(unnamed),395,Route E1,DROPPED
+836972619,unclassified,(unnamed),391,"Route E13, Route E5",DROPPED
+836679419,service,(unnamed),389,"Route E13, Route E17, Route E5, Route E6",DROPPED
+30923488,residential,Mandapam Road,381,Route E16,DROPPED
+386866363,residential,(unnamed),381,Route N3,DROPPED
+385497559,service,(unnamed),379,Route N3,DROPPED
+1090950060,residential,Dhakshina Murthy Koil Street,373,Route E16,DROPPED
+384811796,residential,(unnamed),372,Route E1,DROPPED
+1188779143,service,(unnamed),368,"Route E13, Route E18, Route E5, Route E6",DROPPED
+704209780,unclassified,(unnamed),364,Route W1,DROPPED
+26394457,residential,DBK Street,360,Route E16,DROPPED
+389567507,residential,(unnamed),356,Route N1,DROPPED
+96936226,service,(unnamed),354,"Route E13, Route E17, Route E5, Route E6",DROPPED
+1066925646,residential,8th Avenue,354,Route E1,DROPPED
+836676739,service,(unnamed),353,"Route E13, Route E17, Route E5, Route E6",DROPPED
+215475874,residential,(unnamed),350,"Route E15, Route E9",DROPPED
+26322119,residential,Muthaiyalu Maistry Street,349,Route E16,DROPPED
+23634190,residential,(unnamed),346,Route E12,DROPPED
+831665066,service,(unnamed),343,Route W3,DROPPED
+768244833,residential,(unnamed),334,"Route E13, Route E18, Route E20, Route E5, Route E6",DROPPED
+720208677,service,(unnamed),330,Route S4,DROPPED
+389567841,residential,(unnamed),328,"Route N1, Route N3",DROPPED
+838221476,residential,(unnamed),326,"Route E20, Route E5, Route E6",DROPPED
+26394458,residential,(unnamed),324,Route E16,DROPPED
+390038539,residential,(unnamed),321,"Route N1, Route N3",DROPPED
+102543060,residential,(unnamed),318,Route E16,DROPPED
+189493193,residential,Ramasamy Street,317,Route E10,DROPPED
+209513216,residential,Pinchal Subramanian Street,315,Route E10,DROPPED
+23634193,residential,(unnamed),314,Route E12,DROPPED
+189493200,residential,Venkatesan Street,314,Route E10,DROPPED
+1075776860,residential,(unnamed),309,Route N5,DROPPED
+32456609,residential,(unnamed),308,Route E12,DROPPED
+189493197,residential,kannadsan street,303,Route E10,DROPPED
+1119129629,service,(unnamed),302,Route N1,DROPPED
+23634185,residential,(unnamed),301,Route E12,DROPPED
+207137951,residential,(unnamed),300,Route E16,DROPPED
+833845577,residential,(unnamed),299,Route E1,DROPPED
+833771994,service,(unnamed),297,Route W1,DROPPED
+838407183,service,(unnamed),297,"Route E20, Route E5, Route E6",DROPPED
+385114895,residential,(unnamed),296,"Route N3, Route N5",DROPPED
+836679414,service,(unnamed),296,"Route E13, Route E17, Route E5, Route E6",DROPPED
+385024898,residential,(unnamed),292,"Route N3, Route N5",DROPPED
+1075657784,unclassified,(unnamed),291,Route N3,DROPPED
+673294911,residential,(unnamed),288,"Route E20, Route E5, Route E6",DROPPED
+836972615,unclassified,(unnamed),287,"Route E13, Route E5",DROPPED
+189493185,residential,Radhakrishnan Street,283,Route E10,DROPPED
+838407168,residential,(unnamed),277,Route E20,DROPPED
+26394461,residential,(unnamed),274,Route E16,DROPPED
+766055959,service,(unnamed),269,"Route E5, Route E6",DROPPED
+208177567,residential,Kalyan Nagar 1st Street,262,Route E1,DROPPED
+26800773,residential,(unnamed),256,"Route E13, Route E5",DROPPED
+208177587,residential,(unnamed),253,Route E1,DROPPED
+836704801,service,(unnamed),251,Route N3,DROPPED
+389899444,residential,(unnamed),251,"Route E5, Route E6",DROPPED
+27171622,residential,Kannadasan Salai,247,Route E10,DROPPED
+836679422,service,(unnamed),243,"Route E13, Route E17, Route E18, Route E5, Route E6",DROPPED
+208177581,residential,Kalyan Nagar Main Road,241,Route E1,DROPPED
+26322116,residential,Bojaraja Nagar,239,Route E16,DROPPED
+384392803,residential,(unnamed),237,Route E1,DROPPED
+834186134,residential,(unnamed),235,Route E1,DROPPED
+385630701,service,(unnamed),233,Route W1,DROPPED
+217870888,residential,Dharmaraja Koil Street,233,Route E16,DROPPED
+831665065,service,(unnamed),233,Route W3,DROPPED
+836972614,unclassified,(unnamed),231,"Route E13, Route E5",DROPPED
+385543448,service,(unnamed),231,Route N3,DROPPED
+833845594,residential,(unnamed),229,Route E1,DROPPED
+1162007394,service,(unnamed),229,Route N3,DROPPED
+831665086,service,(unnamed),228,Route W3,DROPPED
+836676742,service,(unnamed),226,"Route E13, Route E17, Route E5, Route E6",DROPPED
+1088104631,residential,(unnamed),225,Route E1,DROPPED
+722106933,residential,(unnamed),225,Route E1,DROPPED
+1222697232,service,(unnamed),224,"Route E13, Route E17, Route E5, Route E6",DROPPED
+32254487,residential,(unnamed),223,Route E1,DROPPED
+214599126,residential,(unnamed),218,Route E12,DROPPED
+1089674761,residential,(unnamed),216,Route W4,DROPPED
+390038647,service,(unnamed),214,Route N1,DROPPED
+1119129633,service,(unnamed),213,Route N1,DROPPED
+208177569,residential,Kalyan Nagar 2nd Street,213,Route E1,DROPPED
+189493196,residential,Nano Rao Road,213,Route E10,DROPPED
+385630693,service,(unnamed),212,Route W1,DROPPED
+1172691686,residential,(unnamed),206,Route N2,DROPPED
+833440967,residential,(unnamed),200,Route E1,DROPPED
+30852846,residential,(unnamed),200,Route E16,DROPPED
+28087223,residential,(unnamed),199,"Route E16, Route E9",DROPPED
+833441022,residential,(unnamed),198,Route E1,DROPPED
+1090950124,residential,Boja Raja Nagar Main Road,197,Route E16,DROPPED
+1268330714,service,(unnamed),190,Route E8,DROPPED
+297308421,residential,3rd Street,190,"Route E16, Route E9",DROPPED
+836704812,service,(unnamed),187,Route N3,DROPPED
+692147183,residential,(unnamed),184,Route E12,DROPPED
+385133009,residential,(unnamed),178,"Route N3, Route N5",DROPPED
+836704750,service,(unnamed),177,Route N3,DROPPED
+1190519623,residential,(unnamed),177,Route E1,DROPPED
+384392750,residential,(unnamed),177,Route E1,DROPPED
+1190758466,residential,(unnamed),176,Route E1,DROPPED
+1268329135,service,(unnamed),176,Route E8,DROPPED
+1273329125,service,(unnamed),176,"Route N3, Route N5",DROPPED
+1082235958,residential,(unnamed),175,"Route E15, Route E9",DROPPED
+26396289,residential,Sarja Munusamy Street,174,Route E16,DROPPED
+834691274,residential,(unnamed),173,Route E1,DROPPED
+384811795,residential,(unnamed),172,Route E1,DROPPED
+838407193,residential,(unnamed),172,"Route E20, Route E5, Route E6",DROPPED
+1075776863,residential,(unnamed),172,Route N5,DROPPED
+384448051,residential,(unnamed),172,Route E1,DROPPED
+838221457,residential,(unnamed),172,Route E20,DROPPED
+1075776861,residential,(unnamed),171,Route N5,DROPPED
+1075776862,residential,(unnamed),171,Route N5,DROPPED
+1090950069,service,(unnamed),167,Route E16,DROPPED
+833762852,service,(unnamed),166,Route W1,DROPPED
+835976328,residential,(unnamed),165,Route S4,DROPPED
+384392776,residential,(unnamed),164,Route E1,DROPPED
+217859488,living_street,(unnamed),163,Route E16,DROPPED
+23634191,residential,(unnamed),162,Route E12,DROPPED
+390038743,residential,(unnamed),161,Route N3,DROPPED
+47997900,unclassified,(unnamed),159,"Route E15, Route E9",DROPPED
+833441053,residential,(unnamed),157,Route E1,DROPPED
+449760234,residential,(unnamed),152,Route N1,DROPPED
+1255175553,residential,(unnamed),150,Route N5,DROPPED
+384392652,residential,(unnamed),150,Route E1,DROPPED
+385024900,residential,(unnamed),148,"Route N3, Route N5",DROPPED
+47415310,residential,(unnamed),147,Route E16,DROPPED
+834186135,residential,(unnamed),146,Route E1,DROPPED
+385024899,residential,(unnamed),145,"Route N3, Route N5",DROPPED
+1076491293,service,(unnamed),144,"Route E5, Route E6",DROPPED
+833758341,service,(unnamed),144,Route W1,DROPPED
+833766078,service,(unnamed),143,Route W1,DROPPED
+834534374,residential,(unnamed),142,Route E1,DROPPED
+833449779,service,(unnamed),142,Route E1,DROPPED
+836768529,residential,Ganapathi Nagar,141,Route N1,DROPPED
+384435878,residential,(unnamed),141,Route E1,DROPPED
+217870887,living_street,Bojaraja Nagar,139,Route E16,DROPPED
+826356453,residential,(unnamed),138,Route W3,DROPPED
+26439524,residential,Aziz Mohamed Ghouse Street,138,Route E16,DROPPED
+1205693283,service,(unnamed),136,"Route E13, Route E17, Route E5, Route E6",DROPPED
+23047845,residential,kannadsan street,136,Route E10,DROPPED
+836768537,residential,(unnamed),134,"Route N1, Route N3",DROPPED
+838221458,residential,(unnamed),134,Route E20,DROPPED
+30852841,residential,(unnamed),134,Route E16,DROPPED
+47415308,residential,Pensioners 3rd Lane,133,Route E16,DROPPED
+47415313,residential,Pensioners 4th Lane,133,Route E16,DROPPED
+111721014,residential,Chennakulanthia Street,133,Route E8,DROPPED
+1190519624,residential,(unnamed),133,Route E1,DROPPED
+838407167,residential,(unnamed),132,Route E20,DROPPED
+32254482,residential,Well Street,129,Route E1,DROPPED
+826356454,residential,(unnamed),129,Route W3,DROPPED
+1076491295,service,(unnamed),128,"Route E5, Route E6",DROPPED
+217859492,residential,(unnamed),128,Route E16,DROPPED
+833771995,service,(unnamed),126,Route W1,DROPPED
+1051498534,residential,(unnamed),125,Route N2,DROPPED
+1090950063,service,(unnamed),123,Route E16,DROPPED
+837856391,residential,(unnamed),122,Route N1,DROPPED
+836768531,residential,(unnamed),121,Route N1,DROPPED
+208174917,residential,Bhagavandas street,121,Route E1,DROPPED
+1207104082,residential,(unnamed),119,Route E16,DROPPED
+385257088,residential,(unnamed),115,Route N5,DROPPED
+47415309,residential,1st Cross Street,113,Route E16,DROPPED
+34690567,residential,4th Street,113,"Route E16, Route E9",DROPPED
+1517896499,service,(unnamed),111,Route E12,DROPPED
+834534386,residential,(unnamed),111,Route E1,DROPPED
+217870920,residential,(unnamed),109,Route E16,DROPPED
+1253888070,residential,(unnamed),108,Route E1,DROPPED
+217859487,residential,(unnamed),108,Route E16,DROPPED
+1341284550,residential,Sivagnanam Street,106,Route E10,DROPPED
+833771997,service,(unnamed),106,Route W1,DROPPED
+30923570,residential,(unnamed),106,Route E16,DROPPED
+217859494,residential,(unnamed),105,Route E16,DROPPED
+26396375,residential,(unnamed),103,Route E16,DROPPED
+1292570358,residential,Kailasapuram 2nd Street,102,Route E1,DROPPED
+385140689,residential,(unnamed),102,Route N5,DROPPED
+1222693406,service,(unnamed),99,"Route E13, Route E17, Route E5, Route E6",DROPPED
+833758340,service,(unnamed),99,Route W1,DROPPED
+26322120,residential,Parasuraman Street,99,Route E16,DROPPED
+1070106063,residential,(unnamed),99,Route E1,DROPPED
+836000012,service,(unnamed),98,Route S4,DROPPED
+627199894,residential,(unnamed),98,Route E20,DROPPED
+32254478,residential,Kailasapuram Main Road,97,Route E1,DROPPED
+1455373011,service,(unnamed),97,"Route E13, Route E5",DROPPED
+1090950103,residential,(unnamed),96,Route E16,DROPPED
+838407197,residential,(unnamed),96,Route E20,DROPPED
+1066925615,residential,(unnamed),96,Route E1,DROPPED
+1066925632,residential,(unnamed),96,Route E1,DROPPED
+1066925633,residential,(unnamed),96,Route E1,DROPPED
+1066925641,residential,(unnamed),96,Route E1,DROPPED
+1066925642,residential,(unnamed),96,Route E1,DROPPED
+384435874,residential,(unnamed),96,Route E1,DROPPED
+384286343,residential,Kalyan Nagar 3rd Main Road,95,Route E1,DROPPED
+28345682,residential,New Pensioners Lane,94,Route E16,DROPPED
+1066925643,residential,(unnamed),94,Route E1,DROPPED
+833845593,residential,(unnamed),93,Route E1,DROPPED
+1501383006,service,(unnamed),93,"Route E13, Route E17, Route E18, Route E5, Route E6",DROPPED
+1222686033,service,(unnamed),93,"Route E13, Route E17, Route E5, Route E6",DROPPED
+1066925655,residential,(unnamed),93,Route E1,DROPPED
+833775683,service,(unnamed),92,Route W1,DROPPED
+837059331,service,(unnamed),92,"Route E13, Route E17, Route E5, Route E6",DROPPED
+836676743,service,(unnamed),92,"Route E13, Route E17, Route E5, Route E6",DROPPED
+1066925653,residential,(unnamed),92,Route E1,DROPPED
+1066925656,residential,(unnamed),92,Route E1,DROPPED
+1292570356,residential,Sadhasivam Street,92,Route E1,DROPPED
+1119129635,service,(unnamed),91,Route N1,DROPPED
+1207104078,living_street,(unnamed),90,Route E16,DROPPED
+838407184,service,(unnamed),90,"Route E20, Route E5, Route E6",DROPPED
+1066925644,residential,(unnamed),90,Route E1,DROPPED
+837804291,residential,(unnamed),89,"Route N1, Route N3",DROPPED
+834644957,residential,(unnamed),89,Route E1,DROPPED
+389569863,residential,(unnamed),89,Route N1,DROPPED
+1090950121,residential,Parasuraman Main Road,88,Route E16,DROPPED
+838421870,service,(unnamed),88,"Route E20, Route E5, Route E6",DROPPED
+1253558523,residential,(unnamed),85,Route E1,DROPPED
+47415314,residential,(unnamed),82,Route E16,DROPPED
+838407195,residential,(unnamed),82,"Route E20, Route E5, Route E6",DROPPED
+102543678,residential,(unnamed),81,Route E16,DROPPED
+836768540,residential,(unnamed),81,Route N3,DROPPED
+389569909,residential,(unnamed),81,"Route N1, Route N3",DROPPED
+1339497419,service,(unnamed),80,Route E1,DROPPED
+1255175554,residential,(unnamed),80,Route N5,DROPPED
+857076090,residential,(unnamed),79,Route N1,DROPPED
+217870923,living_street,(unnamed),79,Route E16,DROPPED
+47997889,service,(unnamed),78,"Route E15, Route E9",DROPPED
+1070106064,residential,(unnamed),78,Route E1,DROPPED
+389569689,residential,(unnamed),77,Route N1,DROPPED
+1190344068,residential,(unnamed),77,Route E1,DROPPED
+384284435,residential,(unnamed),77,Route E1,DROPPED
+206665265,service,(unnamed),76,Route E10,DROPPED
+207269305,residential,(unnamed),75,Route E16,DROPPED
+1066925645,residential,(unnamed),75,Route E1,DROPPED
+1008389911,residential,(unnamed),75,Route E1,DROPPED
+831684663,service,(unnamed),74,Route W3,DROPPED
+1090950123,living_street,(unnamed),73,Route E16,DROPPED
+1008389912,residential,(unnamed),73,Route E1,DROPPED
+1253558525,residential,(unnamed),72,Route E1,DROPPED
+1207104077,living_street,(unnamed),72,Route E16,DROPPED
+838407194,residential,(unnamed),72,"Route E20, Route E5, Route E6",DROPPED
+1270778026,residential,(unnamed),71,Route N1,DROPPED
+837856390,residential,(unnamed),71,"Route N1, Route N3",DROPPED
+838413012,residential,(unnamed),70,Route E20,DROPPED
+1090950070,service,(unnamed),70,Route E16,DROPPED
+384448018,residential,(unnamed),70,Route E1,DROPPED
+1222694421,service,(unnamed),68,"Route E5, Route E6",DROPPED
+1473773535,service,(unnamed),68,Route E10,DROPPED
+1316115751,service,(unnamed),66,Route E1,DROPPED
+1253889790,residential,(unnamed),66,Route E1,DROPPED
+833845592,residential,(unnamed),64,Route E1,DROPPED
+1207104081,residential,(unnamed),64,Route E16,DROPPED
+1303201042,service,(unnamed),64,Route N1,DROPPED
+1253896757,residential,(unnamed),63,Route E1,DROPPED
+1273998166,living_street,(unnamed),62,Route E1,DROPPED
+384285601,unclassified,(unnamed),62,Route E1,DROPPED
+1188226390,service,(unnamed),62,Route E12,DROPPED
+831684668,service,(unnamed),61,Route W3,DROPPED
+1292570355,residential,(unnamed),61,Route E1,DROPPED
+833845585,residential,(unnamed),60,Route E1,DROPPED
+838407196,residential,(unnamed),60,Route E20,DROPPED
+1223673191,service,(unnamed),60,"Route E13, Route E17, Route E18, Route E5, Route E6",DROPPED
+384448023,residential,(unnamed),59,Route E1,DROPPED
+1188616076,service,(unnamed),59,Route E10,DROPPED
+384285603,unclassified,(unnamed),58,Route E1,DROPPED
+1090950075,service,(unnamed),57,Route E16,DROPPED
+1222696598,service,(unnamed),57,"Route E13, Route E17, Route E5, Route E6",DROPPED
+1066925657,residential,(unnamed),56,Route E1,DROPPED
+1253558526,residential,(unnamed),55,Route E1,DROPPED
+1253897443,residential,(unnamed),55,Route E1,DROPPED
+1188226514,service,(unnamed),55,Route E12,DROPPED
+1473773537,service,(unnamed),55,Route E10,DROPPED
+836674291,residential,(unnamed),54,Route N1,DROPPED
+838407169,residential,(unnamed),54,Route E20,DROPPED
+1090950065,service,(unnamed),53,Route E16,DROPPED
+384284434,residential,Kurinji Nagar Venkateshvara Street,53,Route E1,DROPPED
+1207104079,service,(unnamed),52,Route E16,DROPPED
+1517896498,service,(unnamed),52,Route E12,DROPPED
+1253855460,residential,(unnamed),50,Route E1,DROPPED
+838221481,residential,(unnamed),50,"Route E20, Route E5, Route E6",DROPPED
+1253558524,residential,(unnamed),49,Route E1,DROPPED
+1066925658,residential,(unnamed),49,Route E1,DROPPED
+834534375,residential,(unnamed),48,Route E1,DROPPED
+1442951267,residential,(unnamed),47,Route E10,DROPPED
+765792609,residential,(unnamed),47,Route E1,DROPPED
+1253861029,residential,(unnamed),47,Route E1,DROPPED
+995110729,service,(unnamed),47,Route E10,DROPPED
+1253898100,residential,(unnamed),46,Route E1,DROPPED
+384286344,residential,(unnamed),44,Route E1,DROPPED
+1275526376,service,(unnamed),41,Route E1,DROPPED
+1190519625,residential,(unnamed),39,Route E1,DROPPED
+1253897444,residential,(unnamed),39,Route E1,DROPPED
+1253862902,residential,(unnamed),39,Route E1,DROPPED
+1253863125,living_street,(unnamed),38,Route E1,DROPPED
+833441052,residential,(unnamed),37,Route E1,DROPPED
+1119129630,service,(unnamed),35,Route N1,DROPPED
+727701599,living_street,(unnamed),35,Route E1,DROPPED
+1302273445,residential,(unnamed),35,Route E1,DROPPED
+1253862903,residential,(unnamed),35,Route E1,DROPPED
+1273796156,residential,(unnamed),34,Route N1,DROPPED
+836768539,residential,(unnamed),33,Route N3,DROPPED
+1253558528,residential,(unnamed),30,Route E1,DROPPED
+836679420,service,(unnamed),30,"Route E13, Route E17, Route E5, Route E6",DROPPED
+838221482,residential,(unnamed),29,Route E20,DROPPED
+1300424710,residential,(unnamed),28,Route E1,DROPPED
+1253124376,residential,(unnamed),28,Route E1,DROPPED
+1090950077,service,(unnamed),22,Route E16,DROPPED
+1090950078,service,(unnamed),22,Route E16,DROPPED
+1275525954,residential,(unnamed),21,Route E1,DROPPED
+1300418391,residential,(unnamed),21,Route E1,DROPPED
+836704852,unclassified,(unnamed),19,Route N3,DROPPED
+1303077719,residential,(unnamed),19,Route E1,DROPPED
+1273987849,residential,(unnamed),17,Route E1,DROPPED
+1339497421,service,(unnamed),9,Route E1,DROPPED
+1300424712,residential,(unnamed),8,Route E1,DROPPED
+1300424711,residential,(unnamed),3,Route E1,DROPPED

@@ -1,0 +1,5738 @@
+[
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Ennore Bus Stand",
+    "time_str": "5.40 am",
+    "latitude": 13.2258262,
+    "longitude": 80.3243551
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Ernavur anna nagar",
+    "time_str": "5.42",
+    "latitude": 13.2258262,
+    "longitude": 80.3243551
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Lift Gate",
+    "time_str": "5.45",
+    "latitude": 13.2258262,
+    "longitude": 80.3243551
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "ITC",
+    "time_str": "5.50",
+    "latitude": 13.1842959,
+    "longitude": 80.3089189
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Wimco nagar",
+    "time_str": "5.52",
+    "latitude": 13.1796833,
+    "longitude": 80.3054594
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Thiruvottiyur Market",
+    "time_str": "5.54",
+    "latitude": 13.1722287,
+    "longitude": 80.3045553
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Theradi",
+    "time_str": "5.56",
+    "latitude": 12.9853865,
+    "longitude": 80.2237481
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Raja Kadai",
+    "time_str": "5.58",
+    "latitude": 13.2258262,
+    "longitude": 80.3243551
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Thangal",
+    "time_str": "6.00",
+    "latitude": 13.1418303,
+    "longitude": 80.1903291
+  },
+  {
+    "route_no": "1",
+    "route_name": "Ennore",
+    "stop_name": "Tollgate",
+    "time_str": "6.01",
+    "latitude": 13.1431344,
+    "longitude": 80.2963291
+  },
+  {
+    "route_no": "1B",
+    "route_name": "Periyamedu",
+    "stop_name": "Ennore Bus Stand",
+    "time_str": "5.40 am",
+    "latitude": 13.2258262,
+    "longitude": 80.3243551
+  },
+  {
+    "route_no": "1B",
+    "route_name": "Periyamedu",
+    "stop_name": "Ernavur",
+    "time_str": "5.43",
+    "latitude": 13.1893545,
+    "longitude": 80.3111383
+  },
+  {
+    "route_no": "1B",
+    "route_name": "Periyamedu",
+    "stop_name": "Murugan Koil",
+    "time_str": "5.45",
+    "latitude": 13.1255895,
+    "longitude": 80.1994297
+  },
+  {
+    "route_no": "1B",
+    "route_name": "Periyamedu",
+    "stop_name": "Mullai Nagar",
+    "time_str": "5.47",
+    "latitude": 13.0589486,
+    "longitude": 80.2131169
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "Tondiarpet Depot",
+    "time_str": "6.05 am",
+    "latitude": 13.1346167,
+    "longitude": 80.2907524
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "Kasimedu",
+    "time_str": "6.10",
+    "latitude": 13.1364038,
+    "longitude": 80.2958012
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "Kasimedu Petrol Bunk",
+    "time_str": "6.11",
+    "latitude": 13.1364038,
+    "longitude": 80.2958012
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "kalmandapam Police Station",
+    "time_str": "6.13",
+    "latitude": 13.1153712,
+    "longitude": 80.2905548
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "ST Anne's School",
+    "time_str": "6.14",
+    "latitude": 13.132247,
+    "longitude": 80.2361716
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "Royapuram Bridge",
+    "time_str": "6.16",
+    "latitude": 13.1051536,
+    "longitude": 80.2909061
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "Beach Station",
+    "time_str": "6.20",
+    "latitude": 13.0942257,
+    "longitude": 80.2921033
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "Neyveli House",
+    "time_str": "6.31",
+    "latitude": 11.6212791,
+    "longitude": 79.5264064
+  },
+  {
+    "route_no": "1C",
+    "route_name": "Tondiarpet RTO Office",
+    "stop_name": "KMC",
+    "time_str": "6.32",
+    "latitude": 13.0787415,
+    "longitude": 80.2521255
+  },
+  {
+    "route_no": "2",
+    "route_name": "Tondiarpet",
+    "stop_name": "Tondiarpet Mani Cycle Shop",
+    "time_str": "6.10 am",
+    "latitude": 13.1275202,
+    "longitude": 80.2819242
+  },
+  {
+    "route_no": "2",
+    "route_name": "Tondiarpet",
+    "stop_name": "Police Quarters",
+    "time_str": "6.11",
+    "latitude": 13.0685687,
+    "longitude": 80.2631507
+  },
+  {
+    "route_no": "2",
+    "route_name": "Tondiarpet",
+    "stop_name": "Post Office",
+    "time_str": "6.12",
+    "latitude": 13.1193473,
+    "longitude": 80.161245
+  },
+  {
+    "route_no": "2",
+    "route_name": "Tondiarpet",
+    "stop_name": "Maharani (Singapore Shoppee)",
+    "time_str": "6.13",
+    "latitude": 13.0393037,
+    "longitude": 80.2524686
+  },
+  {
+    "route_no": "2B",
+    "route_name": "Ajax",
+    "stop_name": "Periyar nagar",
+    "time_str": "5.57",
+    "latitude": 13.1151671,
+    "longitude": 80.223666
+  },
+  {
+    "route_no": "2B",
+    "route_name": "Ajax",
+    "stop_name": "Ellaiamman koil",
+    "time_str": "6.00",
+    "latitude": 13.0484318,
+    "longitude": 80.2506962
+  },
+  {
+    "route_no": "2B",
+    "route_name": "Ajax",
+    "stop_name": "Lakshmi koil",
+    "time_str": "6.05",
+    "latitude": 13.1005217,
+    "longitude": 80.2885197
+  },
+  {
+    "route_no": "2C",
+    "route_name": "Mint",
+    "stop_name": "Cemetery road",
+    "time_str": "6.10 am",
+    "latitude": 13.0302942,
+    "longitude": 80.2628552
+  },
+  {
+    "route_no": "2C",
+    "route_name": "Mint",
+    "stop_name": "Mint Old Bus Stop",
+    "time_str": "6.11",
+    "latitude": 13.104527,
+    "longitude": 80.2867247
+  },
+  {
+    "route_no": "2C",
+    "route_name": "Mint",
+    "stop_name": "Mint New Bus Stand",
+    "time_str": "6.13",
+    "latitude": 13.1039058,
+    "longitude": 80.2760763
+  },
+  {
+    "route_no": "2C",
+    "route_name": "Mint",
+    "stop_name": "Basin Bridge",
+    "time_str": "6.14",
+    "latitude": 13.1080471,
+    "longitude": 80.2699078
+  },
+  {
+    "route_no": "2C",
+    "route_name": "Mint",
+    "stop_name": "Padmanaba Theater",
+    "time_str": "6.18",
+    "latitude": 13.1048566,
+    "longitude": 80.2776216
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Choolai post office",
+    "time_str": "6.15 am",
+    "latitude": 13.0906283,
+    "longitude": 80.2621417
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Veperi Police Station",
+    "time_str": "6.20",
+    "latitude": 13.4069479,
+    "longitude": 79.2755322
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Muthumari amman Koil- Pursaiwakkam",
+    "time_str": "6.22",
+    "latitude": 13.0952961,
+    "longitude": 80.2882109
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Gangadeeswarar Koil",
+    "time_str": "6.23",
+    "latitude": 12.8112315,
+    "longitude": 79.7349336
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Alagappa Road",
+    "time_str": "6.25",
+    "latitude": 13.0811591,
+    "longitude": 80.2568213
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Pathala Ponniammam Koil",
+    "time_str": "6.27",
+    "latitude": 13.0906283,
+    "longitude": 80.2621417
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Motcham theatre",
+    "time_str": "6.30",
+    "latitude": 13.0906283,
+    "longitude": 80.2621417
+  },
+  {
+    "route_no": "3",
+    "route_name": "Choolai",
+    "stop_name": "Mummy Daddy",
+    "time_str": "6.32",
+    "latitude": 13.0835386,
+    "longitude": 80.2399315
+  },
+  {
+    "route_no": "3B",
+    "route_name": "Kilpauk Kallarai",
+    "stop_name": "Periya palaiyamman Kovil",
+    "time_str": "6.37",
+    "latitude": 13.1151671,
+    "longitude": 80.223666
+  },
+  {
+    "route_no": "3B",
+    "route_name": "Kilpauk Kallarai",
+    "stop_name": "Anna Arch",
+    "time_str": "6.45",
+    "latitude": 13.0760536,
+    "longitude": 80.2181587
+  },
+  {
+    "route_no": "3C",
+    "route_name": "Doveton Bridge",
+    "stop_name": "Muthumariamman kovil (Dovton Bridge)",
+    "time_str": "6.15am",
+    "latitude": 12.9807216,
+    "longitude": 80.2398237
+  },
+  {
+    "route_no": "3C",
+    "route_name": "Doveton Bridge",
+    "stop_name": "Kellys - Signal",
+    "time_str": "6.30",
+    "latitude": 13.0828189,
+    "longitude": 80.2433281
+  },
+  {
+    "route_no": "3C",
+    "route_name": "Doveton Bridge",
+    "stop_name": "Murugan Hospital",
+    "time_str": "6.35",
+    "latitude": 13.0833684,
+    "longitude": 80.234299
+  },
+  {
+    "route_no": "3C",
+    "route_name": "Doveton Bridge",
+    "stop_name": "Kallarai- Road",
+    "time_str": "6.37",
+    "latitude": 13.0491896,
+    "longitude": 80.1054234
+  },
+  {
+    "route_no": "3C",
+    "route_name": "Doveton Bridge",
+    "stop_name": "Periyapalayathamman Temple",
+    "time_str": "6.38",
+    "latitude": 13.1069833,
+    "longitude": 80.2742168
+  },
+  {
+    "route_no": "3C",
+    "route_name": "Doveton Bridge",
+    "stop_name": "Shenoy nagar Bus Stop",
+    "time_str": "6.40",
+    "latitude": 13.0789409,
+    "longitude": 80.2251326
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Chintadripet Fish Market",
+    "time_str": "6.15 am",
+    "latitude": 13.0752222,
+    "longitude": 80.2698578
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Chintadripet Market",
+    "time_str": "6.17",
+    "latitude": 13.0748904,
+    "longitude": 80.2695735
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Chintadripet Police Quarters",
+    "time_str": "6.18",
+    "latitude": 13.0761258,
+    "longitude": 80.270781
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Pudupet",
+    "time_str": "6.20",
+    "latitude": 13.0712018,
+    "longitude": 80.2669603
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Egmore Court",
+    "time_str": "6.22",
+    "latitude": 13.0716607,
+    "longitude": 80.2646506
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Rajarthinam Stadium",
+    "time_str": "6.24",
+    "latitude": 13.0761258,
+    "longitude": 80.270781
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Egmore (Co-Optex) Bridge",
+    "time_str": "6.26",
+    "latitude": 13.0761258,
+    "longitude": 80.270781
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Halls Road Junction",
+    "time_str": "6.28",
+    "latitude": 13.075418,
+    "longitude": 80.2582254
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Supertank Road",
+    "time_str": "6.32",
+    "latitude": 13.0761258,
+    "longitude": 80.270781
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Chetpet Signal",
+    "time_str": "6.30",
+    "latitude": 13.0717448,
+    "longitude": 80.2437973
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Harington Road Junction",
+    "time_str": "6.35",
+    "latitude": 13.0761258,
+    "longitude": 80.270781
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Mehta Nagar",
+    "time_str": "6.40",
+    "latitude": 13.0703783,
+    "longitude": 80.2268067
+  },
+  {
+    "route_no": "4",
+    "route_name": "Chintadripet",
+    "stop_name": "Skywalk bridge",
+    "time_str": "6.42",
+    "latitude": 13.0761258,
+    "longitude": 80.270781
+  },
+  {
+    "route_no": "4C",
+    "route_name": "Loyola College",
+    "stop_name": "Loyola College",
+    "time_str": "6.30 am",
+    "latitude": 13.0617032,
+    "longitude": 80.2346118
+  },
+  {
+    "route_no": "4C",
+    "route_name": "Loyola College",
+    "stop_name": "Nungambakkam Railway Station",
+    "time_str": "6.32",
+    "latitude": 13.065841,
+    "longitude": 80.232839
+  },
+  {
+    "route_no": "4C",
+    "route_name": "Loyola College",
+    "stop_name": "Pantaloon",
+    "time_str": "6.35",
+    "latitude": 13.0617032,
+    "longitude": 80.2346118
+  },
+  {
+    "route_no": "5",
+    "route_name": "Chintamani",
+    "stop_name": "Chintamani",
+    "time_str": "6.30 am",
+    "latitude": 13.0472403,
+    "longitude": 80.1853252
+  },
+  {
+    "route_no": "5",
+    "route_name": "Chintamani",
+    "stop_name": "K3 Police station",
+    "time_str": "6.33",
+    "latitude": 13.0683459,
+    "longitude": 80.2135958
+  },
+  {
+    "route_no": "5",
+    "route_name": "Chintamani",
+    "stop_name": "Razack Garden",
+    "time_str": "6.35",
+    "latitude": 13.0472403,
+    "longitude": 80.1853252
+  },
+  {
+    "route_no": "5",
+    "route_name": "Chintamani",
+    "stop_name": "MMDA",
+    "time_str": "6.38",
+    "latitude": 13.0651401,
+    "longitude": 80.2112943
+  },
+  {
+    "route_no": "5",
+    "route_name": "Chintamani",
+    "stop_name": "MMDA Bus Depot",
+    "time_str": "6.40",
+    "latitude": 13.0630102,
+    "longitude": 80.2115596
+  },
+  {
+    "route_no": "5A",
+    "route_name": "Arumbakkam",
+    "stop_name": "Paanchali Amman Koil (Arumbakkam)",
+    "time_str": "6.35 am",
+    "latitude": 13.074371,
+    "longitude": 80.2081312
+  },
+  {
+    "route_no": "5A",
+    "route_name": "Arumbakkam",
+    "stop_name": "Maduravoyal Ration shop",
+    "time_str": "6.50",
+    "latitude": 13.0665327,
+    "longitude": 80.1748903
+  },
+  {
+    "route_no": "5A",
+    "route_name": "Arumbakkam",
+    "stop_name": "Maduravoyal Murugan Koil arch",
+    "time_str": "6.52",
+    "latitude": 13.0601732,
+    "longitude": 80.1665988
+  },
+  {
+    "route_no": "5A",
+    "route_name": "Arumbakkam",
+    "stop_name": "Maduravoyal Market",
+    "time_str": "6.53",
+    "latitude": 13.0631224,
+    "longitude": 80.1672127
+  },
+  {
+    "route_no": "5A",
+    "route_name": "Arumbakkam",
+    "stop_name": "ACS Medical College",
+    "time_str": "7.05",
+    "latitude": 13.0596014,
+    "longitude": 80.127579
+  },
+  {
+    "route_no": "5B",
+    "route_name": "Maduravoyal Erikarai",
+    "stop_name": "Vanagaram bus stop",
+    "time_str": "6.55",
+    "latitude": 13.1559944,
+    "longitude": 80.1965527
+  },
+  {
+    "route_no": "5B",
+    "route_name": "Maduravoyal Erikarai",
+    "stop_name": "Shrivari Signal",
+    "time_str": "6.57",
+    "latitude": 13.6792661,
+    "longitude": 79.3328076
+  },
+  {
+    "route_no": "5B",
+    "route_name": "Maduravoyal Erikarai",
+    "stop_name": "Velappanchavadi (Harsha Toyota)",
+    "time_str": "7.00",
+    "latitude": 13.0610323,
+    "longitude": 80.1386139
+  },
+  {
+    "route_no": "5C",
+    "route_name": "Thirunagar Ambica Empire Hotel",
+    "stop_name": "Thirunagar (Ambica Empire Hotel)",
+    "time_str": "6.40 am",
+    "latitude": 13.0580044,
+    "longitude": 80.2116987
+  },
+  {
+    "route_no": "5C",
+    "route_name": "Thirunagar Ambica Empire Hotel",
+    "stop_name": "Vallavan Hotel",
+    "time_str": "6.42",
+    "latitude": 13.0638481,
+    "longitude": 80.2118638
+  },
+  {
+    "route_no": "5C",
+    "route_name": "Thirunagar Ambica Empire Hotel",
+    "stop_name": "SAF Games Village",
+    "time_str": "6.44",
+    "latitude": 13.0644894,
+    "longitude": 80.2078485
+  },
+  {
+    "route_no": "5C",
+    "route_name": "Thirunagar Ambica Empire Hotel",
+    "stop_name": "Vijayakanth kalayana Mandapam",
+    "time_str": "6.45",
+    "latitude": 13.073976,
+    "longitude": 80.2002264
+  },
+  {
+    "route_no": "5C",
+    "route_name": "Thirunagar Ambica Empire Hotel",
+    "stop_name": "Toyota Show Room",
+    "time_str": "6.47",
+    "latitude": 13.0315737,
+    "longitude": 80.2460947
+  },
+  {
+    "route_no": "5C",
+    "route_name": "Thirunagar Ambica Empire Hotel",
+    "stop_name": "Nerkundram",
+    "time_str": "6.52",
+    "latitude": 13.0688386,
+    "longitude": 80.1838987
+  },
+  {
+    "route_no": "5C",
+    "route_name": "Thirunagar Ambica Empire Hotel",
+    "stop_name": "Vengaya Mandi",
+    "time_str": "6.54",
+    "latitude": 13.0697316,
+    "longitude": 80.1816826
+  },
+  {
+    "route_no": "5D",
+    "route_name": "Toyota Showroom",
+    "stop_name": "Toyota Showroom",
+    "time_str": "6.40 am",
+    "latitude": 13.1433817,
+    "longitude": 79.8994823
+  },
+  {
+    "route_no": "5D",
+    "route_name": "Toyota Showroom",
+    "stop_name": "Nerkundram",
+    "time_str": "6.45",
+    "latitude": 13.0688386,
+    "longitude": 80.1838987
+  },
+  {
+    "route_no": "5D",
+    "route_name": "Toyota Showroom",
+    "stop_name": "Maduravoyal Market",
+    "time_str": "6.50",
+    "latitude": 13.0631224,
+    "longitude": 80.1672127
+  },
+  {
+    "route_no": "5D",
+    "route_name": "Toyota Showroom",
+    "stop_name": "Velappanchavadi",
+    "time_str": "7.10",
+    "latitude": 13.0610323,
+    "longitude": 80.1386139
+  },
+  {
+    "route_no": "5D",
+    "route_name": "Toyota Showroom",
+    "stop_name": "ACS College",
+    "time_str": "7.13",
+    "latitude": 13.0596014,
+    "longitude": 80.127579
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "New Avadi Road Water Tank",
+    "time_str": "6.25 am",
+    "latitude": 13.0447003,
+    "longitude": 80.2749704
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Gangaiamman koil",
+    "time_str": "6.27",
+    "latitude": 13.0168011,
+    "longitude": 80.1930883
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Lotus Colony",
+    "time_str": "6.29",
+    "latitude": 13.0296417,
+    "longitude": 80.2403771
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "14- Shop",
+    "time_str": "6.34",
+    "latitude": 13.2845587,
+    "longitude": 80.2386595
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Kandasamy College",
+    "time_str": "6.36",
+    "latitude": 13.0858113,
+    "longitude": 80.218134
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Nalli Silks",
+    "time_str": "6.38",
+    "latitude": 13.0844326,
+    "longitude": 80.2155713
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Ayyappan Temple",
+    "time_str": "6.40",
+    "latitude": 13.0851641,
+    "longitude": 80.213185
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Blue star",
+    "time_str": "6.42",
+    "latitude": 13.0849958,
+    "longitude": 80.2109928
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Tower Park Metro Station",
+    "time_str": "6.44",
+    "latitude": 13.0865345,
+    "longitude": 80.2142503
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Hot chips",
+    "time_str": "6.48",
+    "latitude": 12.9880438,
+    "longitude": 80.2560376
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "Senthil Nursing Home",
+    "time_str": "6.50",
+    "latitude": 13.0849671,
+    "longitude": 80.2004752
+  },
+  {
+    "route_no": "6",
+    "route_name": "New Avadi Road Water Tank",
+    "stop_name": "CPWD Quarters",
+    "time_str": "6.52",
+    "latitude": 13.0830263,
+    "longitude": 80.1966129
+  },
+  {
+    "route_no": "6A",
+    "route_name": "Krishna Nagar Vellammal School",
+    "stop_name": "Golden flats",
+    "time_str": "6.48",
+    "latitude": 13.0883017,
+    "longitude": 80.1784121
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Anna Nagar RTO Office",
+    "time_str": "6.35 am",
+    "latitude": 13.0093396,
+    "longitude": 80.2351455
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Anna Nagar East 1st Avenue",
+    "time_str": "6.37",
+    "latitude": 13.0852124,
+    "longitude": 80.2258887
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Anna Nagar East 6th Avenue",
+    "time_str": "6.39",
+    "latitude": 13.0852124,
+    "longitude": 80.2258887
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Chennai Mobiles",
+    "time_str": "6.41",
+    "latitude": 12.9743085,
+    "longitude": 80.1923059
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Kovai Palamuthircholai",
+    "time_str": "6.42",
+    "latitude": 13.0846503,
+    "longitude": 80.2195323
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Akshyam Hotel",
+    "time_str": "6.45",
+    "latitude": 13.0846503,
+    "longitude": 80.2195323
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Nuts Piczs",
+    "time_str": "6.47",
+    "latitude": 13.0846503,
+    "longitude": 80.2195323
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "SBI Bank - 6th Avenue",
+    "time_str": "6.49",
+    "latitude": 13.0266099,
+    "longitude": 80.2643255
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Bata Show Room",
+    "time_str": "6.51",
+    "latitude": 12.9571751,
+    "longitude": 80.1872636
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Vijaya Maruthi",
+    "time_str": "6.52",
+    "latitude": 13.0846503,
+    "longitude": 80.2195323
+  },
+  {
+    "route_no": "7",
+    "route_name": "Anna Nagar East",
+    "stop_name": "Reliance Fresh",
+    "time_str": "6.54",
+    "latitude": 13.0630707,
+    "longitude": 80.2293217
+  },
+  {
+    "route_no": "7C",
+    "route_name": "Collector Nagar",
+    "stop_name": "Collector nagar",
+    "time_str": "6.40 am",
+    "latitude": 13.0884944,
+    "longitude": 80.1909707
+  },
+  {
+    "route_no": "7C",
+    "route_name": "Collector Nagar",
+    "stop_name": "TSK Nagar",
+    "time_str": "6.42",
+    "latitude": 13.0884944,
+    "longitude": 80.1909707
+  },
+  {
+    "route_no": "8",
+    "route_name": "Anna Nagar West Depot",
+    "stop_name": "Anna nagar West Depot",
+    "time_str": "6.40 am",
+    "latitude": 13.0939333,
+    "longitude": 80.1980855
+  },
+  {
+    "route_no": "8",
+    "route_name": "Anna Nagar West Depot",
+    "stop_name": "Thirumangalam EB",
+    "time_str": "6.43",
+    "latitude": 13.0870648,
+    "longitude": 80.1981881
+  },
+  {
+    "route_no": "8",
+    "route_name": "Anna Nagar West Depot",
+    "stop_name": "SIDCO Villivakkam",
+    "time_str": "6.35 am",
+    "latitude": 13.0939333,
+    "longitude": 80.1980855
+  },
+  {
+    "route_no": "8",
+    "route_name": "Anna Nagar West Depot",
+    "stop_name": "Singarampillai School",
+    "time_str": "6.37",
+    "latitude": 13.0939333,
+    "longitude": 80.1980855
+  },
+  {
+    "route_no": "8",
+    "route_name": "Anna Nagar West Depot",
+    "stop_name": "Anbu Colony",
+    "time_str": "6.39",
+    "latitude": 12.9775803,
+    "longitude": 80.2618165
+  },
+  {
+    "route_no": "8",
+    "route_name": "Anna Nagar West Depot",
+    "stop_name": "Anna Nagar West Depot",
+    "time_str": "6.40",
+    "latitude": 13.0939333,
+    "longitude": 80.1980855
+  },
+  {
+    "route_no": "8C",
+    "route_name": "Waves",
+    "stop_name": "Waves",
+    "time_str": "6.40 am",
+    "latitude": 13.0870093,
+    "longitude": 80.1928676
+  },
+  {
+    "route_no": "8C",
+    "route_name": "Waves",
+    "stop_name": "V3 JJ Nagar Police Booth",
+    "time_str": "6.45",
+    "latitude": 13.0870093,
+    "longitude": 80.1928676
+  },
+  {
+    "route_no": "8C",
+    "route_name": "Waves",
+    "stop_name": "Water Tank",
+    "time_str": "6.47",
+    "latitude": 13.0662044,
+    "longitude": 80.2076979
+  },
+  {
+    "route_no": "8C",
+    "route_name": "Waves",
+    "stop_name": "IOB Mogappair East",
+    "time_str": "6.55",
+    "latitude": 12.9993994,
+    "longitude": 80.252504
+  },
+  {
+    "route_no": "9",
+    "route_name": "Mogappair East",
+    "stop_name": "Spartan school",
+    "time_str": "6.40 am",
+    "latitude": 13.0865306,
+    "longitude": 80.1801067
+  },
+  {
+    "route_no": "9",
+    "route_name": "Mogappair East",
+    "stop_name": "Mogappair East Bus Stop (7H)",
+    "time_str": "6.43",
+    "latitude": 13.0835142,
+    "longitude": 80.1840779
+  },
+  {
+    "route_no": "9A",
+    "route_name": "Mogappair Golden Flat",
+    "stop_name": "SBI",
+    "time_str": "6.55 am",
+    "latitude": 13.0266099,
+    "longitude": 80.2643255
+  },
+  {
+    "route_no": "9A",
+    "route_name": "Mogappair Golden Flat",
+    "stop_name": "Greater Chennai corporation park",
+    "time_str": "6.59",
+    "latitude": 13.0818961,
+    "longitude": 80.271828
+  },
+  {
+    "route_no": "9A",
+    "route_name": "Mogappair Golden Flat",
+    "stop_name": "VGN Service Road",
+    "time_str": "7.01",
+    "latitude": 13.0283823,
+    "longitude": 80.1355029
+  },
+  {
+    "route_no": "9A",
+    "route_name": "Mogappair Golden Flat",
+    "stop_name": "MGR University",
+    "time_str": "7.05",
+    "latitude": 13.0097685,
+    "longitude": 80.2179509
+  },
+  {
+    "route_no": "9B",
+    "route_name": "Mogappair",
+    "stop_name": "Grace Super Market",
+    "time_str": "6.45 am",
+    "latitude": 13.0473227,
+    "longitude": 80.2263691
+  },
+  {
+    "route_no": "9B",
+    "route_name": "Mogappair",
+    "stop_name": "Ambedkar Ground",
+    "time_str": "6.46",
+    "latitude": 13.0775362,
+    "longitude": 80.1784899
+  },
+  {
+    "route_no": "9B",
+    "route_name": "Mogappair",
+    "stop_name": "Velammal School (Mogappair West)",
+    "time_str": "6.47",
+    "latitude": 13.1492532,
+    "longitude": 80.191619
+  },
+  {
+    "route_no": "9B",
+    "route_name": "Mogappair",
+    "stop_name": "Mogappair Water Tank Road",
+    "time_str": "6.49",
+    "latitude": 13.0835142,
+    "longitude": 80.1840779
+  },
+  {
+    "route_no": "9B",
+    "route_name": "Mogappair",
+    "stop_name": "(7M) Amutha Matri. School",
+    "time_str": "6.51",
+    "latitude": 13.0835142,
+    "longitude": 80.1840779
+  },
+  {
+    "route_no": "9C",
+    "route_name": "Mogappair West",
+    "stop_name": "DRJ Super Market",
+    "time_str": "6.50 am",
+    "latitude": 13.0825352,
+    "longitude": 80.1709175
+  },
+  {
+    "route_no": "10",
+    "route_name": "Vyasarpadi Erikarai",
+    "stop_name": "Vyasarpadi (Erikarai)",
+    "time_str": "6.10 am",
+    "latitude": 13.1169726,
+    "longitude": 80.2571242
+  },
+  {
+    "route_no": "10",
+    "route_name": "Vyasarpadi Erikarai",
+    "stop_name": "Jeeva Station",
+    "time_str": "6.12",
+    "latitude": 13.1091961,
+    "longitude": 80.2572195
+  },
+  {
+    "route_no": "10",
+    "route_name": "Vyasarpadi Erikarai",
+    "stop_name": "Binny mill Corner",
+    "time_str": "6.22",
+    "latitude": 13.1016551,
+    "longitude": 80.2583553
+  },
+  {
+    "route_no": "10",
+    "route_name": "Vyasarpadi Erikarai",
+    "stop_name": "Otteri",
+    "time_str": "6.25",
+    "latitude": 13.0969576,
+    "longitude": 80.2487215
+  },
+  {
+    "route_no": "10",
+    "route_name": "Vyasarpadi Erikarai",
+    "stop_name": "TP Hospital",
+    "time_str": "6.29",
+    "latitude": 13.2022006,
+    "longitude": 80.2643695
+  },
+  {
+    "route_no": "10",
+    "route_name": "Vyasarpadi Erikarai",
+    "stop_name": "Ayanavaram - Indian Bank",
+    "time_str": "6.33",
+    "latitude": 13.0946157,
+    "longitude": 80.23541
+  },
+  {
+    "route_no": "10",
+    "route_name": "Vyasarpadi Erikarai",
+    "stop_name": "Sayani Theatre",
+    "time_str": "6.35",
+    "latitude": 13.0977818,
+    "longitude": 80.239926
+  },
+  {
+    "route_no": "10B",
+    "route_name": "ICF",
+    "stop_name": "ICF Signal",
+    "time_str": "6.30 am",
+    "latitude": 13.1001091,
+    "longitude": 80.2145485
+  },
+  {
+    "route_no": "10B",
+    "route_name": "ICF",
+    "stop_name": "Kallu Kadai",
+    "time_str": "6.35",
+    "latitude": 13.1001091,
+    "longitude": 80.2145485
+  },
+  {
+    "route_no": "10B",
+    "route_name": "ICF",
+    "stop_name": "Villivakkam Kalpana Hotel",
+    "time_str": "6.37",
+    "latitude": 13.1125875,
+    "longitude": 80.2081378
+  },
+  {
+    "route_no": "10B",
+    "route_name": "ICF",
+    "stop_name": "Anna Nagar West Depot",
+    "time_str": "6.45",
+    "latitude": 13.0939333,
+    "longitude": 80.1980855
+  },
+  {
+    "route_no": "10C",
+    "route_name": "Binny Mill Church",
+    "stop_name": "Jamalia School",
+    "time_str": "6.15 am",
+    "latitude": 13.1062169,
+    "longitude": 80.250519
+  },
+  {
+    "route_no": "10C",
+    "route_name": "Binny Mill Church",
+    "stop_name": "Joint Office",
+    "time_str": "6.32",
+    "latitude": 13.1018864,
+    "longitude": 80.2304285
+  },
+  {
+    "route_no": "10C",
+    "route_name": "Binny Mill Church",
+    "stop_name": "Kambar Arangam",
+    "time_str": "6.36",
+    "latitude": 13.0993988,
+    "longitude": 80.2210877
+  },
+  {
+    "route_no": "10C",
+    "route_name": "Binny Mill Church",
+    "stop_name": "ICF Signal",
+    "time_str": "6.38",
+    "latitude": 13.1001091,
+    "longitude": 80.2145485
+  },
+  {
+    "route_no": "10C",
+    "route_name": "Binny Mill Church",
+    "stop_name": "Kallukadai Bus Stop",
+    "time_str": "6.40",
+    "latitude": 13.1022099,
+    "longitude": 80.2107409
+  },
+  {
+    "route_no": "10C",
+    "route_name": "Binny Mill Church",
+    "stop_name": "Villivakkam Kalpana Hotel",
+    "time_str": "6.42",
+    "latitude": 13.1125875,
+    "longitude": 80.2081378
+  },
+  {
+    "route_no": "10C",
+    "route_name": "Binny Mill Church",
+    "stop_name": "Nadhamuni Theatre",
+    "time_str": "6.44",
+    "latitude": 13.0773744,
+    "longitude": 80.2276302
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "Erukkancheri ABR kalyana Mandapam",
+    "time_str": "6.15 am",
+    "latitude": 13.1197358,
+    "longitude": 80.2554283
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "Erukkancheri - Rajalakshmi Cars Showroom",
+    "time_str": "6.20",
+    "latitude": 13.1197358,
+    "longitude": 80.2554283
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "Moolakadai",
+    "time_str": "6.25",
+    "latitude": 13.1291684,
+    "longitude": 80.2416991
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "M1.Police Station",
+    "time_str": "6.27",
+    "latitude": 13.0683459,
+    "longitude": 80.2135958
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "Kanakan chatram (Shell Petrol Bunk)",
+    "time_str": "6.29",
+    "latitude": 13.1291684,
+    "longitude": 80.2416991
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "Kalpana Lamps",
+    "time_str": "6.31",
+    "latitude": 13.1291684,
+    "longitude": 80.2416991
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "Madavaram Andhra Bus Stand",
+    "time_str": "6.33",
+    "latitude": 13.6968985,
+    "longitude": 78.760684
+  },
+  {
+    "route_no": "11",
+    "route_name": "Moolakadai",
+    "stop_name": "Retteri RTO Office",
+    "time_str": "6.35",
+    "latitude": 13.1412385,
+    "longitude": 80.2120536
+  },
+  {
+    "route_no": "11A",
+    "route_name": "Thathankuppam DRJ",
+    "stop_name": "Thathankuppam (DRJ)",
+    "time_str": "6.35 am",
+    "latitude": 12.6668021,
+    "longitude": 79.0040696
+  },
+  {
+    "route_no": "11A",
+    "route_name": "Thathankuppam DRJ",
+    "stop_name": "Pattaravakkam",
+    "time_str": "6.47",
+    "latitude": 13.1143904,
+    "longitude": 80.1663975
+  },
+  {
+    "route_no": "11A",
+    "route_name": "Thathankuppam DRJ",
+    "stop_name": "Ambattur Telephone Exchange",
+    "time_str": "6.50",
+    "latitude": 13.1015048,
+    "longitude": 80.1620958
+  },
+  {
+    "route_no": "11C",
+    "route_name": "Korattur",
+    "stop_name": "Korattur Police Station",
+    "time_str": "6.30 am",
+    "latitude": 13.1115484,
+    "longitude": 80.1846272
+  },
+  {
+    "route_no": "11C",
+    "route_name": "Korattur",
+    "stop_name": "Bakthavatchlam School Signal",
+    "time_str": "6.35",
+    "latitude": 13.1115484,
+    "longitude": 80.1846272
+  },
+  {
+    "route_no": "12",
+    "route_name": "MKB Nagar",
+    "stop_name": "MKB Nagar",
+    "time_str": "6.15 am",
+    "latitude": 13.1225331,
+    "longitude": 80.2631374
+  },
+  {
+    "route_no": "12",
+    "route_name": "MKB Nagar",
+    "stop_name": "KKD Nagar",
+    "time_str": "6.17",
+    "latitude": 13.1268765,
+    "longitude": 80.2616612
+  },
+  {
+    "route_no": "12",
+    "route_name": "MKB Nagar",
+    "stop_name": "MR Nagar",
+    "time_str": "6.20",
+    "latitude": 13.0407334,
+    "longitude": 80.1859659
+  },
+  {
+    "route_no": "12",
+    "route_name": "MKB Nagar",
+    "stop_name": "Pavithra Hospital",
+    "time_str": "6.22",
+    "latitude": 13.1261166,
+    "longitude": 80.2488364
+  },
+  {
+    "route_no": "12A",
+    "route_name": "Venus",
+    "stop_name": "Venus Bus Stop",
+    "time_str": "6.25 am",
+    "latitude": 13.0412336,
+    "longitude": 80.2542047
+  },
+  {
+    "route_no": "12A",
+    "route_name": "Venus",
+    "stop_name": "Lakshmi amman Koil",
+    "time_str": "6.28",
+    "latitude": 13.1161506,
+    "longitude": 80.2428857
+  },
+  {
+    "route_no": "12A",
+    "route_name": "Venus",
+    "stop_name": "BPCL Petrol Bunk",
+    "time_str": "6.30",
+    "latitude": 13.1273078,
+    "longitude": 80.2844626
+  },
+  {
+    "route_no": "12B",
+    "route_name": "Kolathur",
+    "stop_name": "Vyasarpadi Fire Service",
+    "time_str": "6.15 am",
+    "latitude": 13.1169726,
+    "longitude": 80.2571242
+  },
+  {
+    "route_no": "12B",
+    "route_name": "Kolathur",
+    "stop_name": "BB Road Junction",
+    "time_str": "6.20",
+    "latitude": 12.9245867,
+    "longitude": 80.1057353
+  },
+  {
+    "route_no": "12B",
+    "route_name": "Kolathur",
+    "stop_name": "Lakshmi amman Koil",
+    "time_str": "6.23",
+    "latitude": 13.1161506,
+    "longitude": 80.2428857
+  },
+  {
+    "route_no": "12B",
+    "route_name": "Kolathur",
+    "stop_name": "Brindha Theatre",
+    "time_str": "6.25",
+    "latitude": 13.1241127,
+    "longitude": 80.2046276
+  },
+  {
+    "route_no": "12B",
+    "route_name": "Kolathur",
+    "stop_name": "Welding Shop",
+    "time_str": "6.30",
+    "latitude": 13.1241127,
+    "longitude": 80.2046276
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "BP Road",
+    "time_str": "6.10 am",
+    "latitude": 13.0116259,
+    "longitude": 80.2185178
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "Perambur Bus Depot",
+    "time_str": "6.12",
+    "latitude": 13.1121242,
+    "longitude": 80.245022
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "Perambur Rly Station",
+    "time_str": "6.13",
+    "latitude": 13.1121242,
+    "longitude": 80.245022
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "Perumbur Church",
+    "time_str": "6.15",
+    "latitude": 13.1121242,
+    "longitude": 80.245022
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "Ajantha Bakers",
+    "time_str": "6.16",
+    "latitude": 13.1259603,
+    "longitude": 80.2196788
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "Venus Bus Stop",
+    "time_str": "6.18",
+    "latitude": 13.0412336,
+    "longitude": 80.2542047
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "Lakshmi Amman Koil (kolathur)",
+    "time_str": "6.25",
+    "latitude": 13.1161506,
+    "longitude": 80.2428857
+  },
+  {
+    "route_no": "12C",
+    "route_name": "Perambur",
+    "stop_name": "BPCL Petrol Bunk",
+    "time_str": "6.26",
+    "latitude": 13.1273078,
+    "longitude": 80.2844626
+  },
+  {
+    "route_no": "13",
+    "route_name": "Peravallur",
+    "stop_name": "Peravalur",
+    "time_str": "6.20 am",
+    "latitude": 13.1113801,
+    "longitude": 80.2263786
+  },
+  {
+    "route_no": "13",
+    "route_name": "Peravallur",
+    "stop_name": "Jawahar Nagar Bus Stop",
+    "time_str": "6.22",
+    "latitude": 13.1225201,
+    "longitude": 80.245785
+  },
+  {
+    "route_no": "13",
+    "route_name": "Peravallur",
+    "stop_name": "Axis Bank",
+    "time_str": "6.23",
+    "latitude": 12.9774476,
+    "longitude": 80.2513119
+  },
+  {
+    "route_no": "13",
+    "route_name": "Peravallur",
+    "stop_name": "Agaram BPCL Bunk",
+    "time_str": "6.25",
+    "latitude": 13.1158603,
+    "longitude": 80.2300407
+  },
+  {
+    "route_no": "13",
+    "route_name": "Peravallur",
+    "stop_name": "Thiruvalluvar Kalyanamandabam",
+    "time_str": "6.26",
+    "latitude": 13.1113801,
+    "longitude": 80.2263786
+  },
+  {
+    "route_no": "13",
+    "route_name": "Peravallur",
+    "stop_name": "Periyar Nagar Vegetable market",
+    "time_str": "6.28",
+    "latitude": 13.0811899,
+    "longitude": 80.2615946
+  },
+  {
+    "route_no": "13A",
+    "route_name": "Kolathur Don Bosco School",
+    "stop_name": "Kolathur (Don Bosco School)",
+    "time_str": "6.30 am",
+    "latitude": 13.1241127,
+    "longitude": 80.2046276
+  },
+  {
+    "route_no": "13A",
+    "route_name": "Kolathur Don Bosco School",
+    "stop_name": "Retteri Junction",
+    "time_str": "6.35",
+    "latitude": 13.1301972,
+    "longitude": 80.2139336
+  },
+  {
+    "route_no": "13A",
+    "route_name": "Kolathur Don Bosco School",
+    "stop_name": "Saravana Store (Padi)",
+    "time_str": "6.42",
+    "latitude": 13.1011255,
+    "longitude": 80.1935917
+  },
+  {
+    "route_no": "13A",
+    "route_name": "Kolathur Don Bosco School",
+    "stop_name": "Korattur Signal",
+    "time_str": "6.43",
+    "latitude": 13.1115484,
+    "longitude": 80.1846272
+  },
+  {
+    "route_no": "13B",
+    "route_name": "TVK Nagar",
+    "stop_name": "TVK Idugadu",
+    "time_str": "6.15 am",
+    "latitude": 12.979524,
+    "longitude": 80.2596061
+  },
+  {
+    "route_no": "13B",
+    "route_name": "TVK Nagar",
+    "stop_name": "TVK Bus stand",
+    "time_str": "6.20",
+    "latitude": 13.1272516,
+    "longitude": 80.2619015
+  },
+  {
+    "route_no": "13B",
+    "route_name": "TVK Nagar",
+    "stop_name": "Senthil Nagar",
+    "time_str": "6.35",
+    "latitude": 13.1216887,
+    "longitude": 80.2039496
+  },
+  {
+    "route_no": "13C",
+    "route_name": "Poombukar Nagar",
+    "stop_name": "SBI-Bank",
+    "time_str": "6.20 am",
+    "latitude": 13.0198992,
+    "longitude": 80.2066454
+  },
+  {
+    "route_no": "13C",
+    "route_name": "Poombukar Nagar",
+    "stop_name": "Grace Super Market",
+    "time_str": "6.25",
+    "latitude": 13.0473227,
+    "longitude": 80.2263691
+  },
+  {
+    "route_no": "13C",
+    "route_name": "Poombukar Nagar",
+    "stop_name": "Temple School",
+    "time_str": "6.30",
+    "latitude": 12.8955702,
+    "longitude": 80.2195619
+  },
+  {
+    "route_no": "13D",
+    "route_name": "Temple School",
+    "stop_name": "Temple School",
+    "time_str": "6.30 am",
+    "latitude": 12.8955702,
+    "longitude": 80.2195619
+  },
+  {
+    "route_no": "13D",
+    "route_name": "Temple School",
+    "stop_name": "Padi Saravana Store",
+    "time_str": "6.40",
+    "latitude": 13.1011255,
+    "longitude": 80.1935917
+  },
+  {
+    "route_no": "13D",
+    "route_name": "Temple School",
+    "stop_name": "Korattur Signal",
+    "time_str": "6.42",
+    "latitude": 13.1115484,
+    "longitude": 80.1846272
+  },
+  {
+    "route_no": "13D",
+    "route_name": "Temple School",
+    "stop_name": "Britannia",
+    "time_str": "6.45",
+    "latitude": 12.8955702,
+    "longitude": 80.2195619
+  },
+  {
+    "route_no": "14",
+    "route_name": "Manali",
+    "stop_name": "Manali New Town",
+    "time_str": "6.10 am",
+    "latitude": 13.2116618,
+    "longitude": 80.2771598
+  },
+  {
+    "route_no": "14",
+    "route_name": "Manali",
+    "stop_name": "Vichoor",
+    "time_str": "6.12",
+    "latitude": 13.19868,
+    "longitude": 80.2534581
+  },
+  {
+    "route_no": "14",
+    "route_name": "Manali",
+    "stop_name": "Andarkuppam Check Post",
+    "time_str": "6.15",
+    "latitude": 13.1938755,
+    "longitude": 80.2685646
+  },
+  {
+    "route_no": "14",
+    "route_name": "Manali",
+    "stop_name": "Manjampakkam Ring Road",
+    "time_str": "6.30",
+    "latitude": 13.1672275,
+    "longitude": 80.2598107
+  },
+  {
+    "route_no": "14C",
+    "route_name": "Veterinary College Mathur",
+    "stop_name": "Manali Market",
+    "time_str": "6.15 am",
+    "latitude": 13.1672275,
+    "longitude": 80.2598107
+  },
+  {
+    "route_no": "14C",
+    "route_name": "Veterinary College Mathur",
+    "stop_name": "Shastri nagar",
+    "time_str": "6.20",
+    "latitude": 12.9987729,
+    "longitude": 80.2599116
+  },
+  {
+    "route_no": "14C",
+    "route_name": "Veterinary College Mathur",
+    "stop_name": "Mathur 3rd Main Road",
+    "time_str": "6.22",
+    "latitude": 13.1678641,
+    "longitude": 80.2436918
+  },
+  {
+    "route_no": "14C",
+    "route_name": "Veterinary College Mathur",
+    "stop_name": "Mathur 1st Main Road",
+    "time_str": "6.24",
+    "latitude": 13.1678641,
+    "longitude": 80.2436918
+  },
+  {
+    "route_no": "14C",
+    "route_name": "Veterinary College Mathur",
+    "stop_name": "Veterinary college",
+    "time_str": "6.26",
+    "latitude": 13.0862093,
+    "longitude": 80.2679203
+  },
+  {
+    "route_no": "14C",
+    "route_name": "Veterinary College Mathur",
+    "stop_name": "Arul Nagar",
+    "time_str": "6.28",
+    "latitude": 12.9536072,
+    "longitude": 80.1929252
+  },
+  {
+    "route_no": "15",
+    "route_name": "Ayappakkam",
+    "stop_name": "Dunlop",
+    "time_str": "6.30 am",
+    "latitude": 13.1060625,
+    "longitude": 80.1524361
+  },
+  {
+    "route_no": "15",
+    "route_name": "Ayappakkam",
+    "stop_name": "Canara Bank",
+    "time_str": "6.31",
+    "latitude": 13.0411995,
+    "longitude": 80.2296079
+  },
+  {
+    "route_no": "15",
+    "route_name": "Ayappakkam",
+    "stop_name": "Cake World - Ambattur",
+    "time_str": "6.35",
+    "latitude": 13.0471842,
+    "longitude": 80.1991697
+  },
+  {
+    "route_no": "15",
+    "route_name": "Ayappakkam",
+    "stop_name": "Murugappa Polytechnic",
+    "time_str": "6.43",
+    "latitude": 12.5057641,
+    "longitude": 80.1129406
+  },
+  {
+    "route_no": "15A",
+    "route_name": "Ayappakkam Water Tank",
+    "stop_name": "Ayappakkam Water Tank",
+    "time_str": "6.40 am",
+    "latitude": 12.5057641,
+    "longitude": 80.1129406
+  },
+  {
+    "route_no": "15A",
+    "route_name": "Ayappakkam Water Tank",
+    "stop_name": "Aparna Nagar",
+    "time_str": "6.45",
+    "latitude": 13.0152324,
+    "longitude": 80.2294705
+  },
+  {
+    "route_no": "15A",
+    "route_name": "Ayappakkam Water Tank",
+    "stop_name": "Shivan Koil",
+    "time_str": "6.48",
+    "latitude": 11.6049391,
+    "longitude": 79.7212958
+  },
+  {
+    "route_no": "15A",
+    "route_name": "Ayappakkam Water Tank",
+    "stop_name": "Koladi HP Petrol Bunk",
+    "time_str": "6.50",
+    "latitude": 13.0983878,
+    "longitude": 80.1349581
+  },
+  {
+    "route_no": "15A",
+    "route_name": "Ayappakkam Water Tank",
+    "stop_name": "Thiruverkadu Bus Stand",
+    "time_str": "6.52",
+    "latitude": 13.0983878,
+    "longitude": 80.1349581
+  },
+  {
+    "route_no": "15A",
+    "route_name": "Ayappakkam Water Tank",
+    "stop_name": "Pallavan Nagar",
+    "time_str": "6.55",
+    "latitude": 13.057293,
+    "longitude": 80.1799027
+  },
+  {
+    "route_no": "15A",
+    "route_name": "Ayappakkam Water Tank",
+    "stop_name": "VGN Mahalakshmi Appartments",
+    "time_str": "6.58",
+    "latitude": 13.0283823,
+    "longitude": 80.1355029
+  },
+  {
+    "route_no": "15B",
+    "route_name": "Thirumullaivoyal",
+    "stop_name": "Thirumullaivoyal",
+    "time_str": "6.40 am",
+    "latitude": 13.1309288,
+    "longitude": 80.131225
+  },
+  {
+    "route_no": "15B",
+    "route_name": "Thirumullaivoyal",
+    "stop_name": "Vaishnawi Nagar",
+    "time_str": "6.45",
+    "latitude": 13.1309288,
+    "longitude": 80.131225
+  },
+  {
+    "route_no": "15B",
+    "route_name": "Thirumullaivoyal",
+    "stop_name": "Outer Ring Road bypass - Chokkanallur",
+    "time_str": "7.00",
+    "latitude": 13.1785366,
+    "longitude": 80.1366563
+  },
+  {
+    "route_no": "15C",
+    "route_name": "Ambattur OT",
+    "stop_name": "Singapore shopping",
+    "time_str": "6.30 am",
+    "latitude": 13.1214544,
+    "longitude": 80.1480943
+  },
+  {
+    "route_no": "15C",
+    "route_name": "Ambattur OT",
+    "stop_name": "Anaikattucherry",
+    "time_str": "7.05",
+    "latitude": 13.1228068,
+    "longitude": 80.1483885
+  },
+  {
+    "route_no": "15C",
+    "route_name": "Ambattur OT",
+    "stop_name": "Sitharkadu",
+    "time_str": "7.10",
+    "latitude": 13.1228068,
+    "longitude": 80.1483885
+  },
+  {
+    "route_no": "15D",
+    "route_name": "Ayappakkam Church Water Tank",
+    "stop_name": "Ayappakkam church (water tank)",
+    "time_str": "6.30 am",
+    "latitude": 12.5057641,
+    "longitude": 80.1129406
+  },
+  {
+    "route_no": "15D",
+    "route_name": "Ayappakkam Church Water Tank",
+    "stop_name": "Pillaiyar kovil",
+    "time_str": "6.32",
+    "latitude": 13.037804,
+    "longitude": 80.236041
+  },
+  {
+    "route_no": "15D",
+    "route_name": "Ayappakkam Church Water Tank",
+    "stop_name": "Ration shop",
+    "time_str": "6.37",
+    "latitude": 12.9830279,
+    "longitude": 80.1907162
+  },
+  {
+    "route_no": "15E",
+    "route_name": "Vinayagapuram",
+    "stop_name": "Vinayagapuram SS Mahal",
+    "time_str": "6.15 am",
+    "latitude": 13.1262345,
+    "longitude": 80.2933782
+  },
+  {
+    "route_no": "15E",
+    "route_name": "Vinayagapuram",
+    "stop_name": "Lakshmipuram",
+    "time_str": "6.16",
+    "latitude": 12.9864124,
+    "longitude": 80.2221212
+  },
+  {
+    "route_no": "15E",
+    "route_name": "Vinayagapuram",
+    "stop_name": "Vinayagapuram Koot Raod",
+    "time_str": "6.17",
+    "latitude": 13.1262345,
+    "longitude": 80.2933782
+  },
+  {
+    "route_no": "15E",
+    "route_name": "Vinayagapuram",
+    "stop_name": "Vinayagapuram Bazar",
+    "time_str": "6.18",
+    "latitude": 13.1262345,
+    "longitude": 80.2933782
+  },
+  {
+    "route_no": "15E",
+    "route_name": "Vinayagapuram",
+    "stop_name": "Vinayagapuram KVB ATM",
+    "time_str": "6.19",
+    "latitude": 12.9482686,
+    "longitude": 80.1965992
+  },
+  {
+    "route_no": "15E",
+    "route_name": "Vinayagapuram",
+    "stop_name": "Surapet Main Road",
+    "time_str": "6.23",
+    "latitude": 13.140255,
+    "longitude": 80.2020724
+  },
+  {
+    "route_no": "15E",
+    "route_name": "Vinayagapuram",
+    "stop_name": "Manikandapuram HP Petrol Bunk",
+    "time_str": "6.33",
+    "latitude": 12.9482686,
+    "longitude": 80.1965992
+  },
+  {
+    "route_no": "15F",
+    "route_name": "Dunlop",
+    "stop_name": "Dunlop",
+    "time_str": "6.30 am",
+    "latitude": 13.1060625,
+    "longitude": 80.1524361
+  },
+  {
+    "route_no": "15F",
+    "route_name": "Dunlop",
+    "stop_name": "Sri Ramasamy school Signal",
+    "time_str": "6.35",
+    "latitude": 13.094734,
+    "longitude": 80.2889186
+  },
+  {
+    "route_no": "15F",
+    "route_name": "Dunlop",
+    "stop_name": "Saraswathi Nagar",
+    "time_str": "6.45",
+    "latitude": 13.051844,
+    "longitude": 80.1835656
+  },
+  {
+    "route_no": "15F",
+    "route_name": "Dunlop",
+    "stop_name": "Vaishnavi Nagar",
+    "time_str": "6.50",
+    "latitude": 13.1164154,
+    "longitude": 80.146014
+  },
+  {
+    "route_no": "16",
+    "route_name": "Redhills",
+    "stop_name": "Kavankarai",
+    "time_str": "6.20 am",
+    "latitude": 13.1700994,
+    "longitude": 80.1998069
+  },
+  {
+    "route_no": "16",
+    "route_name": "Redhills",
+    "stop_name": "Puzhual Camp",
+    "time_str": "6.23",
+    "latitude": 13.1518328,
+    "longitude": 80.2044407
+  },
+  {
+    "route_no": "16",
+    "route_name": "Redhills",
+    "stop_name": "Surpet",
+    "time_str": "6.28",
+    "latitude": 13.1518328,
+    "longitude": 80.2044407
+  },
+  {
+    "route_no": "16",
+    "route_name": "Redhills",
+    "stop_name": "Wireless",
+    "time_str": "6.33",
+    "latitude": 12.9909554,
+    "longitude": 80.2424547
+  },
+  {
+    "route_no": "16",
+    "route_name": "Redhills",
+    "stop_name": "Oragadam",
+    "time_str": "6.35",
+    "latitude": 13.130791,
+    "longitude": 80.1529145
+  },
+  {
+    "route_no": "16A",
+    "route_name": "Kallikuppam",
+    "stop_name": "Surapet",
+    "time_str": "6.25 am",
+    "latitude": 13.140255,
+    "longitude": 80.2020724
+  },
+  {
+    "route_no": "16A",
+    "route_name": "Kallikuppam",
+    "stop_name": "Kallikuppam Arch",
+    "time_str": "6.30",
+    "latitude": 13.13207,
+    "longitude": 80.1717346
+  },
+  {
+    "route_no": "16A",
+    "route_name": "Kallikuppam",
+    "stop_name": "Wireless",
+    "time_str": "6.32",
+    "latitude": 12.9909554,
+    "longitude": 80.2424547
+  },
+  {
+    "route_no": "16A",
+    "route_name": "Kallikuppam",
+    "stop_name": "Oragadam",
+    "time_str": "6.35",
+    "latitude": 13.130791,
+    "longitude": 80.1529145
+  },
+  {
+    "route_no": "16A",
+    "route_name": "Kallikuppam",
+    "stop_name": "P.T.R.Kalyanamanadapam",
+    "time_str": "6.36",
+    "latitude": 13.13207,
+    "longitude": 80.1717346
+  },
+  {
+    "route_no": "16A",
+    "route_name": "Kallikuppam",
+    "stop_name": "Ajay Stadiuem",
+    "time_str": "6.45",
+    "latitude": 13.13207,
+    "longitude": 80.1717346
+  },
+  {
+    "route_no": "16B",
+    "route_name": "Puzhal",
+    "stop_name": "Puzhal",
+    "time_str": "6.20 am",
+    "latitude": 13.1636492,
+    "longitude": 80.2038067
+  },
+  {
+    "route_no": "16B",
+    "route_name": "Puzhal",
+    "stop_name": "Puzhal Camp",
+    "time_str": "6.21",
+    "latitude": 13.1579812,
+    "longitude": 80.2040528
+  },
+  {
+    "route_no": "16B",
+    "route_name": "Puzhal",
+    "stop_name": "Umaiyal Large",
+    "time_str": "6.25",
+    "latitude": 13.1636492,
+    "longitude": 80.2038067
+  },
+  {
+    "route_no": "16B",
+    "route_name": "Puzhal",
+    "stop_name": "Velammal College",
+    "time_str": "6.27",
+    "latitude": 13.1499867,
+    "longitude": 80.1918169
+  },
+  {
+    "route_no": "16B",
+    "route_name": "Puzhal",
+    "stop_name": "Surapet",
+    "time_str": "6.30",
+    "latitude": 13.140255,
+    "longitude": 80.2020724
+  },
+  {
+    "route_no": "16B",
+    "route_name": "Puzhal",
+    "stop_name": "Kallikuppam",
+    "time_str": "6.35",
+    "latitude": 13.13207,
+    "longitude": 80.1717346
+  },
+  {
+    "route_no": "16C",
+    "route_name": "Puzhal Bypass",
+    "stop_name": "Kavankarai",
+    "time_str": "6.20 am",
+    "latitude": 13.1700994,
+    "longitude": 80.1998069
+  },
+  {
+    "route_no": "16C",
+    "route_name": "Puzhal Bypass",
+    "stop_name": "Puzhal Jail",
+    "time_str": "6.22",
+    "latitude": 13.1643511,
+    "longitude": 80.2023309
+  },
+  {
+    "route_no": "16C",
+    "route_name": "Puzhal Bypass",
+    "stop_name": "Puzhual Camp",
+    "time_str": "6.23",
+    "latitude": 13.1525804,
+    "longitude": 80.2090963
+  },
+  {
+    "route_no": "16C",
+    "route_name": "Puzhal Bypass",
+    "stop_name": "Shanmugapuram",
+    "time_str": "6.30",
+    "latitude": 13.17756,
+    "longitude": 80.300415
+  },
+  {
+    "route_no": "16C",
+    "route_name": "Puzhal Bypass",
+    "stop_name": "Pudur",
+    "time_str": "6.35",
+    "latitude": 13.1298206,
+    "longitude": 80.1592132
+  },
+  {
+    "route_no": "16D",
+    "route_name": "Gandhinagar Police Booth",
+    "stop_name": "Gandhinagar Police Booth (Redhills)",
+    "time_str": "6.00 am",
+    "latitude": 13.0089932,
+    "longitude": 80.2538632
+  },
+  {
+    "route_no": "16D",
+    "route_name": "Gandhinagar Police Booth",
+    "stop_name": "HP Petrol Bunk",
+    "time_str": "6.04",
+    "latitude": 13.0277462,
+    "longitude": 80.2512876
+  },
+  {
+    "route_no": "16D",
+    "route_name": "Gandhinagar Police Booth",
+    "stop_name": "Alamaram Bus Stop",
+    "time_str": "6.08",
+    "latitude": 12.9574911,
+    "longitude": 80.178322
+  },
+  {
+    "route_no": "16D",
+    "route_name": "Gandhinagar Police Booth",
+    "stop_name": "GRT (Redhills)",
+    "time_str": "6.10",
+    "latitude": 12.9826003,
+    "longitude": 80.2181059
+  },
+  {
+    "route_no": "16D",
+    "route_name": "Gandhinagar Police Booth",
+    "stop_name": "Redhills Bus Stop",
+    "time_str": "6.12",
+    "latitude": 13.1083791,
+    "longitude": 80.2059605
+  },
+  {
+    "route_no": "16D",
+    "route_name": "Gandhinagar Police Booth",
+    "stop_name": "Redhills market",
+    "time_str": "6.15",
+    "latitude": 13.1080663,
+    "longitude": 80.2061553
+  },
+  {
+    "route_no": "16E",
+    "route_name": "Oragadam Ambattur",
+    "stop_name": "Oragadam - PTR Kalyana Mandapam",
+    "time_str": "6.30 am",
+    "latitude": 13.130791,
+    "longitude": 80.1529145
+  },
+  {
+    "route_no": "16E",
+    "route_name": "Oragadam Ambattur",
+    "stop_name": "Stedford",
+    "time_str": "6.35",
+    "latitude": 13.1250034,
+    "longitude": 80.1445346
+  },
+  {
+    "route_no": "16E",
+    "route_name": "Oragadam Ambattur",
+    "stop_name": "Saraswathi Nagar",
+    "time_str": "6.40",
+    "latitude": 13.051844,
+    "longitude": 80.1835656
+  },
+  {
+    "route_no": "16E",
+    "route_name": "Oragadam Ambattur",
+    "stop_name": "Manigandapuram",
+    "time_str": "6.41",
+    "latitude": 13.130791,
+    "longitude": 80.1529145
+  },
+  {
+    "route_no": "16E",
+    "route_name": "Oragadam Ambattur",
+    "stop_name": "Vaishnavi nagar",
+    "time_str": "6.45",
+    "latitude": 13.1164154,
+    "longitude": 80.146014
+  },
+  {
+    "route_no": "17",
+    "route_name": "Thiruvallur GRT",
+    "stop_name": "Thiruvallur - GH",
+    "time_str": "6.45 am",
+    "latitude": 13.1105063,
+    "longitude": 80.1562428
+  },
+  {
+    "route_no": "17",
+    "route_name": "Thiruvallur GRT",
+    "stop_name": "Thiruvallur - GRT",
+    "time_str": "6.46",
+    "latitude": 13.1123034,
+    "longitude": 80.1471697
+  },
+  {
+    "route_no": "17A",
+    "route_name": "Kakkalur",
+    "stop_name": "Manavalanagar Railway Station",
+    "time_str": "6.50",
+    "latitude": 13.1125301,
+    "longitude": 79.9132254
+  },
+  {
+    "route_no": "17A",
+    "route_name": "Kakkalur",
+    "stop_name": "Putlur Bus Stop",
+    "time_str": "7.00",
+    "latitude": 13.144779,
+    "longitude": 79.9535502
+  },
+  {
+    "route_no": "17A",
+    "route_name": "Kakkalur",
+    "stop_name": "Aranvoyal Bus Stop",
+    "time_str": "7.05",
+    "latitude": 13.1024693,
+    "longitude": 79.9540238
+  },
+  {
+    "route_no": "17B",
+    "route_name": "Thiruvallur",
+    "stop_name": "Vasantha Bhavan Hotel",
+    "time_str": "6.45 am",
+    "latitude": 13.0093246,
+    "longitude": 80.2622142
+  },
+  {
+    "route_no": "17B",
+    "route_name": "Thiruvallur",
+    "stop_name": "Caterpillar",
+    "time_str": "6.55",
+    "latitude": 13.0877393,
+    "longitude": 79.9006678
+  },
+  {
+    "route_no": "17B",
+    "route_name": "Thiruvallur",
+    "stop_name": "Melnallathur",
+    "time_str": "7.00",
+    "latitude": 13.147022,
+    "longitude": 80.2869758
+  },
+  {
+    "route_no": "17B",
+    "route_name": "Thiruvallur",
+    "stop_name": "Chatram",
+    "time_str": "7.05",
+    "latitude": 12.8768075,
+    "longitude": 79.6160108
+  },
+  {
+    "route_no": "17C",
+    "route_name": "Sevvapet",
+    "stop_name": "Sevvapet",
+    "time_str": "6.35 am",
+    "latitude": 13.1293328,
+    "longitude": 79.9702214
+  },
+  {
+    "route_no": "17C",
+    "route_name": "Sevvapet",
+    "stop_name": "Tholuvur",
+    "time_str": "6.40",
+    "latitude": 13.1293328,
+    "longitude": 79.9702214
+  },
+  {
+    "route_no": "17C",
+    "route_name": "Sevvapet",
+    "stop_name": "Thaneerkulam",
+    "time_str": "6.45",
+    "latitude": 13.1449937,
+    "longitude": 79.9512179
+  },
+  {
+    "route_no": "17C",
+    "route_name": "Sevvapet",
+    "stop_name": "Thiruvalur GRT",
+    "time_str": "6.55",
+    "latitude": 13.1293328,
+    "longitude": 79.9702214
+  },
+  {
+    "route_no": "17D",
+    "route_name": "Thirunindravur",
+    "stop_name": "Veppampattu Tea Kadai",
+    "time_str": "6.30 am",
+    "latitude": 13.1258146,
+    "longitude": 80.010147
+  },
+  {
+    "route_no": "17D",
+    "route_name": "Thirunindravur",
+    "stop_name": "Veppampattu Rly Station",
+    "time_str": "6.35",
+    "latitude": 13.1258146,
+    "longitude": 80.010147
+  },
+  {
+    "route_no": "17D",
+    "route_name": "Thirunindravur",
+    "stop_name": "Veppampattu Rly 2nd Gate",
+    "time_str": "6.38",
+    "latitude": 13.1258146,
+    "longitude": 80.010147
+  },
+  {
+    "route_no": "17D",
+    "route_name": "Thirunindravur",
+    "stop_name": "Nadukuthagai",
+    "time_str": "6.53",
+    "latitude": 13.1311812,
+    "longitude": 80.0385928
+  },
+  {
+    "route_no": "17D",
+    "route_name": "Thirunindravur",
+    "stop_name": "Jaya college",
+    "time_str": "6.55",
+    "latitude": 13.1225267,
+    "longitude": 80.0454078
+  },
+  {
+    "route_no": "17E",
+    "route_name": "Nemilichery Roundana",
+    "stop_name": "Jaya School",
+    "time_str": "6.52",
+    "latitude": 13.1252713,
+    "longitude": 80.0446713
+  },
+  {
+    "route_no": "17E",
+    "route_name": "Nemilichery Roundana",
+    "stop_name": "Nadukuthagai",
+    "time_str": "6.55",
+    "latitude": 13.1311812,
+    "longitude": 80.0385928
+  },
+  {
+    "route_no": "17E",
+    "route_name": "Nemilichery Roundana",
+    "stop_name": "Vellavedu",
+    "time_str": "7.15",
+    "latitude": 13.0668482,
+    "longitude": 80.0364489
+  },
+  {
+    "route_no": "17E",
+    "route_name": "Nemilichery Roundana",
+    "stop_name": "Thirumazhisai bus stand",
+    "time_str": "7.20",
+    "latitude": 13.0540139,
+    "longitude": 80.0607568
+  },
+  {
+    "route_no": "17F",
+    "route_name": "Thiruvallur Municipality",
+    "stop_name": "Thiruvallur (Municipality Office)",
+    "time_str": "6.45 am",
+    "latitude": 13.147022,
+    "longitude": 80.2869758
+  },
+  {
+    "route_no": "17F",
+    "route_name": "Thiruvallur Municipality",
+    "stop_name": "Post office",
+    "time_str": "6.47",
+    "latitude": 13.1193473,
+    "longitude": 80.161245
+  },
+  {
+    "route_no": "17F",
+    "route_name": "Thiruvallur Municipality",
+    "stop_name": "Pattarai",
+    "time_str": "6.55",
+    "latitude": 12.3942158,
+    "longitude": 80.0920881
+  },
+  {
+    "route_no": "17F",
+    "route_name": "Thiruvallur Municipality",
+    "stop_name": "Sengadu",
+    "time_str": "7.10",
+    "latitude": 13.0191062,
+    "longitude": 79.8986181
+  },
+  {
+    "route_no": "17G",
+    "route_name": "Manavalanagar Signal",
+    "stop_name": "MLA Office",
+    "time_str": "6.45 am",
+    "latitude": 13.0247674,
+    "longitude": 80.2182663
+  },
+  {
+    "route_no": "17G",
+    "route_name": "Manavalanagar Signal",
+    "stop_name": "Manavala Nagar Signal",
+    "time_str": "6.50",
+    "latitude": 13.0839014,
+    "longitude": 79.8991079
+  },
+  {
+    "route_no": "17G",
+    "route_name": "Manavalanagar Signal",
+    "stop_name": "Kabilar Nagar",
+    "time_str": "6.52",
+    "latitude": 13.1205343,
+    "longitude": 80.2453696
+  },
+  {
+    "route_no": "18",
+    "route_name": "Avadi",
+    "stop_name": "Avadi Ramarathinam",
+    "time_str": "6.40 am",
+    "latitude": 13.0403526,
+    "longitude": 80.129575
+  },
+  {
+    "route_no": "18",
+    "route_name": "Avadi",
+    "stop_name": "Ponnu Supermarket",
+    "time_str": "6.42",
+    "latitude": 13.1228705,
+    "longitude": 80.1492032
+  },
+  {
+    "route_no": "18A",
+    "route_name": "Ambattur Stedford Hospital",
+    "stop_name": "JB Estate",
+    "time_str": "7.00 am",
+    "latitude": 13.0249209,
+    "longitude": 80.2776875
+  },
+  {
+    "route_no": "18A",
+    "route_name": "Ambattur Stedford Hospital",
+    "stop_name": "Vasantham Nagar",
+    "time_str": "7.02",
+    "latitude": 13.1189649,
+    "longitude": 80.2172822
+  },
+  {
+    "route_no": "18A",
+    "route_name": "Ambattur Stedford Hospital",
+    "stop_name": "Paruthipattu police Booth",
+    "time_str": "7.06",
+    "latitude": 13.0865074,
+    "longitude": 80.1087025
+  },
+  {
+    "route_no": "18A",
+    "route_name": "Ambattur Stedford Hospital",
+    "stop_name": "Kaduvetti",
+    "time_str": "7.07",
+    "latitude": 11.0158776,
+    "longitude": 79.6677554
+  },
+  {
+    "route_no": "18A",
+    "route_name": "Ambattur Stedford Hospital",
+    "stop_name": "Bharat bunk",
+    "time_str": "7.08",
+    "latitude": 13.072324,
+    "longitude": 80.2602653
+  },
+  {
+    "route_no": "18B",
+    "route_name": "Avadi GRT",
+    "stop_name": "Kavarapalayam",
+    "time_str": "6.46",
+    "latitude": 11.3471544,
+    "longitude": 79.3835658
+  },
+  {
+    "route_no": "18B",
+    "route_name": "Avadi GRT",
+    "stop_name": "Sindhu Nagar",
+    "time_str": "6.47",
+    "latitude": 12.952713,
+    "longitude": 80.1902029
+  },
+  {
+    "route_no": "18B",
+    "route_name": "Avadi GRT",
+    "stop_name": "Sekkadu",
+    "time_str": "6.48",
+    "latitude": 13.1559251,
+    "longitude": 80.257231
+  },
+  {
+    "route_no": "18B",
+    "route_name": "Avadi GRT",
+    "stop_name": "Hindu College",
+    "time_str": "6.50",
+    "latitude": 13.1195044,
+    "longitude": 80.0744657
+  },
+  {
+    "route_no": "18B",
+    "route_name": "Avadi GRT",
+    "stop_name": "Pattabiram Bus Stop",
+    "time_str": "6.52",
+    "latitude": 13.1215291,
+    "longitude": 80.0639365
+  },
+  {
+    "route_no": "18C",
+    "route_name": "Avadi Market",
+    "stop_name": "Govarthanagiri",
+    "time_str": "6.45 am",
+    "latitude": 13.1160521,
+    "longitude": 80.1062634
+  },
+  {
+    "route_no": "18C",
+    "route_name": "Avadi Market",
+    "stop_name": "Ayankulam",
+    "time_str": "6.47",
+    "latitude": 13.1160521,
+    "longitude": 80.1062634
+  },
+  {
+    "route_no": "18C",
+    "route_name": "Avadi Market",
+    "stop_name": "Paruthipatu",
+    "time_str": "6.49",
+    "latitude": 13.1160521,
+    "longitude": 80.1062634
+  },
+  {
+    "route_no": "18C",
+    "route_name": "Avadi Market",
+    "stop_name": "Kaduveti",
+    "time_str": "6.50",
+    "latitude": 13.1160521,
+    "longitude": 80.1062634
+  },
+  {
+    "route_no": "18C",
+    "route_name": "Avadi Market",
+    "stop_name": "Seneerkuppam",
+    "time_str": "6.51",
+    "latitude": 13.1160521,
+    "longitude": 80.1062634
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Kollumedu GH",
+    "time_str": "6.05 am",
+    "latitude": 13.1634237,
+    "longitude": 80.1154064
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Kannadapalayam",
+    "time_str": "6.07",
+    "latitude": 12.9246287,
+    "longitude": 80.1087409
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Vel Tech junction",
+    "time_str": "6.15",
+    "latitude": 13.18822,
+    "longitude": 80.1061083
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Kovilpathagai",
+    "time_str": "6.20",
+    "latitude": 13.1687454,
+    "longitude": 80.0971444
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Ajay stadium",
+    "time_str": "6.25",
+    "latitude": 13.1687454,
+    "longitude": 80.0971444
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Kalainar Nagar",
+    "time_str": "6.27",
+    "latitude": 13.1687454,
+    "longitude": 80.0971444
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Brinda nagar",
+    "time_str": "6.30",
+    "latitude": 12.937008,
+    "longitude": 80.139316
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "CRPF junction",
+    "time_str": "6.45",
+    "latitude": 12.9912055,
+    "longitude": 80.1881366
+  },
+  {
+    "route_no": "18D",
+    "route_name": "Avadi Veerapuram",
+    "stop_name": "Mittanemili",
+    "time_str": "6.48",
+    "latitude": 13.1945035,
+    "longitude": 80.086941
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Muthapudupet Post office",
+    "time_str": "6.10 am",
+    "latitude": 13.1479522,
+    "longitude": 80.0622889
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Muthapudupet",
+    "time_str": "6.15",
+    "latitude": 13.1479522,
+    "longitude": 80.0622889
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Shastri nagar",
+    "time_str": "6.20",
+    "latitude": 12.9987729,
+    "longitude": 80.2599116
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Nemelichery tollgate",
+    "time_str": "6.25",
+    "latitude": 13.1479522,
+    "longitude": 80.0622889
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Gomathipuram",
+    "time_str": "6.45",
+    "latitude": 13.1479522,
+    "longitude": 80.0622889
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Kottabedu",
+    "time_str": "6.50",
+    "latitude": 13.1479522,
+    "longitude": 80.0622889
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Puduchatram",
+    "time_str": "7.05",
+    "latitude": 13.0887438,
+    "longitude": 80.0088996
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Nemam",
+    "time_str": "7.10",
+    "latitude": 13.0771565,
+    "longitude": 80.0275678
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Vellavedu",
+    "time_str": "7.15",
+    "latitude": 13.0668482,
+    "longitude": 80.0364489
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Thirumazhisai sivan kovil",
+    "time_str": "7.20",
+    "latitude": 13.0540139,
+    "longitude": 80.0607568
+  },
+  {
+    "route_no": "18E",
+    "route_name": "Muthapudupet",
+    "stop_name": "Gundumedu",
+    "time_str": "7.23",
+    "latitude": 13.1479522,
+    "longitude": 80.0622889
+  },
+  {
+    "route_no": "18F",
+    "route_name": "Avadi Bus Stand",
+    "stop_name": "Avadi Bus Stand",
+    "time_str": "6.45 am",
+    "latitude": 13.0403526,
+    "longitude": 80.129575
+  },
+  {
+    "route_no": "18F",
+    "route_name": "Avadi Bus Stand",
+    "stop_name": "Avadi Check post",
+    "time_str": "6.47",
+    "latitude": 13.0403526,
+    "longitude": 80.129575
+  },
+  {
+    "route_no": "18F",
+    "route_name": "Avadi Bus Stand",
+    "stop_name": "Paruthipattu",
+    "time_str": "7.00",
+    "latitude": 13.0865074,
+    "longitude": 80.1087025
+  },
+  {
+    "route_no": "19",
+    "route_name": "SP Kovil",
+    "stop_name": "Daimler",
+    "time_str": "6.45",
+    "latitude": 12.8395407,
+    "longitude": 79.9541949
+  },
+  {
+    "route_no": "19",
+    "route_name": "SP Kovil",
+    "stop_name": "Oragadam",
+    "time_str": "6.47",
+    "latitude": 13.130791,
+    "longitude": 80.1529145
+  },
+  {
+    "route_no": "19",
+    "route_name": "SP Kovil",
+    "stop_name": "Vallakottai",
+    "time_str": "6.50",
+    "latitude": 12.9583643,
+    "longitude": 80.185675
+  },
+  {
+    "route_no": "19A",
+    "route_name": "Perungalathur",
+    "stop_name": "Vandalur gate",
+    "time_str": "6.30 am",
+    "latitude": 12.9256549,
+    "longitude": 80.10437
+  },
+  {
+    "route_no": "19A",
+    "route_name": "Perungalathur",
+    "stop_name": "Perungalathur Bus stop",
+    "time_str": "6.40",
+    "latitude": 12.9066371,
+    "longitude": 80.0962763
+  },
+  {
+    "route_no": "19A",
+    "route_name": "Perungalathur",
+    "stop_name": "Perungalathur Erikarai",
+    "time_str": "6.43",
+    "latitude": 12.9256549,
+    "longitude": 80.10437
+  },
+  {
+    "route_no": "19A",
+    "route_name": "Perungalathur",
+    "stop_name": "Irumpuliyur",
+    "time_str": "6.46",
+    "latitude": 12.9256549,
+    "longitude": 80.10437
+  },
+  {
+    "route_no": "19A",
+    "route_name": "Perungalathur",
+    "stop_name": "Lakshmipuram",
+    "time_str": "6.50",
+    "latitude": 12.9864124,
+    "longitude": 80.2221212
+  },
+  {
+    "route_no": "19B",
+    "route_name": "Varatharaja Theatre",
+    "stop_name": "Bharathi Nagar",
+    "time_str": "6.48",
+    "latitude": 13.1226511,
+    "longitude": 80.2237949
+  },
+  {
+    "route_no": "19B",
+    "route_name": "Varatharaja Theatre",
+    "stop_name": "Gandhi Nagar",
+    "time_str": "6.49",
+    "latitude": 13.0412679,
+    "longitude": 80.1871827
+  },
+  {
+    "route_no": "19B",
+    "route_name": "Varatharaja Theatre",
+    "stop_name": "Parvathy Nagar",
+    "time_str": "6.52",
+    "latitude": 12.9052931,
+    "longitude": 80.153449
+  },
+  {
+    "route_no": "19B",
+    "route_name": "Varatharaja Theatre",
+    "stop_name": "Outer Ring Road (Service Road)",
+    "time_str": "6.55",
+    "latitude": 13.1785366,
+    "longitude": 80.1366563
+  },
+  {
+    "route_no": "19C",
+    "route_name": "Hasthinapuram",
+    "stop_name": "Hasthinapuram Bus Stand",
+    "time_str": "6.30 am",
+    "latitude": 12.9372824,
+    "longitude": 80.1519854
+  },
+  {
+    "route_no": "19C",
+    "route_name": "Hasthinapuram",
+    "stop_name": "Amman Koil",
+    "time_str": "6.32",
+    "latitude": 13.0414839,
+    "longitude": 80.1967337
+  },
+  {
+    "route_no": "19C",
+    "route_name": "Hasthinapuram",
+    "stop_name": "Kumaran Kundram",
+    "time_str": "6.35",
+    "latitude": 12.9439424,
+    "longitude": 80.1424399
+  },
+  {
+    "route_no": "19C",
+    "route_name": "Hasthinapuram",
+    "stop_name": "Bharathi Nagar Auto Stand",
+    "time_str": "6.37",
+    "latitude": 13.1191691,
+    "longitude": 80.2497845
+  },
+  {
+    "route_no": "19C",
+    "route_name": "Hasthinapuram",
+    "stop_name": "Madanapuram Bridge (outer ring Road)",
+    "time_str": "6.55",
+    "latitude": 12.9372824,
+    "longitude": 80.1519854
+  },
+  {
+    "route_no": "19D",
+    "route_name": "Guduvanchery",
+    "stop_name": "Urapakkam Tea Kadai",
+    "time_str": "6.34",
+    "latitude": 12.8636676,
+    "longitude": 80.0721616
+  },
+  {
+    "route_no": "19D",
+    "route_name": "Guduvanchery",
+    "stop_name": "Urapakkam School stop",
+    "time_str": "6.36",
+    "latitude": 12.8680865,
+    "longitude": 80.0755956
+  },
+  {
+    "route_no": "19D",
+    "route_name": "Guduvanchery",
+    "stop_name": "Vandalur",
+    "time_str": "6.40",
+    "latitude": 12.9426167,
+    "longitude": 80.2070272
+  },
+  {
+    "route_no": "19E",
+    "route_name": "Tambaram MCC",
+    "stop_name": "Tambaram (MCC)",
+    "time_str": "6.45 am",
+    "latitude": 12.920695,
+    "longitude": 80.1968278
+  },
+  {
+    "route_no": "19E",
+    "route_name": "Tambaram MCC",
+    "stop_name": "Bharathi Nagar",
+    "time_str": "6.50",
+    "latitude": 13.1226511,
+    "longitude": 80.2237949
+  },
+  {
+    "route_no": "19E",
+    "route_name": "Tambaram MCC",
+    "stop_name": "Padmavathi",
+    "time_str": "6.52",
+    "latitude": 13.1425558,
+    "longitude": 80.1989607
+  },
+  {
+    "route_no": "19F",
+    "route_name": "Maraimalai Nagar",
+    "stop_name": "Maraimalai Nagar Bus Stop",
+    "time_str": "6.20 am",
+    "latitude": 13.017752,
+    "longitude": 80.2248965
+  },
+  {
+    "route_no": "19F",
+    "route_name": "Maraimalai Nagar",
+    "stop_name": "Kattankulathur Bus Stop",
+    "time_str": "6.22",
+    "latitude": 13.017752,
+    "longitude": 80.2248965
+  },
+  {
+    "route_no": "19F",
+    "route_name": "Maraimalai Nagar",
+    "stop_name": "SRM (Potheri)",
+    "time_str": "6.24",
+    "latitude": 12.8234361,
+    "longitude": 80.0450412
+  },
+  {
+    "route_no": "19F",
+    "route_name": "Maraimalai Nagar",
+    "stop_name": "Thailavaram",
+    "time_str": "6.25",
+    "latitude": 13.018875,
+    "longitude": 80.2246142
+  },
+  {
+    "route_no": "19F",
+    "route_name": "Maraimalai Nagar",
+    "stop_name": "Srinivasapuram",
+    "time_str": "6.27",
+    "latitude": 13.0322406,
+    "longitude": 80.1307391
+  },
+  {
+    "route_no": "20",
+    "route_name": "Kamatchi Hospital Pallikaranai",
+    "stop_name": "Kamachi Hospital",
+    "time_str": "6.15 am",
+    "latitude": 12.9759417,
+    "longitude": 80.2275406
+  },
+  {
+    "route_no": "20",
+    "route_name": "Kamatchi Hospital Pallikaranai",
+    "stop_name": "Narayanapuram",
+    "time_str": "6.17",
+    "latitude": 12.9417967,
+    "longitude": 80.2083837
+  },
+  {
+    "route_no": "20",
+    "route_name": "Kamatchi Hospital Pallikaranai",
+    "stop_name": "Pallikaranai Oil Mill",
+    "time_str": "6.19",
+    "latitude": 12.9304748,
+    "longitude": 80.2077692
+  },
+  {
+    "route_no": "20",
+    "route_name": "Kamatchi Hospital Pallikaranai",
+    "stop_name": "Pallikaranai Jayachandran",
+    "time_str": "6.23",
+    "latitude": 12.9173825,
+    "longitude": 80.1950805
+  },
+  {
+    "route_no": "20",
+    "route_name": "Kamatchi Hospital Pallikaranai",
+    "stop_name": "Nilgiris Supermarket",
+    "time_str": "6.25",
+    "latitude": 12.9291074,
+    "longitude": 80.2029956
+  },
+  {
+    "route_no": "20A",
+    "route_name": "Medavakkam X Road",
+    "stop_name": "Medavakkam X Road",
+    "time_str": "6.30 am",
+    "latitude": 12.9229928,
+    "longitude": 80.1882897
+  },
+  {
+    "route_no": "20A",
+    "route_name": "Medavakkam X Road",
+    "stop_name": "Santhoshpuram Signal",
+    "time_str": "6.35",
+    "latitude": 12.9200019,
+    "longitude": 80.170946
+  },
+  {
+    "route_no": "20A",
+    "route_name": "Medavakkam X Road",
+    "stop_name": "Sembakkam Signal",
+    "time_str": "6.40",
+    "latitude": 12.9040038,
+    "longitude": 80.1871795
+  },
+  {
+    "route_no": "20A",
+    "route_name": "Medavakkam X Road",
+    "stop_name": "Rajakilpakkam Signal",
+    "time_str": "6.42",
+    "latitude": 12.9145851,
+    "longitude": 80.1579056
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Mambakkam",
+    "time_str": "6.10 am",
+    "latitude": 12.9040038,
+    "longitude": 80.1871795
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Mambakkam Sivan Koil",
+    "time_str": "6.15",
+    "latitude": 12.9040038,
+    "longitude": 80.1871795
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Thiruvanchery",
+    "time_str": "6.30",
+    "latitude": 12.8941183,
+    "longitude": 80.1411752
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Theeder Nagar",
+    "time_str": "6.33",
+    "latitude": 12.9040038,
+    "longitude": 80.1871795
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Lakshmi Ammal College",
+    "time_str": "6.37",
+    "latitude": 12.9519873,
+    "longitude": 80.1345334
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Bharath Engineering College",
+    "time_str": "6.40",
+    "latitude": 12.9079915,
+    "longitude": 80.1394791
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Indra Nagar",
+    "time_str": "6.42",
+    "latitude": 13.0370804,
+    "longitude": 80.1887213
+  },
+  {
+    "route_no": "20B",
+    "route_name": "Mambakkam",
+    "stop_name": "Malar Hospital",
+    "time_str": "6.45",
+    "latitude": 13.0078478,
+    "longitude": 80.2587288
+  },
+  {
+    "route_no": "20C",
+    "route_name": "Madipakkam",
+    "stop_name": "Ponniamman Koil",
+    "time_str": "6.15 am",
+    "latitude": 13.0191432,
+    "longitude": 80.1529719
+  },
+  {
+    "route_no": "20C",
+    "route_name": "Madipakkam",
+    "stop_name": "PNB Bank",
+    "time_str": "6.18",
+    "latitude": 13.0386988,
+    "longitude": 80.2532833
+  },
+  {
+    "route_no": "20C",
+    "route_name": "Madipakkam",
+    "stop_name": "Sathasiva Nagar",
+    "time_str": "6.20",
+    "latitude": 12.9611348,
+    "longitude": 80.2001292
+  },
+  {
+    "route_no": "20C",
+    "route_name": "Madipakkam",
+    "stop_name": "Ram Nagar",
+    "time_str": "6.22",
+    "latitude": 12.984889,
+    "longitude": 80.1943346
+  },
+  {
+    "route_no": "20C",
+    "route_name": "Madipakkam",
+    "stop_name": "Kaiveli Signal",
+    "time_str": "6.28",
+    "latitude": 12.9639064,
+    "longitude": 80.2159702
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Nanmangalam",
+    "time_str": "6.25 am",
+    "latitude": 12.9382161,
+    "longitude": 80.1782483
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Vadakupattu Road",
+    "time_str": "6.27",
+    "latitude": 12.9382161,
+    "longitude": 80.1782483
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Vellakal",
+    "time_str": "6.29",
+    "latitude": 12.6191486,
+    "longitude": 78.9210605
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Kamarajapuram",
+    "time_str": "6.35",
+    "latitude": 13.1933419,
+    "longitude": 80.2612852
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Mahalakshmi Nagar",
+    "time_str": "6.38",
+    "latitude": 13.1860079,
+    "longitude": 80.3063076
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Selaiyur",
+    "time_str": "6.42",
+    "latitude": 12.9187445,
+    "longitude": 80.1311172
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Sankara vidyalaya School",
+    "time_str": "6.43",
+    "latitude": 12.9232657,
+    "longitude": 80.1319713
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Poondi Bazaar",
+    "time_str": "6.44",
+    "latitude": 12.9242,
+    "longitude": 80.127446
+  },
+  {
+    "route_no": "20D",
+    "route_name": "Nanmangalam",
+    "stop_name": "Tambaram Railway Station",
+    "time_str": "6.45",
+    "latitude": 12.9254158,
+    "longitude": 80.1169355
+  },
+  {
+    "route_no": "20E",
+    "route_name": "Chrompet",
+    "stop_name": "Chrompet Saravana Stores",
+    "time_str": "6.40 am",
+    "latitude": 12.9394208,
+    "longitude": 80.1366131
+  },
+  {
+    "route_no": "20E",
+    "route_name": "Chrompet",
+    "stop_name": "Chrompet (Railway Station)",
+    "time_str": "6.42",
+    "latitude": 12.9394208,
+    "longitude": 80.1366131
+  },
+  {
+    "route_no": "20E",
+    "route_name": "Chrompet",
+    "stop_name": "MIT Bridge",
+    "time_str": "6.45",
+    "latitude": 12.9456958,
+    "longitude": 80.1380292
+  },
+  {
+    "route_no": "20E",
+    "route_name": "Chrompet",
+    "stop_name": "Sanatorium TB Hospital",
+    "time_str": "6.47",
+    "latitude": 12.9365866,
+    "longitude": 80.1316235
+  },
+  {
+    "route_no": "20E",
+    "route_name": "Chrompet",
+    "stop_name": "Tambaram Mepz",
+    "time_str": "6.50",
+    "latitude": 12.9394208,
+    "longitude": 80.1366131
+  },
+  {
+    "route_no": "20F",
+    "route_name": "Bharath University",
+    "stop_name": "Bharath University",
+    "time_str": "6.35 am",
+    "latitude": 12.9079915,
+    "longitude": 80.1394791
+  },
+  {
+    "route_no": "20F",
+    "route_name": "Bharath University",
+    "stop_name": "Indra Nagar",
+    "time_str": "6.37",
+    "latitude": 13.0370804,
+    "longitude": 80.1887213
+  },
+  {
+    "route_no": "20F",
+    "route_name": "Bharath University",
+    "stop_name": "Malar Hospital",
+    "time_str": "6.40",
+    "latitude": 13.0078478,
+    "longitude": 80.2587288
+  },
+  {
+    "route_no": "20F",
+    "route_name": "Bharath University",
+    "stop_name": "Camp Road",
+    "time_str": "6.42",
+    "latitude": 13.1580752,
+    "longitude": 80.2033313
+  },
+  {
+    "route_no": "20F",
+    "route_name": "Bharath University",
+    "stop_name": "ICICI Bank",
+    "time_str": "6.45",
+    "latitude": 12.9996299,
+    "longitude": 80.2558929
+  },
+  {
+    "route_no": "20F",
+    "route_name": "Bharath University",
+    "stop_name": "Old Tambaram Kulam",
+    "time_str": "6.55",
+    "latitude": 12.8571505,
+    "longitude": 80.226222
+  },
+  {
+    "route_no": "20F",
+    "route_name": "Bharath University",
+    "stop_name": "Krishna Nagar (Mudichur Road)",
+    "time_str": "6.58",
+    "latitude": 12.9842409,
+    "longitude": 80.2332331
+  },
+  {
+    "route_no": "20G",
+    "route_name": "Sembakkam",
+    "stop_name": "Sembakkam Signal",
+    "time_str": "6.35 am",
+    "latitude": 12.9040038,
+    "longitude": 80.1871795
+  },
+  {
+    "route_no": "20G",
+    "route_name": "Sembakkam",
+    "stop_name": "Rajakilpakkam Signal",
+    "time_str": "6.42",
+    "latitude": 12.9145851,
+    "longitude": 80.1579056
+  },
+  {
+    "route_no": "20H",
+    "route_name": "Sanatorium",
+    "stop_name": "Sanatorium",
+    "time_str": "6.40 am",
+    "latitude": 12.9369591,
+    "longitude": 80.1307034
+  },
+  {
+    "route_no": "20H",
+    "route_name": "Sanatorium",
+    "stop_name": "Gandhi Street",
+    "time_str": "6.45",
+    "latitude": 12.9824232,
+    "longitude": 80.2389132
+  },
+  {
+    "route_no": "20H",
+    "route_name": "Sanatorium",
+    "stop_name": "old Tambaram kulam",
+    "time_str": "6.47",
+    "latitude": 12.8581117,
+    "longitude": 80.2262771
+  },
+  {
+    "route_no": "20H",
+    "route_name": "Sanatorium",
+    "stop_name": "Krishna nagar",
+    "time_str": "6.49",
+    "latitude": 13.0523375,
+    "longitude": 80.1949682
+  },
+  {
+    "route_no": "21",
+    "route_name": "NGO Colony",
+    "stop_name": "NGO Colony Dept",
+    "time_str": "6.20 am",
+    "latitude": 13.064553,
+    "longitude": 80.2199644
+  },
+  {
+    "route_no": "21",
+    "route_name": "NGO Colony",
+    "stop_name": "Kakkanpalam",
+    "time_str": "6.25",
+    "latitude": 12.9948953,
+    "longitude": 80.2077603
+  },
+  {
+    "route_no": "21",
+    "route_name": "NGO Colony",
+    "stop_name": "Arun Ice Parler",
+    "time_str": "6.28",
+    "latitude": 13.0216118,
+    "longitude": 80.2191067
+  },
+  {
+    "route_no": "21",
+    "route_name": "NGO Colony",
+    "stop_name": "Prem Care Hospital",
+    "time_str": "6.30",
+    "latitude": 12.9948953,
+    "longitude": 80.2077603
+  },
+  {
+    "route_no": "21",
+    "route_name": "NGO Colony",
+    "stop_name": "Puzuthiwakkam Road",
+    "time_str": "06;32",
+    "latitude": 13.064553,
+    "longitude": 80.2199644
+  },
+  {
+    "route_no": "21",
+    "route_name": "NGO Colony",
+    "stop_name": "Sakthi Cars",
+    "time_str": "6.35",
+    "latitude": 12.9797152,
+    "longitude": 80.2000871
+  },
+  {
+    "route_no": "21A",
+    "route_name": "Velachery",
+    "stop_name": "Tansi Nagar",
+    "time_str": "6.15 am",
+    "latitude": 12.9774585,
+    "longitude": 80.2234467
+  },
+  {
+    "route_no": "21A",
+    "route_name": "Velachery",
+    "stop_name": "Murugan Kalyanamandapam",
+    "time_str": "6.20",
+    "latitude": 12.9801655,
+    "longitude": 80.2228506
+  },
+  {
+    "route_no": "21A",
+    "route_name": "Velachery",
+    "stop_name": "Velachery Chekpost",
+    "time_str": "6.25",
+    "latitude": 12.9801655,
+    "longitude": 80.2228506
+  },
+  {
+    "route_no": "21A",
+    "route_name": "Velachery",
+    "stop_name": "Shanthi Apartment",
+    "time_str": "6.30",
+    "latitude": 13.0450766,
+    "longitude": 80.1815229
+  },
+  {
+    "route_no": "21A",
+    "route_name": "Velachery",
+    "stop_name": "Sakthi Cars",
+    "time_str": "6.37",
+    "latitude": 12.9797152,
+    "longitude": 80.2000871
+  },
+  {
+    "route_no": "21A",
+    "route_name": "Velachery",
+    "stop_name": "Alandur Court",
+    "time_str": "6.42",
+    "latitude": 12.9972824,
+    "longitude": 80.1922214
+  },
+  {
+    "route_no": "21A",
+    "route_name": "Velachery",
+    "stop_name": "Jothi Theatre",
+    "time_str": "6.47",
+    "latitude": 13.0061844,
+    "longitude": 80.2014025
+  },
+  {
+    "route_no": "21C",
+    "route_name": "Adambakkam",
+    "stop_name": "Thandeeswarm Bus Stop",
+    "time_str": "6.15 am",
+    "latitude": 12.9822215,
+    "longitude": 80.209121
+  },
+  {
+    "route_no": "21C",
+    "route_name": "Adambakkam",
+    "stop_name": "Gandhi Road",
+    "time_str": "6.17",
+    "latitude": 13.0488767,
+    "longitude": 80.1852189
+  },
+  {
+    "route_no": "21C",
+    "route_name": "Adambakkam",
+    "stop_name": "Race Course Road",
+    "time_str": "6.18",
+    "latitude": 13.0041328,
+    "longitude": 80.2121276
+  },
+  {
+    "route_no": "21C",
+    "route_name": "Adambakkam",
+    "stop_name": "NGO Colony",
+    "time_str": "6.25",
+    "latitude": 13.064553,
+    "longitude": 80.2199644
+  },
+  {
+    "route_no": "21C",
+    "route_name": "Adambakkam",
+    "stop_name": "St.Thomas Mount Rly Station",
+    "time_str": "6.27",
+    "latitude": 13.0335889,
+    "longitude": 80.2777851
+  },
+  {
+    "route_no": "21C",
+    "route_name": "Adambakkam",
+    "stop_name": "Jayalakshmi Theatre",
+    "time_str": "6.30",
+    "latitude": 13.0617001,
+    "longitude": 80.2421495
+  },
+  {
+    "route_no": "21C",
+    "route_name": "Adambakkam",
+    "stop_name": "Thillaiganga nagar subway",
+    "time_str": "6.35",
+    "latitude": 12.9946433,
+    "longitude": 80.1934233
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Sholinganallur",
+    "time_str": "5.50 am",
+    "latitude": 12.9174426,
+    "longitude": 80.2164902
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Dollar Bus Stop",
+    "time_str": "5.55",
+    "latitude": 12.867918,
+    "longitude": 80.2257097
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Karapakkam Bus Stop",
+    "time_str": "6.00",
+    "latitude": 12.9117073,
+    "longitude": 80.2277203
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "RRE Bus Stop",
+    "time_str": "6.10",
+    "latitude": 12.867918,
+    "longitude": 80.2257097
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Thorapakkam",
+    "time_str": "6.12",
+    "latitude": 12.867918,
+    "longitude": 80.2257097
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Perunkudi",
+    "time_str": "6.13",
+    "latitude": 12.867918,
+    "longitude": 80.2257097
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "MGR Road",
+    "time_str": "6.15",
+    "latitude": 12.9801029,
+    "longitude": 80.1828463
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Tharamani",
+    "time_str": "6.17",
+    "latitude": 12.9851573,
+    "longitude": 80.2409748
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Baby Nagar",
+    "time_str": "6.24",
+    "latitude": 12.9803651,
+    "longitude": 80.2291946
+  },
+  {
+    "route_no": "22",
+    "route_name": "Sholinganallur OMR",
+    "stop_name": "Vijaya Nagar Kajana Jewlers",
+    "time_str": "6.29",
+    "latitude": 13.0469006,
+    "longitude": 80.2071386
+  },
+  {
+    "route_no": "23",
+    "route_name": "Kovilampakkam",
+    "stop_name": "Kovilambakkam",
+    "time_str": "6.15 am",
+    "latitude": 12.9392427,
+    "longitude": 80.1825888
+  },
+  {
+    "route_no": "23",
+    "route_name": "Kovilampakkam",
+    "stop_name": "Kaiveli Signal",
+    "time_str": "6.25",
+    "latitude": 12.9639064,
+    "longitude": 80.2159702
+  },
+  {
+    "route_no": "23",
+    "route_name": "Kovilampakkam",
+    "stop_name": "Vanuvampet Perumal Kovil",
+    "time_str": "6.35",
+    "latitude": 12.9816928,
+    "longitude": 80.1956168
+  },
+  {
+    "route_no": "23",
+    "route_name": "Kovilampakkam",
+    "stop_name": "Nayara Petrol Bunk",
+    "time_str": "6.50",
+    "latitude": 12.917494,
+    "longitude": 80.1893385
+  },
+  {
+    "route_no": "23C",
+    "route_name": "Keelkatalai",
+    "stop_name": "Echangadu Singal",
+    "time_str": "6.15 am",
+    "latitude": 12.9481595,
+    "longitude": 80.1782078
+  },
+  {
+    "route_no": "23C",
+    "route_name": "Keelkatalai",
+    "stop_name": "Kaiveli Singal",
+    "time_str": "6.25",
+    "latitude": 12.9481595,
+    "longitude": 80.1782078
+  },
+  {
+    "route_no": "23C",
+    "route_name": "Keelkatalai",
+    "stop_name": "Vanuvampet Perumal Kovil",
+    "time_str": "6.35",
+    "latitude": 12.9816928,
+    "longitude": 80.1956168
+  },
+  {
+    "route_no": "23C",
+    "route_name": "Keelkatalai",
+    "stop_name": "Nagalkeni",
+    "time_str": "6.50",
+    "latitude": 12.9481595,
+    "longitude": 80.1782078
+  },
+  {
+    "route_no": "23C",
+    "route_name": "Keelkatalai",
+    "stop_name": "Thiruneermalai Erikarai",
+    "time_str": "6.55",
+    "latitude": 12.9481595,
+    "longitude": 80.1782078
+  },
+  {
+    "route_no": "23C",
+    "route_name": "Keelkatalai",
+    "stop_name": "Thirumudivakkam",
+    "time_str": "7.00",
+    "latitude": 12.9646786,
+    "longitude": 80.0817377
+  },
+  {
+    "route_no": "24",
+    "route_name": "Nanganallur",
+    "stop_name": "Moovarasampettai kulam",
+    "time_str": "6.25 am",
+    "latitude": 12.9801242,
+    "longitude": 80.184902
+  },
+  {
+    "route_no": "24",
+    "route_name": "Nanganallur",
+    "stop_name": "JK Mahal",
+    "time_str": "6.28",
+    "latitude": 12.9761372,
+    "longitude": 80.1831511
+  },
+  {
+    "route_no": "24",
+    "route_name": "Nanganallur",
+    "stop_name": "Nanganallur Bus Stand",
+    "time_str": "6.30",
+    "latitude": 12.9801242,
+    "longitude": 80.184902
+  },
+  {
+    "route_no": "24",
+    "route_name": "Nanganallur",
+    "stop_name": "Ranga theatre",
+    "time_str": "6.32",
+    "latitude": 11.6204251,
+    "longitude": 79.4917436
+  },
+  {
+    "route_no": "24",
+    "route_name": "Nanganallur",
+    "stop_name": "Independence Park",
+    "time_str": "6.35",
+    "latitude": 12.9810647,
+    "longitude": 80.1858797
+  },
+  {
+    "route_no": "24C",
+    "route_name": "Pallavaram Bus Stand",
+    "stop_name": "Pallavaram Bus Stand",
+    "time_str": "6.40 am",
+    "latitude": 12.9692964,
+    "longitude": 80.1502505
+  },
+  {
+    "route_no": "24C",
+    "route_name": "Pallavaram Bus Stand",
+    "stop_name": "Pallavaram Ponds Singal",
+    "time_str": "6.43",
+    "latitude": 12.9675742,
+    "longitude": 80.1520504
+  },
+  {
+    "route_no": "24C",
+    "route_name": "Pallavaram Bus Stand",
+    "stop_name": "Nagalkeni (Nayara Petrol Bunk)",
+    "time_str": "6.48",
+    "latitude": 12.9692964,
+    "longitude": 80.1502505
+  },
+  {
+    "route_no": "24C",
+    "route_name": "Pallavaram Bus Stand",
+    "stop_name": "Nagalkeni Erikarai",
+    "time_str": "6.50",
+    "latitude": 12.9692964,
+    "longitude": 80.1502505
+  },
+  {
+    "route_no": "24C",
+    "route_name": "Pallavaram Bus Stand",
+    "stop_name": "Thirumudivakkam",
+    "time_str": "6.55",
+    "latitude": 12.9646786,
+    "longitude": 80.0817377
+  },
+  {
+    "route_no": "25",
+    "route_name": "VGP ECR",
+    "stop_name": "VGP",
+    "time_str": "6.00 am",
+    "latitude": 12.9205379,
+    "longitude": 80.2513359
+  },
+  {
+    "route_no": "25",
+    "route_name": "VGP ECR",
+    "stop_name": "Neelankarai Police Station",
+    "time_str": "6.13",
+    "latitude": 12.9454955,
+    "longitude": 80.2574692
+  },
+  {
+    "route_no": "25",
+    "route_name": "VGP ECR",
+    "stop_name": "Palavakkam Periyar Street",
+    "time_str": "6.17",
+    "latitude": 12.95999,
+    "longitude": 80.2560268
+  },
+  {
+    "route_no": "25",
+    "route_name": "VGP ECR",
+    "stop_name": "Kotivakkam Bus Stop",
+    "time_str": "6.19",
+    "latitude": 12.96954,
+    "longitude": 80.2575889
+  },
+  {
+    "route_no": "25",
+    "route_name": "VGP ECR",
+    "stop_name": "Tidel Park",
+    "time_str": "6.28",
+    "latitude": 12.9895935,
+    "longitude": 80.2488721
+  },
+  {
+    "route_no": "25",
+    "route_name": "VGP ECR",
+    "stop_name": "Butt Road",
+    "time_str": "6.40",
+    "latitude": 13.0080046,
+    "longitude": 80.1986131
+  },
+  {
+    "route_no": "25",
+    "route_name": "VGP ECR",
+    "stop_name": "Sangeetha Hotel Signal",
+    "time_str": "6.42",
+    "latitude": 13.0367415,
+    "longitude": 80.2672996
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "Indra Nagar Water Tank",
+    "time_str": "6.15 am",
+    "latitude": 13.0370804,
+    "longitude": 80.1887213
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "Besant Nagar",
+    "time_str": "6.18",
+    "latitude": 12.9996907,
+    "longitude": 80.2682259
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "BSNL Office Adyar",
+    "time_str": "6.22",
+    "latitude": 13.0002744,
+    "longitude": 80.2564084
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "Adyar Signal",
+    "time_str": "6.24",
+    "latitude": 13.0070713,
+    "longitude": 80.2586412
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "Adyar Bus Stand (Ambica Appalam)",
+    "time_str": "6.26",
+    "latitude": 13.00645,
+    "longitude": 80.2577791
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "Madhya Kailash",
+    "time_str": "6.30",
+    "latitude": 13.006241,
+    "longitude": 80.2470822
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "Balaji hospital (Guindy)",
+    "time_str": "6.38",
+    "latitude": 12.9721642,
+    "longitude": 80.1905716
+  },
+  {
+    "route_no": "25C",
+    "route_name": "Adyar",
+    "stop_name": "Butt Road",
+    "time_str": "6.40",
+    "latitude": 13.0080046,
+    "longitude": 80.1986131
+  },
+  {
+    "route_no": "26",
+    "route_name": "Triplicane",
+    "stop_name": "D1 Police Station",
+    "time_str": "6.05 am",
+    "latitude": 13.0683459,
+    "longitude": 80.2135958
+  },
+  {
+    "route_no": "26",
+    "route_name": "Triplicane",
+    "stop_name": "Rathna Cafe",
+    "time_str": "6.08",
+    "latitude": 13.0604285,
+    "longitude": 80.2750704
+  },
+  {
+    "route_no": "26",
+    "route_name": "Triplicane",
+    "stop_name": "ICE House",
+    "time_str": "6.12",
+    "latitude": 13.049045,
+    "longitude": 80.2804835
+  },
+  {
+    "route_no": "26",
+    "route_name": "Triplicane",
+    "stop_name": "Meesapet Market",
+    "time_str": "6.15",
+    "latitude": 13.0604285,
+    "longitude": 80.2750704
+  },
+  {
+    "route_no": "26",
+    "route_name": "Triplicane",
+    "stop_name": "New College",
+    "time_str": "6.20",
+    "latitude": 13.0533161,
+    "longitude": 80.2594826
+  },
+  {
+    "route_no": "26",
+    "route_name": "Triplicane",
+    "stop_name": "Fire Office",
+    "time_str": "6.23",
+    "latitude": 11.9428618,
+    "longitude": 79.4874732
+  },
+  {
+    "route_no": "26C",
+    "route_name": "Teynampet",
+    "stop_name": "Teynampet Signal",
+    "time_str": "6.15 am",
+    "latitude": 13.0443237,
+    "longitude": 80.2498455
+  },
+  {
+    "route_no": "26C",
+    "route_name": "Teynampet",
+    "stop_name": "Teynampet Metro",
+    "time_str": "6.16",
+    "latitude": 13.0443237,
+    "longitude": 80.2498455
+  },
+  {
+    "route_no": "26C",
+    "route_name": "Teynampet",
+    "stop_name": "Nandanam Signal",
+    "time_str": "6.20",
+    "latitude": 13.0317092,
+    "longitude": 80.2411957
+  },
+  {
+    "route_no": "26C",
+    "route_name": "Teynampet",
+    "stop_name": "Nandanam Fire Office",
+    "time_str": "6.21",
+    "latitude": 13.0317092,
+    "longitude": 80.2411957
+  },
+  {
+    "route_no": "26C",
+    "route_name": "Teynampet",
+    "stop_name": "Saidapet (Metro Station)",
+    "time_str": "6.26",
+    "latitude": 13.020817,
+    "longitude": 80.2239536
+  },
+  {
+    "route_no": "26C",
+    "route_name": "Teynampet",
+    "stop_name": "Kalaignar Arch",
+    "time_str": "6.28",
+    "latitude": 13.0443237,
+    "longitude": 80.2498455
+  },
+  {
+    "route_no": "26C",
+    "route_name": "Teynampet",
+    "stop_name": "Chinnamalai Court",
+    "time_str": "6.30",
+    "latitude": 13.0443237,
+    "longitude": 80.2498455
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "Airtel Office",
+    "time_str": "6.00 am",
+    "latitude": 13.0931823,
+    "longitude": 80.2910257
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "Mandaveli Bus Depot",
+    "time_str": "6.03",
+    "latitude": 13.0265149,
+    "longitude": 80.2663081
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "Devanathan Street",
+    "time_str": "6.05",
+    "latitude": 13.0280072,
+    "longitude": 80.2636917
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "Mandaveli Post office",
+    "time_str": "6.07",
+    "latitude": 13.0293213,
+    "longitude": 80.2661449
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "TTK Road",
+    "time_str": "6.17",
+    "latitude": 13.044388,
+    "longitude": 80.2596753
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "Kaliappa Hospital",
+    "time_str": "6.13",
+    "latitude": 13.0268492,
+    "longitude": 80.2558082
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "Adyar Gate Hotel",
+    "time_str": "6.16",
+    "latitude": 13.00645,
+    "longitude": 80.2577791
+  },
+  {
+    "route_no": "27",
+    "route_name": "Pattinapakkam",
+    "stop_name": "Kotturpuram",
+    "time_str": "6.20",
+    "latitude": 13.0193703,
+    "longitude": 80.2435512
+  },
+  {
+    "route_no": "27C",
+    "route_name": "Santhome Lighthouse",
+    "stop_name": "Santhome Church",
+    "time_str": "6.07",
+    "latitude": 13.0335889,
+    "longitude": 80.2777851
+  },
+  {
+    "route_no": "27C",
+    "route_name": "Santhome Lighthouse",
+    "stop_name": "Light House",
+    "time_str": "6.10",
+    "latitude": 13.0455374,
+    "longitude": 80.2769885
+  },
+  {
+    "route_no": "27C",
+    "route_name": "Santhome Lighthouse",
+    "stop_name": "Jain Temple",
+    "time_str": "6.10",
+    "latitude": 13.0345965,
+    "longitude": 80.2715611
+  },
+  {
+    "route_no": "27C",
+    "route_name": "Santhome Lighthouse",
+    "stop_name": "Luz Corner",
+    "time_str": "6.12",
+    "latitude": 13.0375277,
+    "longitude": 80.2677619
+  },
+  {
+    "route_no": "27C",
+    "route_name": "Santhome Lighthouse",
+    "stop_name": "New Woodlands",
+    "time_str": "6.17",
+    "latitude": 13.0446727,
+    "longitude": 80.2630248
+  },
+  {
+    "route_no": "27C",
+    "route_name": "Santhome Lighthouse",
+    "stop_name": "Music Academy",
+    "time_str": "6.20",
+    "latitude": 13.045914,
+    "longitude": 80.2596589
+  },
+  {
+    "route_no": "28",
+    "route_name": "Nungambakkam Shastri Bhawan",
+    "stop_name": "Taj Coromandel hotel(sterling road)",
+    "time_str": "6.20",
+    "latitude": 13.0581516,
+    "longitude": 80.2475187
+  },
+  {
+    "route_no": "28",
+    "route_name": "Nungambakkam Shastri Bhawan",
+    "stop_name": "Periyar salai bus stop",
+    "time_str": "6.25",
+    "latitude": 13.0151413,
+    "longitude": 80.1725796
+  },
+  {
+    "route_no": "28",
+    "route_name": "Nungambakkam Shastri Bhawan",
+    "stop_name": "Kodambakkam Bridge",
+    "time_str": "6.28",
+    "latitude": 13.0541252,
+    "longitude": 80.2311561
+  },
+  {
+    "route_no": "28",
+    "route_name": "Nungambakkam Shastri Bhawan",
+    "stop_name": "Sekar Emporium",
+    "time_str": "6.30",
+    "latitude": 13.0537201,
+    "longitude": 80.2280198
+  },
+  {
+    "route_no": "28",
+    "route_name": "Nungambakkam Shastri Bhawan",
+    "stop_name": "Five lights junction signal(kodambakkam)",
+    "time_str": "6.32",
+    "latitude": 13.0014721,
+    "longitude": 80.2127711
+  },
+  {
+    "route_no": "28",
+    "route_name": "Nungambakkam Shastri Bhawan",
+    "stop_name": "Power House",
+    "time_str": "6.35",
+    "latitude": 12.9990656,
+    "longitude": 80.2577535
+  },
+  {
+    "route_no": "28B",
+    "route_name": "Virugambakkam",
+    "stop_name": "Valasaravakkam",
+    "time_str": "6.35 am",
+    "latitude": 13.0410164,
+    "longitude": 80.1721682
+  },
+  {
+    "route_no": "28B",
+    "route_name": "Virugambakkam",
+    "stop_name": "Porur",
+    "time_str": "6.50",
+    "latitude": 13.0320131,
+    "longitude": 80.158304
+  },
+  {
+    "route_no": "28C",
+    "route_name": "Lakshman Sruthi",
+    "stop_name": "Vadapalani Bus Stand",
+    "time_str": "6.20 am",
+    "latitude": 13.0509304,
+    "longitude": 80.2120661
+  },
+  {
+    "route_no": "28C",
+    "route_name": "Lakshman Sruthi",
+    "stop_name": "Lakshman Sruthi",
+    "time_str": "6.30",
+    "latitude": 13.0445465,
+    "longitude": 80.2125402
+  },
+  {
+    "route_no": "28C",
+    "route_name": "Lakshman Sruthi",
+    "stop_name": "la martin school",
+    "time_str": "6.40",
+    "latitude": 13.0445465,
+    "longitude": 80.2125402
+  },
+  {
+    "route_no": "28C",
+    "route_name": "Lakshman Sruthi",
+    "stop_name": "Karapakkam",
+    "time_str": "6.50",
+    "latitude": 12.9117073,
+    "longitude": 80.2277203
+  },
+  {
+    "route_no": "28C",
+    "route_name": "Lakshman Sruthi",
+    "stop_name": "Porur Bus stand",
+    "time_str": "6.55",
+    "latitude": 13.0320131,
+    "longitude": 80.158304
+  },
+  {
+    "route_no": "28C",
+    "route_name": "Lakshman Sruthi",
+    "stop_name": "Kattupakkam (Hyundai showroom)",
+    "time_str": "6.58",
+    "latitude": 13.0430617,
+    "longitude": 80.122765
+  },
+  {
+    "route_no": "29",
+    "route_name": "Saligramam",
+    "stop_name": "Surya Hospital",
+    "time_str": "6.20 am",
+    "latitude": 11.7615618,
+    "longitude": 79.7642665
+  },
+  {
+    "route_no": "29",
+    "route_name": "Saligramam",
+    "stop_name": "Parvathi Bhavan",
+    "time_str": "6.21",
+    "latitude": 13.0387921,
+    "longitude": 80.2570003
+  },
+  {
+    "route_no": "29",
+    "route_name": "Saligramam",
+    "stop_name": "Dasarathapuram",
+    "time_str": "6.23",
+    "latitude": 13.0571469,
+    "longitude": 80.2022243
+  },
+  {
+    "route_no": "29",
+    "route_name": "Saligramam",
+    "stop_name": "Sudharma Mahal",
+    "time_str": "6.25",
+    "latitude": 13.0583406,
+    "longitude": 80.1985327
+  },
+  {
+    "route_no": "29",
+    "route_name": "Saligramam",
+    "stop_name": "Kamachi Store",
+    "time_str": "6.26",
+    "latitude": 11.9305504,
+    "longitude": 79.8283646
+  },
+  {
+    "route_no": "29",
+    "route_name": "Saligramam",
+    "stop_name": "Saligramam Bus Stand",
+    "time_str": "6.27",
+    "latitude": 13.0583406,
+    "longitude": 80.1985327
+  },
+  {
+    "route_no": "29",
+    "route_name": "Saligramam",
+    "stop_name": "AVM Colony",
+    "time_str": "6.29",
+    "latitude": 13.0516292,
+    "longitude": 80.1969822
+  },
+  {
+    "route_no": "29C",
+    "route_name": "Alwarthirunagar",
+    "stop_name": "Mega Mart",
+    "time_str": "6.40 am",
+    "latitude": 13.047486,
+    "longitude": 80.1836687
+  },
+  {
+    "route_no": "29C",
+    "route_name": "Alwarthirunagar",
+    "stop_name": "Valasaravakkam Signal",
+    "time_str": "6.43",
+    "latitude": 13.0410164,
+    "longitude": 80.1721682
+  },
+  {
+    "route_no": "30",
+    "route_name": "Chinmaya Nagar",
+    "stop_name": "Natesan Nagar",
+    "time_str": "6.30 am",
+    "latitude": 13.0369499,
+    "longitude": 80.2121346
+  },
+  {
+    "route_no": "30",
+    "route_name": "Chinmaya Nagar",
+    "stop_name": "Sai Nagar Bus Stop",
+    "time_str": "6.32",
+    "latitude": 13.0598825,
+    "longitude": 80.1953348
+  },
+  {
+    "route_no": "30",
+    "route_name": "Chinmaya Nagar",
+    "stop_name": "Chinmaya Nagar Bus Stop",
+    "time_str": "6.35",
+    "latitude": 13.0627931,
+    "longitude": 80.19718
+  },
+  {
+    "route_no": "30C",
+    "route_name": "Elango Nagar",
+    "stop_name": "Elango Nagar",
+    "time_str": "6.40 am",
+    "latitude": 12.9715538,
+    "longitude": 80.2523792
+  },
+  {
+    "route_no": "30C",
+    "route_name": "Elango Nagar",
+    "stop_name": "Virugambakkam Market",
+    "time_str": "6.42",
+    "latitude": 13.0475434,
+    "longitude": 80.1922181
+  },
+  {
+    "route_no": "30C",
+    "route_name": "Elango Nagar",
+    "stop_name": "Kesavarthini",
+    "time_str": "6.44",
+    "latitude": 12.9715538,
+    "longitude": 80.2523792
+  },
+  {
+    "route_no": "30C",
+    "route_name": "Elango Nagar",
+    "stop_name": "Friends Park Hotel",
+    "time_str": "6.45",
+    "latitude": 12.9962725,
+    "longitude": 80.2678267
+  },
+  {
+    "route_no": "30C",
+    "route_name": "Elango Nagar",
+    "stop_name": "Lakshmi Nagar",
+    "time_str": "6.47",
+    "latitude": 13.1278684,
+    "longitude": 80.1987111
+  },
+  {
+    "route_no": "30C",
+    "route_name": "Elango Nagar",
+    "stop_name": "Saibaba Koil (Kumanan Chavadi)",
+    "time_str": "7.05",
+    "latitude": 12.9384795,
+    "longitude": 80.2526055
+  },
+  {
+    "route_no": "30C",
+    "route_name": "Elango Nagar",
+    "stop_name": "Chinmaya Nagar Bus Stop",
+    "time_str": "6.35",
+    "latitude": 13.0627931,
+    "longitude": 80.19718
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "Madras Coffee House",
+    "time_str": "6.17",
+    "latitude": 12.9824358,
+    "longitude": 80.1642333
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "Panagal Park",
+    "time_str": "6.21",
+    "latitude": 13.0410311,
+    "longitude": 80.2332635
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "Nalli Silks",
+    "time_str": "6.24",
+    "latitude": 13.0844326,
+    "longitude": 80.2155713
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "J.P.Road (West Mambalam)",
+    "time_str": "6.26",
+    "latitude": 13.0193294,
+    "longitude": 80.2562229
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "Ayodhya Mandapam",
+    "time_str": "6.28",
+    "latitude": 13.0391687,
+    "longitude": 80.2209492
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "Postal Colony",
+    "time_str": "6.29",
+    "latitude": 13.0338431,
+    "longitude": 80.2725698
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "Sangamam Hotel",
+    "time_str": "6.30",
+    "latitude": 13.0349987,
+    "longitude": 80.2163485
+  },
+  {
+    "route_no": "31",
+    "route_name": "Valluvarkottam",
+    "stop_name": "Ambica Empire Hotel",
+    "time_str": "6.35",
+    "latitude": 13.0976918,
+    "longitude": 80.2799478
+  },
+  {
+    "route_no": "32",
+    "route_name": "CIT Nagar",
+    "stop_name": "CIT Nagar Bus Stop",
+    "time_str": "6.15 am",
+    "latitude": 13.0293843,
+    "longitude": 80.2342825
+  },
+  {
+    "route_no": "32",
+    "route_name": "CIT Nagar",
+    "stop_name": "Vasanth & Co",
+    "time_str": "6.18",
+    "latitude": 12.9758709,
+    "longitude": 80.1931061
+  },
+  {
+    "route_no": "32",
+    "route_name": "CIT Nagar",
+    "stop_name": "Aranganathan Sub Way",
+    "time_str": "6.20",
+    "latitude": 13.0282195,
+    "longitude": 80.2252655
+  },
+  {
+    "route_no": "32",
+    "route_name": "CIT Nagar",
+    "stop_name": "Srinivasa Theatre",
+    "time_str": "6.25",
+    "latitude": 13.0310229,
+    "longitude": 80.2247272
+  },
+  {
+    "route_no": "32",
+    "route_name": "CIT Nagar",
+    "stop_name": "Metupalayam",
+    "time_str": "6.27",
+    "latitude": 13.0293843,
+    "longitude": 80.2342825
+  },
+  {
+    "route_no": "32",
+    "route_name": "CIT Nagar",
+    "stop_name": "Blue Tank",
+    "time_str": "6.30",
+    "latitude": 11.9107562,
+    "longitude": 79.8077737
+  },
+  {
+    "route_no": "32C",
+    "route_name": "Ashok Pillar",
+    "stop_name": "Kasi Theatre",
+    "time_str": "6.20 am",
+    "latitude": 13.0294853,
+    "longitude": 80.2084902
+  },
+  {
+    "route_no": "32C",
+    "route_name": "Ashok Pillar",
+    "stop_name": "Ekkatuthangal",
+    "time_str": "6.25",
+    "latitude": 13.0346747,
+    "longitude": 80.2119332
+  },
+  {
+    "route_no": "32C",
+    "route_name": "Ashok Pillar",
+    "stop_name": "Ramapuram",
+    "time_str": "6.35",
+    "latitude": 13.0298609,
+    "longitude": 80.1780333
+  },
+  {
+    "route_no": "32C",
+    "route_name": "Ashok Pillar",
+    "stop_name": "Porur Sivan kovil",
+    "time_str": "6.45",
+    "latitude": 13.0320131,
+    "longitude": 80.158304
+  },
+  {
+    "route_no": "33",
+    "route_name": "KK Nagar Sivan Park",
+    "stop_name": "Sivan Park",
+    "time_str": "6.20 am",
+    "latitude": 13.0419806,
+    "longitude": 80.204972
+  },
+  {
+    "route_no": "33",
+    "route_name": "KK Nagar Sivan Park",
+    "stop_name": "Hotel Saravana Bhavan",
+    "time_str": "6.25",
+    "latitude": 12.9963059,
+    "longitude": 80.1901749
+  },
+  {
+    "route_no": "33",
+    "route_name": "KK Nagar Sivan Park",
+    "stop_name": "MGR Nagar Market",
+    "time_str": "6.27",
+    "latitude": 12.9795827,
+    "longitude": 80.2494441
+  },
+  {
+    "route_no": "33",
+    "route_name": "KK Nagar Sivan Park",
+    "stop_name": "Ajantha",
+    "time_str": "6.29",
+    "latitude": 13.0373344,
+    "longitude": 80.1964198
+  },
+  {
+    "route_no": "33C",
+    "route_name": "Nesapakkam",
+    "stop_name": "Nesapakkam Bus Stand",
+    "time_str": "6.35 am",
+    "latitude": 13.0336193,
+    "longitude": 80.1873092
+  },
+  {
+    "route_no": "33C",
+    "route_name": "Nesapakkam",
+    "stop_name": "Pondichery Guest House",
+    "time_str": "6.37",
+    "latitude": 11.9260593,
+    "longitude": 79.8319857
+  },
+  {
+    "route_no": "34",
+    "route_name": "Porur Ramachandra",
+    "stop_name": "Ramachandra",
+    "time_str": "6.45 am",
+    "latitude": 13.1535657,
+    "longitude": 80.2344569
+  },
+  {
+    "route_no": "34",
+    "route_name": "Porur Ramachandra",
+    "stop_name": "Ambedkar Statue",
+    "time_str": "6.48",
+    "latitude": 13.1273041,
+    "longitude": 80.153765
+  },
+  {
+    "route_no": "34",
+    "route_name": "Porur Ramachandra",
+    "stop_name": "Kattupakkam Honda Show Room",
+    "time_str": "6.51",
+    "latitude": 13.0430617,
+    "longitude": 80.122765
+  },
+  {
+    "route_no": "34B",
+    "route_name": "Iyyappanthangal Depot",
+    "stop_name": "Kattupakkam",
+    "time_str": "6.45",
+    "latitude": 13.0430617,
+    "longitude": 80.122765
+  },
+  {
+    "route_no": "34B",
+    "route_name": "Iyyappanthangal Depot",
+    "stop_name": "Aravind Eye Hospital",
+    "time_str": "6.55",
+    "latitude": 13.0531628,
+    "longitude": 80.1247392
+  },
+  {
+    "route_no": "35",
+    "route_name": "Pammal Therasa School",
+    "stop_name": "Therasa School",
+    "time_str": "6.35 am",
+    "latitude": 12.9721586,
+    "longitude": 80.2045966
+  },
+  {
+    "route_no": "35",
+    "route_name": "Pammal Therasa School",
+    "stop_name": "Puthur Koil",
+    "time_str": "6.37",
+    "latitude": 11.0569499,
+    "longitude": 79.4375246
+  },
+  {
+    "route_no": "35",
+    "route_name": "Pammal Therasa School",
+    "stop_name": "Krishna Nagar",
+    "time_str": "6.40",
+    "latitude": 13.0523375,
+    "longitude": 80.1949682
+  },
+  {
+    "route_no": "35",
+    "route_name": "Pammal Therasa School",
+    "stop_name": "Pozhichalur Church",
+    "time_str": "6.42",
+    "latitude": 12.9871836,
+    "longitude": 80.1424097
+  },
+  {
+    "route_no": "35A",
+    "route_name": "Mangadu",
+    "stop_name": "Mangadu Gangai Amman Koil",
+    "time_str": "6.50 am",
+    "latitude": 13.0209113,
+    "longitude": 80.1259365
+  },
+  {
+    "route_no": "35A",
+    "route_name": "Mangadu",
+    "stop_name": "MGR Statue",
+    "time_str": "6.55",
+    "latitude": 13.031501,
+    "longitude": 80.1913595
+  },
+  {
+    "route_no": "35A",
+    "route_name": "Mangadu",
+    "stop_name": "Kumanachavdi",
+    "time_str": "6.58",
+    "latitude": 13.0209113,
+    "longitude": 80.1259365
+  },
+  {
+    "route_no": "35A",
+    "route_name": "Mangadu",
+    "stop_name": "Sai Baba Koil",
+    "time_str": "7.00",
+    "latitude": 12.9196363,
+    "longitude": 80.1680081
+  },
+  {
+    "route_no": "35B",
+    "route_name": "Arunmathi Theatre Pammal",
+    "stop_name": "Arunmathi Theatre",
+    "time_str": "6.45 am",
+    "latitude": 12.9775298,
+    "longitude": 80.1306267
+  },
+  {
+    "route_no": "35B",
+    "route_name": "Arunmathi Theatre Pammal",
+    "stop_name": "Indian Bank",
+    "time_str": "6.46",
+    "latitude": 13.0950595,
+    "longitude": 80.2920476
+  },
+  {
+    "route_no": "35B",
+    "route_name": "Arunmathi Theatre Pammal",
+    "stop_name": "Anakaputhur Amman Kovil",
+    "time_str": "6.50",
+    "latitude": 12.9722109,
+    "longitude": 80.1393765
+  },
+  {
+    "route_no": "35B",
+    "route_name": "Arunmathi Theatre Pammal",
+    "stop_name": "Manikandan Nagar",
+    "time_str": "6.55",
+    "latitude": 12.9066621,
+    "longitude": 80.1523203
+  },
+  {
+    "route_no": "35B",
+    "route_name": "Arunmathi Theatre Pammal",
+    "stop_name": "Metha Nagar",
+    "time_str": "6.58",
+    "latitude": 12.9456667,
+    "longitude": 80.2395755
+  },
+  {
+    "route_no": "35C",
+    "route_name": "Kundrathur",
+    "stop_name": "Mananchery",
+    "time_str": "6.38 am",
+    "latitude": 11.0833441,
+    "longitude": 79.5027029
+  },
+  {
+    "route_no": "35C",
+    "route_name": "Kundrathur",
+    "stop_name": "Andarkuppam",
+    "time_str": "6.39",
+    "latitude": 13.1938755,
+    "longitude": 80.2685646
+  },
+  {
+    "route_no": "35C",
+    "route_name": "Kundrathur",
+    "stop_name": "Sivanthangal",
+    "time_str": "6.42",
+    "latitude": 13.0306501,
+    "longitude": 80.1529176
+  },
+  {
+    "route_no": "35C",
+    "route_name": "Kundrathur",
+    "stop_name": "Muthukumaran Bus Stop",
+    "time_str": "6.45",
+    "latitude": 13.0181602,
+    "longitude": 80.1090485
+  },
+  {
+    "route_no": "35C",
+    "route_name": "Kundrathur",
+    "stop_name": "Pattu Koot Road",
+    "time_str": "6.47",
+    "latitude": 13.0209113,
+    "longitude": 80.1259365
+  },
+  {
+    "route_no": "35C",
+    "route_name": "Kundrathur",
+    "stop_name": "Mangadu",
+    "time_str": "6.51",
+    "latitude": 13.0209113,
+    "longitude": 80.1259365
+  },
+  {
+    "route_no": "35D",
+    "route_name": "Pammal",
+    "stop_name": "Pozhichalur Church",
+    "time_str": "6.40 am",
+    "latitude": 12.9871836,
+    "longitude": 80.1424097
+  },
+  {
+    "route_no": "35D",
+    "route_name": "Pammal",
+    "stop_name": "Anakaputhur Bridge",
+    "time_str": "6.43",
+    "latitude": 13.0347902,
+    "longitude": 80.1994677
+  },
+  {
+    "route_no": "35E",
+    "route_name": "Kundrathur Alt",
+    "stop_name": "Mangadu",
+    "time_str": "6.45",
+    "latitude": 13.0209113,
+    "longitude": 80.1259365
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Moondram Kattalai",
+    "time_str": "6.30 am",
+    "latitude": 13.0125315,
+    "longitude": 80.1211467
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Kovur RTO Office",
+    "time_str": "6.32",
+    "latitude": 13.0125315,
+    "longitude": 80.1211467
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Kovur High School",
+    "time_str": "6.34",
+    "latitude": 13.0125315,
+    "longitude": 80.1211467
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Panicherry",
+    "time_str": "6.36",
+    "latitude": 13.0125315,
+    "longitude": 80.1211467
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Girugampakkam Bus Stop",
+    "time_str": "6.39",
+    "latitude": 13.0125315,
+    "longitude": 80.1211467
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Girugampakkam Lakshmi Kalyanamandapam",
+    "time_str": "6.41",
+    "latitude": 13.0125315,
+    "longitude": 80.1211467
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Kolapakkam Bus Stop",
+    "time_str": "6.43",
+    "latitude": 13.0097074,
+    "longitude": 80.1528994
+  },
+  {
+    "route_no": "36",
+    "route_name": "Kovur",
+    "stop_name": "Bai Kadai",
+    "time_str": "6.45",
+    "latitude": 13.0198261,
+    "longitude": 80.1430544
+  },
+  {
+    "route_no": "36C",
+    "route_name": "Madhanandapuram",
+    "stop_name": "Porur EB",
+    "time_str": "6.39",
+    "latitude": 13.0320131,
+    "longitude": 80.158304
+  },
+  {
+    "route_no": "36C",
+    "route_name": "Madhanandapuram",
+    "stop_name": "Porur Bridge Down",
+    "time_str": "6.41",
+    "latitude": 13.0320131,
+    "longitude": 80.158304
+  },
+  {
+    "route_no": "37",
+    "route_name": "DLF",
+    "stop_name": "DLF",
+    "time_str": "6.45 am",
+    "latitude": 12.8709575,
+    "longitude": 80.2057047
+  },
+  {
+    "route_no": "37",
+    "route_name": "DLF",
+    "stop_name": "Mugaliwakkam",
+    "time_str": "6.47",
+    "latitude": 12.8709575,
+    "longitude": 80.2057047
+  },
+  {
+    "route_no": "37",
+    "route_name": "DLF",
+    "stop_name": "Mugaliwakkam Bus Stop",
+    "time_str": "6.49",
+    "latitude": 12.8709575,
+    "longitude": 80.2057047
+  },
+  {
+    "route_no": "37",
+    "route_name": "DLF",
+    "stop_name": "Saravana Stores",
+    "time_str": "6.51",
+    "latitude": 13.0350261,
+    "longitude": 80.2281802
+  },
+  {
+    "route_no": "37",
+    "route_name": "DLF",
+    "stop_name": "Police Station",
+    "time_str": "6.53",
+    "latitude": 13.0245554,
+    "longitude": 80.2748154
+  },
+  {
+    "route_no": "37A",
+    "route_name": "Iyyappanthangal Reliance Mart",
+    "stop_name": "Kattupakkam Petrol Bunk",
+    "time_str": "6.55",
+    "latitude": 13.0430617,
+    "longitude": 80.122765
+  },
+  {
+    "route_no": "37B",
+    "route_name": "NIVH Poonamalle",
+    "stop_name": "National Institute for the Visually Handicapped",
+    "time_str": "7.00 am",
+    "latitude": 13.000005,
+    "longitude": 80.2280448
+  },
+  {
+    "route_no": "37B",
+    "route_name": "NIVH Poonamalle",
+    "stop_name": "Indian Bank",
+    "time_str": "7.08",
+    "latitude": 13.0358003,
+    "longitude": 80.2125602
+  },
+  {
+    "route_no": "37B",
+    "route_name": "NIVH Poonamalle",
+    "stop_name": "Perumal Koil",
+    "time_str": "7.12",
+    "latitude": 13.07623,
+    "longitude": 80.2675221
+  },
+  {
+    "route_no": "37B",
+    "route_name": "NIVH Poonamalle",
+    "stop_name": "Parivakkam Signal",
+    "time_str": "7.15",
+    "latitude": 13.0646104,
+    "longitude": 80.0981675
+  },
+  {
+    "route_no": "37C",
+    "route_name": "Poonamallee Bus Stand",
+    "stop_name": "Poonamallee ambedkar statue",
+    "time_str": "7.05",
+    "latitude": 13.0274366,
+    "longitude": 80.1724209
+  },
+  {
+    "route_no": "37D",
+    "route_name": "Poonamallee Ambedkar Statue",
+    "stop_name": "Poonamallee ambedkar statue",
+    "time_str": "7.00 am",
+    "latitude": 13.0274366,
+    "longitude": 80.1724209
+  },
+  {
+    "route_no": "37D",
+    "route_name": "Poonamallee Ambedkar Statue",
+    "stop_name": "Chembarambakkam",
+    "time_str": "7.10",
+    "latitude": 13.016769,
+    "longitude": 80.1367942
+  },
+  {
+    "route_no": "38",
+    "route_name": "Housing Board Kancheepuram",
+    "stop_name": "Housing Board",
+    "time_str": "6.20 am",
+    "latitude": 13.0084674,
+    "longitude": 80.2475552
+  },
+  {
+    "route_no": "38B",
+    "route_name": "Ayyangarkulam",
+    "stop_name": "Sevilimedu",
+    "time_str": "6.18",
+    "latitude": 12.8089582,
+    "longitude": 79.6681815
+  },
+  {
+    "route_no": "38C",
+    "route_name": "Kancheepuram Collectorate",
+    "stop_name": "Mettu Street",
+    "time_str": "6.23",
+    "latitude": 13.155303,
+    "longitude": 80.2082269
+  },
+  {
+    "route_no": "39",
+    "route_name": "Orikkai",
+    "stop_name": "Orikkai",
+    "time_str": "6.10 am",
+    "latitude": 12.7980422,
+    "longitude": 79.7141904
+  },
+  {
+    "route_no": "39",
+    "route_name": "Orikkai",
+    "stop_name": "Miltary Road",
+    "time_str": "6.15",
+    "latitude": 12.7980422,
+    "longitude": 79.7141904
+  },
+  {
+    "route_no": "39",
+    "route_name": "Orikkai",
+    "stop_name": "KK Nagar",
+    "time_str": "6.17",
+    "latitude": 13.0386493,
+    "longitude": 80.2052158
+  },
+  {
+    "route_no": "39",
+    "route_name": "Orikkai",
+    "stop_name": "Keel Gate",
+    "time_str": "6.20",
+    "latitude": 12.7980422,
+    "longitude": 79.7141904
+  },
+  {
+    "route_no": "39",
+    "route_name": "Orikkai",
+    "stop_name": "Keeramandapam",
+    "time_str": "6.23",
+    "latitude": 12.7980422,
+    "longitude": 79.7141904
+  },
+  {
+    "route_no": "39C",
+    "route_name": "Kanchipuram",
+    "stop_name": "Kancheepuram Bus Stand",
+    "time_str": "6.30 am",
+    "latitude": 13.092922,
+    "longitude": 80.2613881
+  },
+  {
+    "route_no": "39C",
+    "route_name": "Kanchipuram",
+    "stop_name": "Ekambaranathar temple",
+    "time_str": "6.34",
+    "latitude": 12.8472879,
+    "longitude": 79.6997904
+  },
+  {
+    "route_no": "39C",
+    "route_name": "Kanchipuram",
+    "stop_name": "Ponnerikarai",
+    "time_str": "6.40",
+    "latitude": 12.8438466,
+    "longitude": 79.7044258
+  },
+  {
+    "route_no": "39C",
+    "route_name": "Kanchipuram",
+    "stop_name": "Kancheepuram RTO Office",
+    "time_str": "6.42",
+    "latitude": 13.092922,
+    "longitude": 80.2613881
+  },
+  {
+    "route_no": "39C",
+    "route_name": "Kanchipuram",
+    "stop_name": "Sunguvarchatram",
+    "time_str": "7.00",
+    "latitude": 12.92556,
+    "longitude": 79.8790492
+  },
+  {
+    "route_no": "40",
+    "route_name": "Walajabad",
+    "stop_name": "New Police Station",
+    "time_str": "6.15 am",
+    "latitude": 11.7513011,
+    "longitude": 79.7610182
+  },
+  {
+    "route_no": "40",
+    "route_name": "Walajabad",
+    "stop_name": "Chetty Street",
+    "time_str": "6.17",
+    "latitude": 13.0206124,
+    "longitude": 80.2203129
+  },
+  {
+    "route_no": "40",
+    "route_name": "Walajabad",
+    "stop_name": "Perumal Koil",
+    "time_str": "6.20",
+    "latitude": 13.07623,
+    "longitude": 80.2675221
+  },
+  {
+    "route_no": "40",
+    "route_name": "Walajabad",
+    "stop_name": "Tollgate",
+    "time_str": "6.21",
+    "latitude": 13.1431344,
+    "longitude": 80.2963291
+  },
+  {
+    "route_no": "40",
+    "route_name": "Walajabad",
+    "stop_name": "Periyar Nagar",
+    "time_str": "6.22",
+    "latitude": 13.1151671,
+    "longitude": 80.223666
+  },
+  {
+    "route_no": "40",
+    "route_name": "Walajabad",
+    "stop_name": "Pachaiyappa's College",
+    "time_str": "6.23",
+    "latitude": 13.0729673,
+    "longitude": 80.2330386
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Ayyampettai Anjeneyar Koil",
+    "time_str": "6.30 am",
+    "latitude": 12.8094574,
+    "longitude": 79.7567874
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Ayyampettai Bus Stop",
+    "time_str": "6.32",
+    "latitude": 12.8094574,
+    "longitude": 79.7567874
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Ayyampettai Easwearan Koil",
+    "time_str": "6.33",
+    "latitude": 12.8094574,
+    "longitude": 79.7567874
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Ekanampet",
+    "time_str": "6.35",
+    "latitude": 12.8041674,
+    "longitude": 79.7686585
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Rajampet",
+    "time_str": "6.38",
+    "latitude": 14.1987099,
+    "longitude": 79.1110344
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Walajabad",
+    "time_str": "6.42",
+    "latitude": 12.9676942,
+    "longitude": 80.2175717
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Waranavasi",
+    "time_str": "6.47",
+    "latitude": 12.8094574,
+    "longitude": 79.7567874
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Oragadam",
+    "time_str": "6.55",
+    "latitude": 13.130791,
+    "longitude": 80.1529145
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Casagrand",
+    "time_str": "7.00",
+    "latitude": 12.9521696,
+    "longitude": 80.2466751
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Vallakottai",
+    "time_str": "7.01",
+    "latitude": 12.9583643,
+    "longitude": 80.185675
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Pondur",
+    "time_str": "7.04",
+    "latitude": 12.3314594,
+    "longitude": 79.923717
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Sriperumbudur Bus Stop",
+    "time_str": "7.08",
+    "latitude": 13.0127638,
+    "longitude": 80.1679345
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Theradi Bus Stop",
+    "time_str": "7.10",
+    "latitude": 12.9853865,
+    "longitude": 80.2237481
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "Sriperumbudur Arch",
+    "time_str": "7.16",
+    "latitude": 12.8094574,
+    "longitude": 79.7567874
+  },
+  {
+    "route_no": "40A",
+    "route_name": "Ayyampettai",
+    "stop_name": "VGN Apartment(MRF)",
+    "time_str": "7.20",
+    "latitude": 12.8094574,
+    "longitude": 79.7567874
+  },
+  {
+    "route_no": "40B",
+    "route_name": "Rangasamy Kulam",
+    "stop_name": "Rengasamy Kulam",
+    "time_str": "6.20 am",
+    "latitude": 12.824118,
+    "longitude": 79.7097781
+  },
+  {
+    "route_no": "40B",
+    "route_name": "Rangasamy Kulam",
+    "stop_name": "Mungelmandapam",
+    "time_str": "6.23",
+    "latitude": 12.824118,
+    "longitude": 79.7097781
+  },
+  {
+    "route_no": "40B",
+    "route_name": "Rangasamy Kulam",
+    "stop_name": "Thaluk Office",
+    "time_str": "6.25",
+    "latitude": 12.824118,
+    "longitude": 79.7097781
+  },
+  {
+    "route_no": "40B",
+    "route_name": "Rangasamy Kulam",
+    "stop_name": "Kachepeswarar Koil",
+    "time_str": "6.27",
+    "latitude": 12.824118,
+    "longitude": 79.7097781
+  },
+  {
+    "route_no": "40B",
+    "route_name": "Rangasamy Kulam",
+    "stop_name": "Gujarathi Chithiram",
+    "time_str": "6.32",
+    "latitude": 12.824118,
+    "longitude": 79.7097781
+  },
+  {
+    "route_no": "40B",
+    "route_name": "Rangasamy Kulam",
+    "stop_name": "Oli Mohamed Pettai (Kori)",
+    "time_str": "6.33",
+    "latitude": 11.7817609,
+    "longitude": 79.5554555
+  },
+  {
+    "route_no": "40B",
+    "route_name": "Rangasamy Kulam",
+    "stop_name": "Rajalakshmi Cars",
+    "time_str": "7.18",
+    "latitude": 12.824118,
+    "longitude": 79.7097781
+  },
+  {
+    "route_no": "40D",
+    "route_name": "Kancheepuram Alt",
+    "stop_name": "collector office",
+    "time_str": "6.20 am",
+    "latitude": 13.0959177,
+    "longitude": 80.2922668
+  },
+  {
+    "route_no": "40D",
+    "route_name": "Kancheepuram Alt",
+    "stop_name": "Kancheepuram Bus Stand",
+    "time_str": "6.30",
+    "latitude": 13.092922,
+    "longitude": 80.2613881
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Sathuvachari",
+    "time_str": "5.12",
+    "latitude": 12.9361096,
+    "longitude": 79.1557785
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Vallalar",
+    "time_str": "5.13",
+    "latitude": 13.1019255,
+    "longitude": 80.2787773
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Puttuthakku",
+    "time_str": "5.20",
+    "latitude": 12.9441279,
+    "longitude": 79.2328857
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Arcot Bus stand",
+    "time_str": "5.32",
+    "latitude": 13.0418593,
+    "longitude": 80.1764131
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Ranipet Bypass",
+    "time_str": "5.35",
+    "latitude": 12.9534006,
+    "longitude": 79.333781
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Walajapet Bus Stand",
+    "time_str": "5.37",
+    "latitude": 12.9254734,
+    "longitude": 79.3637892
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Housing Board",
+    "time_str": "5.39",
+    "latitude": 13.0084674,
+    "longitude": 80.2475552
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "AAA College",
+    "time_str": "5.42",
+    "latitude": 11.6117207,
+    "longitude": 78.5872017
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Walajapet Toll Gate",
+    "time_str": "5.45",
+    "latitude": 12.9254734,
+    "longitude": 79.3637892
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Kaveripakkam",
+    "time_str": "5.49",
+    "latitude": 12.9079163,
+    "longitude": 79.4625102
+  },
+  {
+    "route_no": "41C",
+    "route_name": "Vellore Faculty Staff",
+    "stop_name": "Baluchetty",
+    "time_str": "6.00",
+    "latitude": 12.8768075,
+    "longitude": 79.6160108
+  },
+  {
+    "route_no": "42",
+    "route_name": "Arakkonam",
+    "stop_name": "Vimal School",
+    "time_str": "6.08 am",
+    "latitude": 13.0973346,
+    "longitude": 79.6558651
+  },
+  {
+    "route_no": "42",
+    "route_name": "Arakkonam",
+    "stop_name": "Indira Gandhi Statue",
+    "time_str": "6.10",
+    "latitude": 11.931572,
+    "longitude": 79.8076567
+  },
+  {
+    "route_no": "42",
+    "route_name": "Arakkonam",
+    "stop_name": "Suvalapet",
+    "time_str": "6.12",
+    "latitude": 13.0839782,
+    "longitude": 79.6700892
+  },
+  {
+    "route_no": "42",
+    "route_name": "Arakkonam",
+    "stop_name": "Old Bus Stand",
+    "time_str": "6.13",
+    "latitude": 12.6970916,
+    "longitude": 79.9765648
+  },
+  {
+    "route_no": "42",
+    "route_name": "Arakkonam",
+    "stop_name": "New Bus Stand",
+    "time_str": "6.14",
+    "latitude": 12.6908369,
+    "longitude": 79.980153
+  },
+  {
+    "route_no": "42A",
+    "route_name": "Thakkolam Koot Road",
+    "stop_name": "Thakkolam koot Road",
+    "time_str": "6.30 am",
+    "latitude": 13.0159594,
+    "longitude": 79.7332852
+  },
+  {
+    "route_no": "42A",
+    "route_name": "Thakkolam Koot Road",
+    "stop_name": "Naidu Mess",
+    "time_str": "6.35",
+    "latitude": 13.0143188,
+    "longitude": 80.2248506
+  },
+  {
+    "route_no": "42A",
+    "route_name": "Thakkolam Koot Road",
+    "stop_name": "Thakkolam Petrol Bunk",
+    "time_str": "6.47",
+    "latitude": 13.0159594,
+    "longitude": 79.7332852
+  },
+  {
+    "route_no": "42A",
+    "route_name": "Thakkolam Koot Road",
+    "stop_name": "Kattu koot Road",
+    "time_str": "7.10",
+    "latitude": 13.0409813,
+    "longitude": 80.261973
+  },
+  {
+    "route_no": "42B",
+    "route_name": "SR Gate",
+    "stop_name": "Thakkolam X Road",
+    "time_str": "6.40am",
+    "latitude": 13.0159594,
+    "longitude": 79.7332852
+  },
+  {
+    "route_no": "42B",
+    "route_name": "SR Gate",
+    "stop_name": "Perambakkam",
+    "time_str": "6.55",
+    "latitude": 13.0377208,
+    "longitude": 79.8133227
+  },
+  {
+    "route_no": "42C",
+    "route_name": "Arakkonam Alt",
+    "stop_name": "Thakkolam Koot Road",
+    "time_str": "6.30",
+    "latitude": 13.0159594,
+    "longitude": 79.7332852
+  },
+  {
+    "route_no": "42C",
+    "route_name": "Arakkonam Alt",
+    "stop_name": "Perambakkam",
+    "time_str": "6.50",
+    "latitude": 13.0377208,
+    "longitude": 79.8133227
+  },
+  {
+    "route_no": "42C",
+    "route_name": "Arakkonam Alt",
+    "stop_name": "Mappedu",
+    "time_str": "6.52",
+    "latitude": 13.0307499,
+    "longitude": 79.8629479
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Meenakshi College (KPM)",
+    "time_str": "6.30 am",
+    "latitude": 13.0549811,
+    "longitude": 80.226481
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Enathur Petrol Bunk",
+    "time_str": "6.33",
+    "latitude": 12.8678772,
+    "longitude": 79.7378598
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Rajakulam",
+    "time_str": "6.35",
+    "latitude": 12.856197,
+    "longitude": 79.7643496
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Senthamangalam",
+    "time_str": "6.48",
+    "latitude": 11.3736759,
+    "longitude": 79.2293296
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Santhavellore",
+    "time_str": "6.50",
+    "latitude": 12.9147366,
+    "longitude": 79.8623228
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Thirumangalam",
+    "time_str": "6.55",
+    "latitude": 13.085335,
+    "longitude": 80.201518
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Mambakkam",
+    "time_str": "7.00",
+    "latitude": 12.9040038,
+    "longitude": 80.1871795
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Sriperumbudur Police Station",
+    "time_str": "7.12",
+    "latitude": 12.9637993,
+    "longitude": 79.9491741
+  },
+  {
+    "route_no": "44",
+    "route_name": "Meenakshi College KPM",
+    "stop_name": "Sriperumbudur Toll gate",
+    "time_str": "7.15",
+    "latitude": 13.0127638,
+    "longitude": 80.1679345
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Padappai",
+    "time_str": "6.25am",
+    "latitude": 12.8876927,
+    "longitude": 80.0220457
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Keel Padappai (High School)",
+    "time_str": "6.28",
+    "latitude": 12.8876927,
+    "longitude": 80.0220457
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Karasangal",
+    "time_str": "6.40",
+    "latitude": 12.896871,
+    "longitude": 80.0440183
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Manimangalam",
+    "time_str": "6.43",
+    "latitude": 12.916831,
+    "longitude": 80.0412449
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Naduverpattu",
+    "time_str": "6.50",
+    "latitude": 12.8876927,
+    "longitude": 80.0220457
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Melnallathur High School",
+    "time_str": "6.55",
+    "latitude": 12.8876927,
+    "longitude": 80.0220457
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Pudupet Koot Road",
+    "time_str": "7.00",
+    "latitude": 13.0712018,
+    "longitude": 80.2669603
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "nallur Check post",
+    "time_str": "7.02",
+    "latitude": 12.9031131,
+    "longitude": 80.2341453
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Sriperumbudur RTO Office",
+    "time_str": "7.10",
+    "latitude": 13.0127638,
+    "longitude": 80.1679345
+  },
+  {
+    "route_no": "45",
+    "route_name": "Padappai",
+    "stop_name": "Sriperumbudur High School Stoping",
+    "time_str": "7.11",
+    "latitude": 13.0127638,
+    "longitude": 80.1679345
+  }
+]

@@ -1,0 +1,125 @@
+meters,highway,name,osm_id,routes
+1347,tertiary,,829102756,Route S1
+1028,tertiary,Kattrambakkam - Irunkattukottai Road,829119391,Route S1
+982,tertiary,,1060955219,Route N4
+798,tertiary,Thirumangalam Road,51352045,Route E13|Route E14
+667,tertiary,,1060955218,Route N4
+591,tertiary,Thirumangalam Road,27877905,Route E13|Route E14
+364,tertiary,Thirur - Sevvapet - Keelanur Road,1060955217,Route N4
+358,tertiary,Kattrambakkam - Irunkattukottai Road,30119883,Route S1
+316,residential,School Road,112716532,Route E8
+283,tertiary,Kattrambakkam - Irunkattukottai Road,829119386,Route S1
+256,tertiary,Anna Nagar 6th Avenue,1192573702,Route E9
+243,tertiary,Monegar Choultry Road,666393459,Route E9
+242,tertiary,,832434018,Route S1
+206,residential,LV Prasad Street,27346916,Route E8
+185,residential,Senthil Andavar Koil Street,27346922,Route E8
+168,tertiary,School Road,26550054,Route E13
+168,tertiary,,829102757,Route S1
+165,residential,E Main Road,1192606601,Route E13
+151,residential,,354250097,Route E13|Route E14
+151,residential,,28295574,Route E8
+147,residential,,385426220,Route E8
+146,residential,,48741333,Route E16
+135,residential,Station View Road,26763826,Route E4
+119,residential,,389565939,Route N3
+119,residential,,1070143283,Route E13
+117,residential,E Main Road,27437643,Route E13
+116,residential,,832431437,Route W3
+114,residential,,48742018,Route E9
+114,residential,,829119388,Route S1
+112,residential,SAIT Colony 2nd Street,29115465,Route E8
+110,residential,Venugopalan Street,487961461,Route E13|Route E14
+109,residential,NRN Street,487961466,Route E13|Route E14
+109,residential,53rd Street,206825503,Route E18
+101,tertiary,Anna Nagar 6th Avenue,1381950186,Route E16
+99,residential,,836299975,Route N3
+98,construction,Chennai Port–Maduravoyal Expressway,1378830347,Route E8
+92,service,,836275221,Route N3
+92,residential,,385484717,Route N3
+89,residential,,1058687353,Route N4
+88,service,,1200822001,Route N5
+86,residential,,832459355,Route W3
+85,service,,829086993,Route S1
+85,service,,718790108,Route E14
+85,residential,,385445487,Route N3
+84,residential,Gopala Menon Road,25466280,Route E4
+84,tertiary,Kattrambakkam - Irunkattukottai Road,696533220,Route S1
+83,residential,,1190085873,Route E9
+83,residential,Old Smith Tank Road,1107638827,Route E15
+80,service,,1193710134,Route E9
+80,construction,Chennai Port–Maduravoyal Expressway,1378830322,Route E8
+80,residential,,385425860,Route E8
+79,residential,2nd Street,138307585,Route E20
+79,residential,Arunachalam Street,68536154,Route E8
+79,residential,,385445485,Route N3
+79,residential,Yadaval Street,1037517323,Route E14
+79,residential,,1189092177,Route E4
+78,service,,837078765,Route N3
+78,construction,Chennai Port–Maduravoyal Expressway,1378830253,Route E8
+78,residential,Anna Nagar 6th Avenue,219516136,Route E16
+78,service,,1270830368,Route E6
+77,service,,832455816,Route W3
+77,residential,Muthiah Mudali Street,26394451,Route E15
+76,residential,,1381075544,Route E15
+75,residential,,702324415,Route E8
+75,residential,,1209015091,Route E8
+75,service,,838436417,Route E14
+75,residential,,206836422,Route E20
+75,residential,,835663513,Route E8
+75,residential,,543852028,Route N3
+74,residential,,829088590,Route S1
+73,residential,,102543060,Route E9
+71,residential,,385418949,Route N3
+71,residential,,1151041643,Route S1
+69,residential,,112716555,Route E8
+69,residential,,1270373725,Route E13
+69,tertiary,,830745226,Route W3
+69,service,,1271655038,Route E14
+68,construction,Chennai Port-Maduravoyal Expressway,1327647481,Route E9
+67,unclassified,,1203029443,Route N4
+64,residential,Aziz Nagar 2nd Street,206812369,Route E4
+63,residential,,836281748,Route E8
+63,residential,,389269772,Route N5
+63,service,,995136853,Route E13
+63,residential,,832431435,Route W3
+63,service,,1300889434,Route E8
+63,residential,Vigneswar Nagar 1st Street,27190026,Route E4
+62,living_street,,27346887,Route E4
+61,residential,,178751028,Route E8
+61,residential,,543246211,Route N5
+61,residential,Narayana M Street,24484005,Route E8
+61,residential,,385445491,Route N3
+59,residential,,838413279,Route E14
+58,unclassified,,832431418,Route W3
+58,service,,232403818,Route S1
+58,living_street,,1298496434,Route E15
+58,residential,E Main Road,26970005,Route E13
+57,tertiary,Neervallur - Kallipattu  Road,1270603719,Route W3
+57,residential,,1081051659,Route N4
+57,residential,,832195842,Route W3
+57,living_street,,1276634441,Route E4
+56,residential,,389564293,Route N3
+56,unclassified,,187026023,Route E14
+56,residential,,836320362,Route E8
+56,residential,,30124216,Route E9
+56,residential,,26394458,Route E15
+55,service,,1271653648,Route E14
+55,residential,,385420568,Route N3
+54,residential,VOC Nagar Main Road,48753856,Route E9
+54,residential,,832897447,Route W3
+54,residential,,837106446,Route E14
+54,residential,Gandhi Street,543234571,Route N5
+53,residential,,112716599,Route E8
+53,unclassified,,1055289852,Route N4
+53,residential,,385426227,Route E8
+52,residential,Sannadhi Street,58503080,Route E4
+51,service,,832431438,Route W3
+51,residential,Brindavan Street,217685947,Route E8
+51,residential,,48742035,Route E9
+51,service,,1273303422,Route E14
+51,residential,,838483352,Route E14
+50,residential,,27346929,Route E8
+50,tertiary,Amarambedu Road,828789666,Route S1
+47,residential,,1044675951,Route E14
+14,tertiary,,1388512650,Route S1
