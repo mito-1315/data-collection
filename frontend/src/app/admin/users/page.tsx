@@ -9,6 +9,8 @@ interface User {
   admission_number: string;
   email: string;
   status: 'FILLED' | 'UNFILLED';
+  lat: number | null;
+  lng: number | null;
 }
 
 export default function UsersPage() {
@@ -132,7 +134,9 @@ export default function UsersPage() {
     const csv = Papa.unparse(dataToExport.map(u => ({
       'Admission Number': u.admission_number,
       'Email': u.email,
-      'Status': u.status
+      'Status': u.status,
+      'Latitude': u.lat ?? '',
+      'Longitude': u.lng ?? ''
     })));
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -237,13 +241,15 @@ export default function UsersPage() {
                 <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Email</th>
                 <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Password</th>
                 <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Status</th>
+                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Latitude</th>
+                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Longitude</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={5} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>Loading users...</td></tr>
+                <tr><td colSpan={7} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>Loading users...</td></tr>
               ) : paginatedUsers.length === 0 ? (
-                <tr><td colSpan={5} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>No users found.</td></tr>
+                <tr><td colSpan={7} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>No users found.</td></tr>
               ) : (
                 paginatedUsers.map(u => (
                   <tr key={u.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
@@ -267,6 +273,8 @@ export default function UsersPage() {
                         {u.status}
                       </span>
                     </td>
+                    <td style={{ padding: '16px', color: 'var(--text-secondary)', fontSize: 13 }}>{u.lat ?? '-'}</td>
+                    <td style={{ padding: '16px', color: 'var(--text-secondary)', fontSize: 13 }}>{u.lng ?? '-'}</td>
                   </tr>
                 ))
               )}
