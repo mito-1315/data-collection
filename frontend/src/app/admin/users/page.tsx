@@ -196,7 +196,7 @@ export default function UsersPage() {
                     <td style={{ padding: '16px', color: '#fff', fontFamily: 'monospace' }}>{u.admission_number}</td>
                     <td style={{ padding: '16px', color: 'var(--text-primary)' }}>{u.email}</td>
                     <td style={{ padding: '16px', color: 'var(--text-secondary)', fontFamily: 'monospace', fontSize: 13 }}>
-                      {u.admission_number.length >= 4 ? u.admission_number.slice(-4) : u.admission_number}
+                      {u.admission_number}
                     </td>
                     <td style={{ padding: '16px' }}>
                       <span style={{
