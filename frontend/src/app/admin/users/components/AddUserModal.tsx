@@ -30,7 +30,6 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
   const validateAdmissionNumber = (num: string): string | null => {
     if (!num) return 'Admission number is required.';
     if (!/^\d+$/.test(num)) return 'Admission number must contain only digits.';
-    if (num.length < 4) return 'Admission number must have at least 4 digits (password uses last 4).';
     return null;
   };
 
@@ -54,8 +53,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
       });
       const data = await res.json();
       if (res.ok) {
-        const last4 = form.admission_number.slice(-4);
-        setSuccess(`Student added! Password: ${last4} (last 4 digits of admission number)`);
+        setSuccess(`Student added! Password: ${form.admission_number} (full admission number)`);
         onRefresh();
         setTimeout(onClose, 2500);
       } else if (res.status === 409 && data.duplicate) {
@@ -115,7 +113,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
       });
       const data = await res.json();
       if (res.ok && data.errors?.length === 0) {
-        setSuccess(`Successfully added ${data.created} students. Passwords = last 4 digits of each admission number.`);
+        setSuccess(`Successfully added ${data.created} students. Passwords = full admission number for each student.`);
         onRefresh();
         setTimeout(onClose, 2500);
       } else {
@@ -186,11 +184,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
     XLSX.writeFile(wb, 'sample_students.xlsx');
   };
 
-  const admLast4 = form.admission_number.length >= 4
-    ? form.admission_number.slice(-4)
-    : form.admission_number.length > 0
-      ? `(need ${4 - form.admission_number.length} more digit${form.admission_number.length < 3 ? 's' : ''})`
-      : 'last 4 digits';
+  const passwordPreview = form.admission_number || 'full admission number';
 
   return (
     <div style={{
@@ -218,9 +212,9 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
           <span style={{ fontSize: 16 }}>🔑</span>
           <span>
             Password is automatically set to the{' '}
-            <strong style={{ color: '#fff' }}>last 4 digits</strong> of the admission number.{' '}
-            Example: admission <code style={{ color: '#9b59f5' }}>230701184</code> → password:{' '}
-            <code style={{ color: '#9b59f5' }}>1184</code>
+            <strong style={{ color: '#fff' }}>full admission number</strong>.{' '}
+            Example: admission <code style={{ color: '#9b59f5' }}>01202519421</code> → password:{' '}
+            <code style={{ color: '#9b59f5' }}>01202519421</code>
           </span>
         </div>
 
@@ -265,7 +259,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: 'rgba(255,255,255,0.02)' }}>
-                    <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left', whiteSpace: 'nowrap' }}>Roll Number</th>
+                    <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left', whiteSpace: 'nowrap' }}>Admission Number</th>
                     <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left' }}>Name</th>
                     <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left' }}>Email</th>
                     <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left' }}>Department</th>
@@ -344,7 +338,7 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
               background: 'rgba(155,89,245,0.08)', borderRadius: 6, padding: '8px 12px',
               fontSize: 12, color: 'var(--text-secondary)',
             }}>
-              🔑 Password will be: <strong style={{ color: '#9b59f5' }}>{admLast4}</strong>
+              🔑 Password will be: <strong style={{ color: '#9b59f5' }}>{passwordPreview}</strong>
             </div>
             <button type="submit" className="btn-submit" disabled={loading} style={{ marginTop: 8 }}>
               {loading ? 'Adding...' : 'Add Student'}

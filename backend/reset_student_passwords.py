@@ -1,7 +1,7 @@
 """
 reset_student_passwords.py
-Resets ALL existing student passwords to the last 4 digits of their admission_number.
-Rule: last 4 digits of admission_number  (e.g. '230701184' → '1184')
+Resets ALL existing student passwords to their full admission_number.
+Rule: full admission_number  (e.g. '01202519421' → '01202519421')
 
 Run once after deploying the new authentication logic:
     python reset_student_passwords.py
@@ -18,8 +18,7 @@ from collection.models import Student
 
 
 def get_default_password(admission_number: str) -> str:
-    digits = admission_number.strip()
-    return digits[-4:] if len(digits) >= 4 else digits
+    return admission_number.strip()
 
 
 def reset_all_passwords():

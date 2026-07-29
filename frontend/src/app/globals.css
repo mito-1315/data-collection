@@ -460,6 +460,24 @@ a {
   background: #111118;
 }
 
+.map-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.map-controls-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.map-controls-layer .map-loading-overlay,
+.map-controls-layer .map-zoom-hint {
+  pointer-events: auto;
+}
+
 .map-hint {
   display: flex;
   align-items: center;
@@ -695,10 +713,100 @@ a {
   color: var(--text-secondary);
 }
 
+/* ─── MAP SEARCH BAR (Google Maps style overlay) ─── */
+.map-search-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 56px;
+  max-width: 380px;
+  pointer-events: auto;
+  z-index: 6;
+}
+
+.map-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  padding: 0 14px;
+  height: 40px;
+}
+
+.map-search-bar svg {
+  color: #70757a;
+  flex-shrink: 0;
+}
+
+.map-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #202124;
+  font-size: 15px;
+  font-family: Roboto, Arial, sans-serif;
+  min-width: 0;
+}
+
+.map-search-input::placeholder {
+  color: #70757a;
+}
+
+/* Google Places dropdown — dark theme */
+.pac-container {
+  background: #fff !important;
+  border: none !important;
+  border-radius: 2px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  margin-top: 4px !important;
+  font-family: Roboto, Arial, sans-serif !important;
+  overflow: hidden;
+  z-index: 10000 !important;
+}
+
+.pac-item {
+  padding: 10px 14px !important;
+  color: #3c4043 !important;
+  border-top: 1px solid #e8eaed !important;
+  cursor: pointer !important;
+  line-height: 1.4 !important;
+}
+
+.pac-item:first-child {
+  border-top: none !important;
+}
+
+.pac-item:hover,
+.pac-item-selected {
+  background: #f1f3f4 !important;
+}
+
+.pac-item-query {
+  color: #202124 !important;
+  font-size: 14px !important;
+}
+
+.pac-matched {
+  color: #202124 !important;
+  font-weight: 600 !important;
+}
+
+.pac-icon {
+  display: none !important;
+}
+
+.hdpi.pac-logo::after {
+  display: none !important;
+}
+
 /* ─── MAP ZOOM HINT ─── */
 .map-zoom-hint {
   position: absolute;
-  top: 16px;
+  top: 58px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--bg-card);

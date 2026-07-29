@@ -22,14 +22,8 @@ import jwt
 # ─── Helpers ─────────────────────────────────────────────────────────────────
 
 def get_default_password(admission_number: str) -> str:
-    """
-    Derives the default password from a student's admission number.
-    Rule: last 4 digits of the admission number.
-    Example: '230701184' → '1184'
-    Admission number must have at least 4 digits.
-    """
-    digits = admission_number.strip()
-    return digits[-4:] if len(digits) >= 4 else digits
+    """Password is the full admission number."""
+    return admission_number.strip()
 
 
 def get_jwt_payload(request):
@@ -70,7 +64,7 @@ def login_view(request):
     Returns JWT access token with role ('admin' or 'student').
     Passwords:
       - Admin users: Django auth.User (PBKDF2-hashed) — set via create_admin.py / Django admin.
-      - Students: last 4 digits of their admission_number.
+      - Students: full admission_number.
     """
     email = request.data.get('email', '').strip()
     password = request.data.get('password', '')
@@ -95,7 +89,7 @@ def login_view(request):
     except User.DoesNotExist:
         pass
 
-    # 2. Check if student (custom Student model — password = last 4 digits of admission_number)
+    # 2. Check if student (custom Student model — password = full admission_number)
     try:
         student = Student.objects.get(email=email)
         if student.check_password(password):
@@ -291,7 +285,7 @@ def export_csv(request):
     response['Content-Disposition'] = 'attachment; filename="student_locations.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['Roll No', 'Name', 'Lat', 'Lng', 'Pref Boarding Address', 'Submitted By', 'Submitted At'])
+    writer.writerow(['Admission No', 'Name', 'Lat', 'Lng', 'Pref Boarding Address', 'Submitted By', 'Submitted At'])
 
     for entry in StudentLocation.objects.all():
         writer.writerow([
@@ -366,8 +360,8 @@ def student_list(request):
     POST /api/students/ (single create)
 
     Only 'email' and 'admission_number' are required fields.
-    Password is NOT accepted from the request. It is auto-derived as the
-    last 4 digits of the student's admission_number.
+    Password is NOT accepted from the request. It is auto-set to the
+    full admission_number.
     """
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -448,8 +442,8 @@ def student_bulk(request):
     Receives JSON array of students to create.
 
     Only 'email' and 'admission_number' are required per row.
-    Password is NOT required in the payload. It is auto-derived as the
-    last 4 digits of each student's admission_number.
+    Password is NOT required in the payload. It is auto-set to the
+    full admission_number for each student.
     Any 'password' field present in the payload is silently ignored.
 
     Returns:

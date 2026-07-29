@@ -106,7 +106,7 @@ export default function LoginPage() {
         {/* Heading */}
         <h1 className="login-title">Login</h1>
         <p className="login-subtitle">
-          Sign in with your email and the last 4 digits of your admission number as your password.
+          Sign in with your email and your full admission number as your password.
         </p>
 
         {/* Form */}

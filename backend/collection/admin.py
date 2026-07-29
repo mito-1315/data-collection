@@ -22,8 +22,7 @@ class StudentAdmin(admin.ModelAdmin):
     """
     Django admin view for Student records.
     NOTE: The 'password' field shown here is the BCrypt hash — do NOT edit it
-    directly from this panel. Passwords are auto-set as the last 4 digits of
-    the student's admission_number and are managed by the application logic.
+    directly from this panel. Passwords are auto-set to the full admission_number and are managed by the application logic.
     """
     list_display = ['admission_number', 'email', 'created_at']
     search_fields = ['admission_number', 'email']

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import NextImage from 'next/image';
 import {
@@ -57,6 +58,42 @@ function metresPerPixel(lat: number, zoom: number): number {
   return (Math.cos((lat * Math.PI) / 180) * 2 * Math.PI * 6_378_137) / (256 * 2 ** zoom);
 }
 
+function findNearestRoadPoint(
+  lat: number,
+  lng: number,
+  roads: RoadLine[],
+  maxDistanceMetres: number,
+): { lat: number; lng: number } | null {
+  let bestDist = Infinity;
+  let bestLat = lat;
+  let bestLng = lng;
+
+  for (const coords of roads) {
+    for (const [roadLng, roadLat] of coords) {
+      const d = haversine(lat, lng, roadLat, roadLng);
+      if (d < bestDist) {
+        bestDist = d;
+        bestLat = roadLat;
+        bestLng = roadLng;
+      }
+    }
+  }
+
+  if (bestDist <= maxDistanceMetres) {
+    return { lat: bestLat, lng: bestLng };
+  }
+
+  return null;
+}
+
+const CHENNAI_BOUNDS = {
+  south: 12.8,
+  west: 80.0,
+  north: 13.35,
+  east: 80.35,
+};
+const SEARCH_SNAP_RADIUS_METRES = 800;
+
 // ─── Map layer for submitting (with road polylines) ────────────────────────────
 function MapLayerWithRoads({
   roads,
@@ -85,24 +122,10 @@ function MapLayerWithRoads({
 
     const zoom = map.getZoom() ?? DEFAULT_ZOOM;
     const snapRadiusMetres = SNAP_RADIUS_PX * metresPerPixel(clickedLat, zoom);
+    const snapped = findNearestRoadPoint(clickedLat, clickedLng, roads, snapRadiusMetres);
 
-    let bestDist = Infinity;
-    let bestLat = clickedLat;
-    let bestLng = clickedLng;
-
-    for (const coords of roads) {
-      for (const [lng, lat] of coords) {
-        const d = haversine(clickedLat, clickedLng, lat, lng);
-        if (d < bestDist && d < snapRadiusMetres) {
-          bestDist = d;
-          bestLat = lat;
-          bestLng = lng;
-        }
-      }
-    }
-
-    if (bestDist <= snapRadiusMetres) {
-      onSnappedClick(bestLat, bestLng);
+    if (snapped) {
+      onSnappedClick(snapped.lat, snapped.lng);
     }
   }, [map, roads, onSnappedClick]);
 
@@ -182,6 +205,102 @@ function MapLayerWithRoads({
   }, [map, markerLib, markerPos]);
 
   return null;
+}
+
+// ─── Pan map when user searches a location ─────────────────────────────────────
+function MapPanTo({ target }: { target: { lat: number; lng: number } | null }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map || !target) return;
+    map.panTo(target);
+    map.setZoom(15);
+  }, [map, target]);
+
+  return null;
+}
+
+// ─── Google Places search — overlaid on map like Google Maps ───────────────────
+function MapSearchControl({
+  onSelect,
+  overlayRef,
+}: {
+  onSelect: (lat: number, lng: number, address: string) => void;
+  overlayRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const map = useMap();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const placesLib = useMapsLibrary('places');
+  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+  const [overlayReady, setOverlayReady] = useState(false);
+
+  useLayoutEffect(() => {
+    if (overlayRef.current) setOverlayReady(true);
+  }, [overlayRef]);
+
+  useEffect(() => {
+    if (!placesLib || !inputRef.current || autocompleteRef.current) return;
+
+    const bounds = new google.maps.LatLngBounds(
+      { lat: CHENNAI_BOUNDS.south, lng: CHENNAI_BOUNDS.west },
+      { lat: CHENNAI_BOUNDS.north, lng: CHENNAI_BOUNDS.east },
+    );
+
+    const autocomplete = new placesLib.Autocomplete(inputRef.current, {
+      fields: ['geometry', 'formatted_address', 'name'],
+      componentRestrictions: { country: 'in' },
+      bounds,
+      strictBounds: false,
+    });
+    autocompleteRef.current = autocomplete;
+
+    if (map) {
+      autocomplete.bindTo('bounds', map);
+    }
+
+    const listener = autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      const location = place.geometry?.location;
+      if (!location) return;
+
+      const lat = location.lat();
+      const lng = location.lng();
+      const address = place.formatted_address ?? place.name ?? `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+      onSelect(lat, lng, address);
+
+      if (inputRef.current) {
+        inputRef.current.value = address;
+      }
+    });
+
+    return () => {
+      google.maps.event.removeListener(listener);
+      if (map) autocomplete.unbind('bounds');
+      autocompleteRef.current = null;
+    };
+  }, [placesLib, map, onSelect]);
+
+  if (!overlayReady || !overlayRef.current) return null;
+
+  return createPortal(
+    <div className="map-search-overlay">
+      <div className="map-search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input
+          ref={inputRef}
+          type="text"
+          className="map-search-input"
+          placeholder="Search Google Maps"
+          autoComplete="off"
+          aria-label="Search location on map"
+        />
+      </div>
+    </div>,
+    overlayRef.current,
+  );
 }
 
 // ─── Map layer for read-only view (just a pin, no roads) ──────────────────────
@@ -285,6 +404,8 @@ export default function FormPage() {
   });
 
   const [markerPos, setMarkerPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [mapPanTarget, setMapPanTarget] = useState<{ lat: number; lng: number } | null>(null);
+  const mapControlsRef = useRef<HTMLDivElement>(null);
   const [addressLoading, setAddressLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -369,12 +490,32 @@ export default function FormPage() {
     [reverseGeocode]
   );
 
+  const handleSearchSelect = useCallback(
+    (lat: number, lng: number, address: string) => {
+      setMapPanTarget({ lat, lng });
+      const snapped = findNearestRoadPoint(lat, lng, roads, SEARCH_SNAP_RADIUS_METRES);
+      const finalLat = snapped?.lat ?? lat;
+      const finalLng = snapped?.lng ?? lng;
+
+      setMarkerPos({ lat: finalLat, lng: finalLng });
+      setForm((f) => ({
+        ...f,
+        lat: finalLat,
+        lng: finalLng,
+        address: snapped ? address : `${address} (click nearest purple road to snap to bus route)`,
+      }));
+      setAddressLoading(false);
+      setError('');
+    },
+    [roads]
+  );
+
   // Called when user clicks "Submit" — shows confirm modal first
   const handleSubmitRequest = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     if (!form.lat || !form.lng) {
-      setError('Please click on a purple road line on the map to set your boarding location.');
+      setError('Please search for your location or click on a purple road line on the map to set your boarding location.');
       return;
     }
     setShowConfirmModal(true);
@@ -425,7 +566,7 @@ export default function FormPage() {
   );
 
   return (
-    <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
+    <APIProvider apiKey={GOOGLE_MAPS_API_KEY} libraries={['places', 'marker']}>
       <div className="form-page">
         {/* ── Topbar ── */}
         <header className="form-topbar">
@@ -536,8 +677,8 @@ export default function FormPage() {
               <div className="form-heading">
                 <h1>Submit Boarding Location</h1>
                 <p>
-                  <strong>Click directly on a purple road line</strong> on the map to set your boarding location.
-                  Your pin will snap to the nearest bus route point automatically.
+                  <strong>Search for your area</strong> or <strong>click a purple road line</strong> on the map
+                  to set your boarding location. Your pin will snap to the nearest bus route point automatically.
                 </p>
               </div>
 
@@ -578,14 +719,15 @@ export default function FormPage() {
                         <circle cx="12" cy="10" r="3"/>
                       </svg>
                       <span>
-                        The <span className="road-highlight">purple lines</span> show the roads your
-                        college bus travels. Click anywhere on or near a purple line — your pin will
+                        Use the <strong>search bar on the map</strong> or click the{' '}
+                        <span className="road-highlight">purple lines</span> — your pin will
                         snap to the nearest point on the bus route automatically.
                       </span>
                     </div>
 
                     {/* Map */}
                     <div className="map-picker-container">
+                      <div ref={mapControlsRef} className="map-controls-layer">
                       {!isZoomedIn && roadsLoaded && (
                         <div className="map-zoom-hint">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -603,21 +745,26 @@ export default function FormPage() {
                           <span>Loading bus routes…</span>
                         </div>
                       )}
-                      <Map
-                        defaultCenter={CHENNAI_CENTER}
-                        defaultZoom={DEFAULT_ZOOM}
-                        mapId="rec-boarding-map"
-                        gestureHandling="greedy"
-                        disableDefaultUI={false}
-                        style={{ width: '100%', height: '100%' }}
-                      >
-                        <MapLayerWithRoads
-                          roads={roads}
-                          markerPos={markerPos}
-                          onSnappedClick={handleSnappedClick}
-                          onZoomChange={setIsZoomedIn}
-                        />
-                      </Map>
+                      </div>
+                      <div className="map-canvas">
+                        <Map
+                          defaultCenter={CHENNAI_CENTER}
+                          defaultZoom={DEFAULT_ZOOM}
+                          mapId="rec-boarding-map"
+                          gestureHandling="greedy"
+                          disableDefaultUI={false}
+                          style={{ width: '100%', height: '100%' }}
+                        >
+                          <MapSearchControl onSelect={handleSearchSelect} overlayRef={mapControlsRef} />
+                          <MapLayerWithRoads
+                            roads={roads}
+                            markerPos={markerPos}
+                            onSnappedClick={handleSnappedClick}
+                            onZoomChange={setIsZoomedIn}
+                          />
+                          <MapPanTo target={mapPanTarget} />
+                        </Map>
+                      </div>
                     </div>
 
                     <div className="map-hint">
@@ -626,7 +773,7 @@ export default function FormPage() {
                         <line x1="12" y1="8" x2="12" y2="12"/>
                         <line x1="12" y1="16" x2="12.01" y2="16"/>
                       </svg>
-                      Map centred on Chennai. Zoom in to find the exact road you board from.
+                      Map centred on Chennai. Search on the map or zoom in to find your boarding road.
                     </div>
 
                     {/* Coordinates */}
@@ -642,7 +789,7 @@ export default function FormPage() {
                         </div>
                       ) : (
                         <div className="coord-badge coord-badge-empty">
-                          No pin dropped yet — click a purple road on the map
+                          No pin dropped yet — search on the map or click a purple road
                         </div>
                       )}
                     </div>
@@ -658,7 +805,7 @@ export default function FormPage() {
                         <div className="form-input-readonly">
                           {form.address || (
                             <span style={{ color: 'var(--text-muted)' }}>
-                              Address will appear after you click a road on the map
+                              Address will appear after you search on the map or click a road
                             </span>
                           )}
                         </div>

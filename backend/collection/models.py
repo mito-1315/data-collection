@@ -22,7 +22,7 @@ class Student(models.Model):
     """
     Stores a student account that can log into the portal.
     Only email and admission_number are required fields.
-    Password is auto-set to the last 4 digits of the admission_number.
+    Password is auto-set to the full admission_number.
     """
     admission_number = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True)
