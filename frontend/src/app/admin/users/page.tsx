@@ -19,6 +19,8 @@ export default function UsersPage() {
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
   const [showAddModal, setShowAddModal] = useState(false);
   const [page, setPage] = useState(1);
+  const [loadingRoads, setLoadingRoads] = useState(false);
+  const [roadsMsg, setRoadsMsg] = useState<{ text: string; ok: boolean } | null>(null);
   const perPage = 10;
 
   const fetchUsers = async () => {
@@ -41,6 +43,31 @@ export default function UsersPage() {
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  const handleLoadRoads = async () => {
+    setLoadingRoads(true);
+    setRoadsMsg(null);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/roads/load/`,
+        {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+        }
+      );
+      const data = await res.json();
+      if (res.ok) {
+        setRoadsMsg({ text: `✅ Roads loaded: ${data.loaded} new, ${data.total_in_db} total in DB`, ok: true });
+      } else {
+        setRoadsMsg({ text: `❌ ${data.detail || 'Failed to load roads'}`, ok: false });
+      }
+    } catch {
+      setRoadsMsg({ text: '❌ Could not reach server', ok: false });
+    } finally {
+      setLoadingRoads(false);
+      setTimeout(() => setRoadsMsg(null), 6000);
+    }
+  };
 
   // Filtering
   const filteredUsers = useMemo(() => {
@@ -136,7 +163,7 @@ export default function UsersPage() {
       <div style={{ padding: 32 }}>
         {/* Toolbar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <div style={{ display: 'flex', gap: 16 }}>
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
             <input
               type="text"
               className="form-input"
@@ -155,6 +182,36 @@ export default function UsersPage() {
               <option value="FILLED">Filled</option>
               <option value="UNFILLED">Unfilled</option>
             </select>
+            <button
+              id="load-roads-btn"
+              onClick={handleLoadRoads}
+              disabled={loadingRoads}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 7,
+                padding: '10px 16px',
+                background: loadingRoads ? 'rgba(155,89,245,0.3)' : 'rgba(155,89,245,0.15)',
+                border: '1px solid rgba(155,89,245,0.5)',
+                color: '#c084fc',
+                borderRadius: 8, cursor: loadingRoads ? 'not-allowed' : 'pointer',
+                fontWeight: 600, fontSize: 13, whiteSpace: 'nowrap',
+                transition: 'background 0.2s',
+              }}
+            >
+              {loadingRoads ? (
+                <><div className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} /> Loading…</>
+              ) : (
+                <>🗺️ Load Roads</>
+              )}
+            </button>
+            {roadsMsg && (
+              <span style={{
+                fontSize: 13, fontWeight: 500,
+                color: roadsMsg.ok ? '#50fa7b' : '#ff5555',
+                background: roadsMsg.ok ? 'rgba(80,250,123,0.08)' : 'rgba(255,85,85,0.08)',
+                border: `1px solid ${roadsMsg.ok ? 'rgba(80,250,123,0.25)' : 'rgba(255,85,85,0.25)'}`,
+                borderRadius: 6, padding: '6px 12px',
+              }}>{roadsMsg.text}</span>
+            )}
           </div>
 
           {selectedIds.size > 0 && (

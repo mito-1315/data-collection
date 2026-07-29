@@ -18,6 +18,7 @@ urlpatterns = [
 
     # ── Road segments (public) ─────────────────────────────────────
     path('roads/',             views.roads_view,              name='roads'),
+    path('roads/load/',        views.load_roads_view,         name='roads-load'),
 
     # ── Student management ─────────────────────────────────────────
     path('students/',              views.student_list,        name='student-list'),

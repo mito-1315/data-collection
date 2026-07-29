@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef, useLayoutEffect } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import NextImage from 'next/image';
 import {
@@ -196,9 +195,7 @@ function MapLayerWithRoads({
       return;
     }
     if (!markerRef.current) {
-      const pin = document.createElement('div');
-      pin.style.cssText = `width:20px;height:20px;background:#9b59f5;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(155,89,245,.6);`;
-      markerRef.current = new markerLib.AdvancedMarkerElement({ map, content: pin, title: 'Boarding point' });
+      markerRef.current = new markerLib.AdvancedMarkerElement({ map, title: 'Boarding point' });
     }
     markerRef.current.position = { lat: markerPos.lat, lng: markerPos.lng };
     markerRef.current.map = map;
@@ -220,43 +217,74 @@ function MapPanTo({ target }: { target: { lat: number; lng: number } | null }) {
   return null;
 }
 
-// ─── Google Places search — overlaid on map like Google Maps ───────────────────
+// ─── Google Places search — injected as a native Google Maps control ─────────────
+// Using map.controls ensures the input and its .pac-container dropdown
+// are in Google Maps' own stacking context, fixing all z-index issues.
 function MapSearchControl({
   onSelect,
-  overlayRef,
 }: {
   onSelect: (lat: number, lng: number, address: string) => void;
-  overlayRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const map = useMap();
-  const inputRef = useRef<HTMLInputElement>(null);
   const placesLib = useMapsLibrary('places');
-  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
-  const [overlayReady, setOverlayReady] = useState(false);
-
-  useLayoutEffect(() => {
-    if (overlayRef.current) setOverlayReady(true);
-  }, [overlayRef]);
+  // Keep a stable ref to onSelect so the effect doesn't re-run when it changes
+  const onSelectRef = useRef(onSelect);
+  useEffect(() => { onSelectRef.current = onSelect; }, [onSelect]);
 
   useEffect(() => {
-    if (!placesLib || !inputRef.current || autocompleteRef.current) return;
+    if (!map || !placesLib) return;
 
+    // Build the search bar DOM (outside React, lives inside Google Maps control)
+    const container = document.createElement('div');
+    container.className = 'map-search-overlay';
+    container.style.margin = '10px 0 0 10px';
+
+    const bar = document.createElement('div');
+    bar.className = 'map-search-bar';
+
+    // Search icon
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '18'); svg.setAttribute('height', '18');
+    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', '#70757a'); svg.setAttribute('stroke-width', '2.5');
+    svg.setAttribute('aria-hidden', 'true');
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', '11'); circle.setAttribute('cy', '11'); circle.setAttribute('r', '8');
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', '21'); line.setAttribute('y1', '21');
+    line.setAttribute('x2', '16.65'); line.setAttribute('y2', '16.65');
+    svg.appendChild(circle); svg.appendChild(line);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'map-search-input';
+    input.placeholder = 'Search Google Maps';
+    input.setAttribute('autocomplete', 'off');
+    input.setAttribute('aria-label', 'Search location on map');
+    // Prevent Enter from propagating outside the input
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') e.stopPropagation();
+    });
+
+    bar.appendChild(svg);
+    bar.appendChild(input);
+    container.appendChild(bar);
+
+    // Register as a Google Maps control (TOP_LEFT)
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(container);
+
+    // Initialise Autocomplete on the input
     const bounds = new google.maps.LatLngBounds(
       { lat: CHENNAI_BOUNDS.south, lng: CHENNAI_BOUNDS.west },
       { lat: CHENNAI_BOUNDS.north, lng: CHENNAI_BOUNDS.east },
     );
-
-    const autocomplete = new placesLib.Autocomplete(inputRef.current, {
+    const autocomplete = new placesLib.Autocomplete(input, {
       fields: ['geometry', 'formatted_address', 'name'],
       componentRestrictions: { country: 'in' },
       bounds,
       strictBounds: false,
     });
-    autocompleteRef.current = autocomplete;
-
-    if (map) {
-      autocomplete.bindTo('bounds', map);
-    }
+    autocomplete.bindTo('bounds', map);
 
     const listener = autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
@@ -266,44 +294,27 @@ function MapSearchControl({
       const lat = location.lat();
       const lng = location.lng();
       const address = place.formatted_address ?? place.name ?? `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-      onSelect(lat, lng, address);
 
-      if (inputRef.current) {
-        inputRef.current.value = address;
-      }
+      map.panTo({ lat, lng });
+      map.setZoom(15);
+      input.value = address;
+      onSelectRef.current(lat, lng, address);
     });
 
     return () => {
       google.maps.event.removeListener(listener);
-      if (map) autocomplete.unbind('bounds');
-      autocompleteRef.current = null;
+      autocomplete.unbind('bounds');
+      const controls = map.controls[google.maps.ControlPosition.TOP_LEFT];
+      for (let i = 0; i < controls.getLength(); i++) {
+        if (controls.getAt(i) === container) { controls.removeAt(i); break; }
+      }
     };
-  }, [placesLib, map, onSelect]);
+  }, [map, placesLib]);
 
-  if (!overlayReady || !overlayRef.current) return null;
-
-  return createPortal(
-    <div className="map-search-overlay">
-      <div className="map-search-bar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-        <input
-          ref={inputRef}
-          type="text"
-          className="map-search-input"
-          placeholder="Search Google Maps"
-          autoComplete="off"
-          aria-label="Search location on map"
-        />
-      </div>
-    </div>,
-    overlayRef.current,
-  );
+  return null; // DOM is managed imperatively via map.controls
 }
 
-// ─── Map layer for read-only view (just a pin, no roads) ──────────────────────
+// ─── Map layer for read-only view (just a pin, no roads) ────────────────────────────────────
 function MapLayerReadOnly({ lat, lng }: { lat: number; lng: number }) {
   const map = useMap();
   const markerLib = useMapsLibrary('marker');
@@ -312,22 +323,13 @@ function MapLayerReadOnly({ lat, lng }: { lat: number; lng: number }) {
   useEffect(() => {
     if (!map || !markerLib) return;
     if (!markerRef.current) {
-      const pin = document.createElement('div');
-      pin.style.cssText = `
-        width: 24px; height: 24px;
-        background: #50fa7b; border: 3px solid #fff;
-        border-radius: 50%; box-shadow: 0 2px 12px rgba(80,250,123,.7);
-      `;
       markerRef.current = new markerLib.AdvancedMarkerElement({
         map,
-        content: pin,
         title: 'Your boarding point',
       });
     }
     markerRef.current.position = { lat, lng };
     markerRef.current.map = map;
-
-    // Pan map to marker
     map.panTo({ lat, lng });
     map.setZoom(15);
   }, [map, markerLib, lat, lng]);
@@ -335,48 +337,54 @@ function MapLayerReadOnly({ lat, lng }: { lat: number; lng: number }) {
   return null;
 }
 
-// ─── Confirmation Modal ────────────────────────────────────────────────────────
+// ─── Confirmation Modal ──────────────────────────────────────────────────────────────
 function ConfirmModal({ onConfirm, onCancel }: { onConfirm: () => void; onCancel: () => void }) {
   return (
     <div style={{
-      position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
-      backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center',
+      position: 'fixed', inset: 0, background: 'rgba(6,6,10,0.75)',
+      backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center',
       justifyContent: 'center', zIndex: 200,
     }}>
-      <div style={{
-        background: 'var(--bg-card)', borderRadius: 16, padding: 32, maxWidth: 440, width: '90%',
-        border: '1px solid rgba(255, 85, 85, 0.4)', boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
+      <div className="form-step-card" style={{
+        maxWidth: 460, width: '90%', marginBottom: 0,
+        boxShadow: '0 24px 80px rgba(0,0,0,0.6)', animation: 'fadeSlideUp 0.25s ease',
       }}>
-        <div style={{ fontSize: 40, textAlign: 'center', marginBottom: 16 }}>⚠️</div>
-        <h2 style={{ color: '#ff5555', margin: '0 0 12px', textAlign: 'center', fontSize: 20 }}>
-          This cannot be undone
-        </h2>
-        <p style={{ color: 'var(--text-secondary)', textAlign: 'center', lineHeight: 1.6, margin: '0 0 24px' }}>
-          Once submitted, your boarding location is <strong style={{ color: '#fff' }}>permanently recorded</strong> in
-          the database and <strong style={{ color: '#ff5555' }}>cannot be changed or removed</strong> by you.
-          Please make sure the pin is placed at your correct boarding point.
-        </p>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <button
-            id="confirm-cancel-btn"
-            onClick={onCancel}
-            style={{
-              flex: 1, padding: '12px 0', background: 'var(--bg)', border: '1px solid var(--accent-border)',
-              color: 'var(--text-primary)', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 15,
-            }}
-          >
-            ← Go Back
-          </button>
-          <button
-            id="confirm-submit-btn"
-            onClick={onConfirm}
-            style={{
-              flex: 1, padding: '12px 0', background: '#ff5555', border: 'none',
-              color: '#fff', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 15,
-            }}
-          >
-            Yes, Submit Permanently
-          </button>
+        <div className="form-step-header" style={{ padding: '18px 24px' }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <h2 style={{ fontSize: 15 }}>Confirm Submission</h2>
+        </div>
+        <div className="form-step-body" style={{ gap: 20, padding: '20px 24px 24px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>
+            You are about to permanently record your boarding location. Once submitted,
+            this entry <strong style={{ color: 'var(--text-primary)' }}>cannot be modified or removed</strong> by you.
+            Please verify that the pin on the map is placed at your correct boarding point before proceeding.
+          </p>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <button
+              id="confirm-cancel-btn"
+              onClick={onCancel}
+              style={{
+                flex: 1, padding: '11px 0',
+                background: 'transparent',
+                border: '1px solid var(--accent-border)',
+                color: 'var(--text-secondary)', borderRadius: 8,
+                cursor: 'pointer', fontWeight: 600, fontSize: 14,
+                fontFamily: 'var(--font)',
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              id="confirm-submit-btn"
+              onClick={onConfirm}
+              className="btn-submit"
+              style={{ flex: 1, padding: '11px 0', justifyContent: 'center', fontSize: 14 }}
+            >
+              Confirm Submission
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -753,9 +761,10 @@ export default function FormPage() {
                           mapId="rec-boarding-map"
                           gestureHandling="greedy"
                           disableDefaultUI={false}
+                          mapTypeControl={false}
                           style={{ width: '100%', height: '100%' }}
                         >
-                          <MapSearchControl onSelect={handleSearchSelect} overlayRef={mapControlsRef} />
+                          <MapSearchControl onSelect={handleSearchSelect} />
                           <MapLayerWithRoads
                             roads={roads}
                             markerPos={markerPos}

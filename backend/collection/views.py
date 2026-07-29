@@ -1,4 +1,6 @@
 import csv
+import json
+from pathlib import Path
 
 from django.conf import settings
 from django.contrib.auth import login, logout
@@ -334,6 +336,80 @@ def roads_view(request):
         RoadSegment.objects.values_list('coordinates', flat=True)
     )
     return JsonResponse({'segments': segments})
+
+
+_GEOJSON_PATH = (
+    Path(__file__).resolve()
+    .parents[2]          # repo root: collection/ -> backend/ -> data-collection/
+    / 'datasets'
+    / 'roadTopology'
+    / 'geojson'
+    / 'SelectiveRoadTopology.geojson'
+)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def load_roads_view(request):
+    """
+    POST /api/roads/load/
+    Admin-only: reads SelectiveRoadTopology.geojson from the datasets
+    directory and bulk-inserts RoadSegment rows (skips existing osm_ids).
+    Optionally clears existing rows first if ?clear=1 is passed.
+    Response: { loaded, skipped, total_in_db }
+    """
+    if not is_admin_authorized(request):
+        return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    if not _GEOJSON_PATH.exists():
+        return Response(
+            {'detail': f'GeoJSON file not found on server: {_GEOJSON_PATH}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )
+
+    clear = request.query_params.get('clear', '0') == '1'
+    if clear:
+        RoadSegment.objects.all().delete()
+
+    with open(_GEOJSON_PATH, encoding='utf-8') as fh:
+        data = json.load(fh)
+
+    features = data.get('features', [])
+    existing_ids = set(RoadSegment.objects.values_list('osm_id', flat=True))
+
+    to_create = []
+    skipped = 0
+
+    for feat in features:
+        geom = feat.get('geometry', {})
+        if geom.get('type') != 'LineString':
+            continue
+        props = feat.get('properties', {}) or {}
+        osm_id = props.get('osm_id')
+        if osm_id is None:
+            skipped += 1
+            continue
+        if int(osm_id) in existing_ids:
+            skipped += 1
+            continue
+        to_create.append(RoadSegment(
+            osm_id=int(osm_id),
+            name=props.get('name') or '',
+            highway=props.get('highway') or '',
+            coordinates=geom['coordinates'],
+        ))
+
+    if to_create:
+        from django.db import transaction
+        with transaction.atomic():
+            RoadSegment.objects.bulk_create(to_create, batch_size=500)
+
+    return JsonResponse({
+        'loaded': len(to_create),
+        'skipped': skipped,
+        'total_in_db': RoadSegment.objects.count(),
+    })
 
 
 @csrf_exempt
