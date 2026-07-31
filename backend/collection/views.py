@@ -77,7 +77,7 @@ def login_view(request):
     # 1. Check if admin (Django auth.User with is_staff=True)
     from django.contrib.auth.models import User
     try:
-        admin_user = User.objects.get(email=email)
+        admin_user = User.objects.get(email__iexact=email)
         if admin_user.check_password(password) and admin_user.is_staff:
             token = RefreshToken.for_user(admin_user)
             token['role'] = 'admin'
@@ -93,7 +93,7 @@ def login_view(request):
 
     # 2. Check if student (custom Student model — password = full admission_number)
     try:
-        student = Student.objects.get(email=email)
+        student = Student.objects.get(email__iexact=email)
         if student.check_password(password):
             # Check if student has already submitted a location entry
             has_submitted = StudentLocation.objects.filter(roll_no=student.admission_number).exists()
@@ -338,17 +338,7 @@ def roads_view(request):
     return JsonResponse({'segments': segments})
 
 
-_GEOJSON_PATH = (
-    Path(__file__).resolve()
-    .parents[2]          # repo root: collection/ -> backend/ -> data-collection/
-    / 'datasets'
-    / 'roadTopology'
-    / 'geojson'
-    / 'SelectiveRoadTopology.geojson'
-)
-
-
-@csrf_exempt
+from .geojson_paths import road_geojson_path
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def load_roads_view(request):
@@ -362,9 +352,9 @@ def load_roads_view(request):
     if not is_admin_authorized(request):
         return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-    if not _GEOJSON_PATH.exists():
+    if not road_geojson_path().exists():
         return Response(
-            {'detail': f'GeoJSON file not found on server: {_GEOJSON_PATH}'},
+            {'detail': f'GeoJSON file not found on server: {road_geojson_path()}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
 
@@ -372,7 +362,7 @@ def load_roads_view(request):
     if clear:
         RoadSegment.objects.all().delete()
 
-    with open(_GEOJSON_PATH, encoding='utf-8') as fh:
+    with open(road_geojson_path(), encoding='utf-8') as fh:
         data = json.load(fh)
 
     features = data.get('features', [])

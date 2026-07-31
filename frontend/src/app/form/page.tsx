@@ -218,8 +218,7 @@ function MapPanTo({ target }: { target: { lat: number; lng: number } | null }) {
 }
 
 // ─── Google Places search — injected as a native Google Maps control ─────────────
-// Using map.controls ensures the input and its .pac-container dropdown
-// are in Google Maps' own stacking context, fixing all z-index issues.
+// Uses PlaceAutocompleteElement (legacy Autocomplete is blocked for new API keys).
 function MapSearchControl({
   onSelect,
 }: {
@@ -227,83 +226,124 @@ function MapSearchControl({
 }) {
   const map = useMap();
   const placesLib = useMapsLibrary('places');
-  // Keep a stable ref to onSelect so the effect doesn't re-run when it changes
   const onSelectRef = useRef(onSelect);
   useEffect(() => { onSelectRef.current = onSelect; }, [onSelect]);
 
   useEffect(() => {
     if (!map || !placesLib) return;
 
-    // Build the search bar DOM (outside React, lives inside Google Maps control)
     const container = document.createElement('div');
     container.className = 'map-search-overlay';
-    container.style.margin = '10px 0 0 10px';
 
-    const bar = document.createElement('div');
-    bar.className = 'map-search-bar';
-
-    // Search icon
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', '18'); svg.setAttribute('height', '18');
-    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', '#70757a'); svg.setAttribute('stroke-width', '2.5');
-    svg.setAttribute('aria-hidden', 'true');
-    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('cx', '11'); circle.setAttribute('cy', '11'); circle.setAttribute('r', '8');
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', '21'); line.setAttribute('y1', '21');
-    line.setAttribute('x2', '16.65'); line.setAttribute('y2', '16.65');
-    svg.appendChild(circle); svg.appendChild(line);
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.className = 'map-search-input';
-    input.placeholder = 'Search Google Maps';
-    input.setAttribute('autocomplete', 'off');
-    input.setAttribute('aria-label', 'Search location on map');
-    // Prevent Enter from propagating outside the input
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') e.stopPropagation();
-    });
-
-    bar.appendChild(svg);
-    bar.appendChild(input);
-    container.appendChild(bar);
-
-    // Register as a Google Maps control (TOP_LEFT)
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(container);
 
-    // Initialise Autocomplete on the input
-    const bounds = new google.maps.LatLngBounds(
-      { lat: CHENNAI_BOUNDS.south, lng: CHENNAI_BOUNDS.west },
-      { lat: CHENNAI_BOUNDS.north, lng: CHENNAI_BOUNDS.east },
-    );
-    const autocomplete = new placesLib.Autocomplete(input, {
-      fields: ['geometry', 'formatted_address', 'name'],
-      componentRestrictions: { country: 'in' },
-      bounds,
-      strictBounds: false,
-    });
-    autocomplete.bindTo('bounds', map);
+    const cleanupFns: Array<() => void> = [];
 
-    const listener = autocomplete.addListener('place_changed', () => {
-      const place = autocomplete.getPlace();
-      const location = place.geometry?.location;
-      if (!location) return;
-
-      const lat = location.lat();
-      const lng = location.lng();
-      const address = place.formatted_address ?? place.name ?? `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-
+    const handlePlace = (lat: number, lng: number, address: string) => {
       map.panTo({ lat, lng });
       map.setZoom(15);
-      input.value = address;
       onSelectRef.current(lat, lng, address);
-    });
+    };
+
+    if ('PlaceAutocompleteElement' in placesLib) {
+      const PlaceAutocompleteElement = placesLib.PlaceAutocompleteElement as typeof google.maps.places.PlaceAutocompleteElement;
+      const placeAutocomplete = new PlaceAutocompleteElement({
+        includedRegionCodes: ['in'],
+      });
+      placeAutocomplete.placeholder = 'Search Google Maps';
+      placeAutocomplete.locationBias = {
+        center: CHENNAI_CENTER,
+        radius: 50_000,
+      };
+      placeAutocomplete.className = 'map-search-widget';
+      container.appendChild(placeAutocomplete);
+
+      const onPlaceSelect = async (event: Event) => {
+        const { placePrediction } = event as google.maps.places.PlacePredictionSelectEvent;
+        if (!placePrediction) return;
+        const place = placePrediction.toPlace();
+        await place.fetchFields({
+          fields: ['displayName', 'formattedAddress', 'location'],
+        });
+        const location = place.location;
+        if (!location) return;
+        const lat = location.lat();
+        const lng = location.lng();
+        const address =
+          place.formattedAddress ??
+          place.displayName ??
+          `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+        handlePlace(lat, lng, address);
+      };
+
+      placeAutocomplete.addEventListener('gmp-select', onPlaceSelect);
+      cleanupFns.push(() => placeAutocomplete.removeEventListener('gmp-select', onPlaceSelect));
+
+      const boundsListener = map.addListener('bounds_changed', () => {
+        const bounds = map.getBounds();
+        if (bounds) placeAutocomplete.locationBias = bounds;
+      });
+      cleanupFns.push(() => google.maps.event.removeListener(boundsListener));
+    } else {
+      const bar = document.createElement('div');
+      bar.className = 'map-search-bar';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', '18'); svg.setAttribute('height', '18');
+      svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none');
+      svg.setAttribute('stroke', '#70757a'); svg.setAttribute('stroke-width', '2.5');
+      svg.setAttribute('aria-hidden', 'true');
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', '11'); circle.setAttribute('cy', '11'); circle.setAttribute('r', '8');
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', '21'); line.setAttribute('y1', '21');
+      line.setAttribute('x2', '16.65'); line.setAttribute('y2', '16.65');
+      svg.appendChild(circle); svg.appendChild(line);
+      bar.appendChild(svg);
+      container.appendChild(bar);
+
+      // Fallback for older Maps builds that still expose legacy Autocomplete.
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'map-search-input';
+      input.placeholder = 'Search Google Maps';
+      input.setAttribute('autocomplete', 'off');
+      input.setAttribute('aria-label', 'Search location on map');
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') e.stopPropagation();
+      });
+      bar.appendChild(input);
+
+      const bounds = new google.maps.LatLngBounds(
+        { lat: CHENNAI_BOUNDS.south, lng: CHENNAI_BOUNDS.west },
+        { lat: CHENNAI_BOUNDS.north, lng: CHENNAI_BOUNDS.east },
+      );
+      const autocomplete = new placesLib.Autocomplete(input, {
+        fields: ['geometry', 'formatted_address', 'name'],
+        componentRestrictions: { country: 'in' },
+        bounds,
+        strictBounds: false,
+      });
+      autocomplete.bindTo('bounds', map);
+
+      const listener = autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        const location = place.geometry?.location;
+        if (!location) return;
+        const lat = location.lat();
+        const lng = location.lng();
+        const address = place.formatted_address ?? place.name ?? `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+        input.value = address;
+        handlePlace(lat, lng, address);
+      });
+      cleanupFns.push(() => {
+        google.maps.event.removeListener(listener);
+        autocomplete.unbind('bounds');
+      });
+    }
 
     return () => {
-      google.maps.event.removeListener(listener);
-      autocomplete.unbind('bounds');
+      cleanupFns.forEach((fn) => fn());
       const controls = map.controls[google.maps.ControlPosition.TOP_LEFT];
       for (let i = 0; i < controls.getLength(); i++) {
         if (controls.getAt(i) === container) { controls.removeAt(i); break; }
@@ -311,7 +351,7 @@ function MapSearchControl({
     };
   }, [map, placesLib]);
 
-  return null; // DOM is managed imperatively via map.controls
+  return null;
 }
 
 // ─── Map layer for read-only view (just a pin, no roads) ────────────────────────────────────
@@ -574,7 +614,7 @@ export default function FormPage() {
   );
 
   return (
-    <APIProvider apiKey={GOOGLE_MAPS_API_KEY} libraries={['places', 'marker']}>
+    <APIProvider apiKey={GOOGLE_MAPS_API_KEY} libraries={['places', 'marker']} region="IN">
       <div className="form-page">
         {/* ── Topbar ── */}
         <header className="form-topbar">

@@ -715,13 +715,18 @@ a {
 
 /* ─── MAP SEARCH BAR (Google Maps style overlay) ─── */
 .map-search-overlay {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 56px;
+  margin: 10px 0 0 10px;
   max-width: 380px;
   pointer-events: auto;
-  z-index: 6;
+}
+
+.map-search-overlay .map-search-widget,
+.map-search-overlay gmp-place-autocomplete {
+  display: block;
+  width: min(380px, calc(100vw - 120px));
+  color-scheme: light;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  border-radius: 2px;
 }
 
 .map-search-bar {

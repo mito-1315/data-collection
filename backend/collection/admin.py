@@ -29,5 +29,13 @@ class StudentAdmin(admin.ModelAdmin):
     ordering = ['admission_number']
     readonly_fields = ['password', 'created_at']
 
+    def save_model(self, request, obj, form, change):
+        from collection.views import get_default_password
+
+        super().save_model(request, obj, form, change)
+        if not change or not obj.check_password(get_default_password(obj.admission_number)):
+            obj.set_password(get_default_password(obj.admission_number))
+            obj.save(update_fields=['password'])
+
     def has_delete_permission(self, request, obj=None):
         return True

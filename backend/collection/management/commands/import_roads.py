@@ -15,15 +15,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
 from collection.models import RoadSegment
-
-DEFAULT_GEOJSON = (
-    Path(__file__).resolve()
-    .parents[4]          # repo root: commands -> management -> collection -> backend -> data-collection
-    / 'datasets'
-    / 'roadTopology'
-    / 'geojson'
-    / 'SelectiveRoadTopology.geojson'
-)
+from collection.geojson_paths import road_geojson_path
 
 
 class Command(BaseCommand):
@@ -32,7 +24,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--geojson',
-            default=str(DEFAULT_GEOJSON),
+            default='',
             help='Path to the SelectiveRoadTopology.geojson file.',
         )
         parser.add_argument(
@@ -43,7 +35,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        path = Path(options['geojson'])
+        path = Path(options['geojson']) if options['geojson'] else road_geojson_path()
         if not path.exists():
             raise CommandError(f'GeoJSON file not found: {path}')
 
