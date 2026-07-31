@@ -13,6 +13,12 @@ function isAdminEmail(email: string): boolean {
   return email.trim().toLowerCase() === ADMIN_EMAIL.toLowerCase();
 }
 
+interface LoginConfig {
+  is_open: boolean;
+  note_message: string;
+  bypass_emails: string[];
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -20,6 +26,10 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [bannerIndex, setBannerIndex] = useState(0);
+
+  // Login gate state
+  const [loginConfig, setLoginConfig] = useState<LoginConfig | null>(null);
+  const [showClosedModal, setShowClosedModal] = useState(false);
 
   // Slideshow: advance every 4 seconds
   useEffect(() => {
@@ -29,12 +39,36 @@ export default function LoginPage() {
     return () => clearInterval(timer);
   }, []);
 
+  // Fetch login gate status on mount
+  useEffect(() => {
+    fetch(`${API}/api/auth/login-status/`)
+      .then((res) => res.json())
+      .then((data: LoginConfig) => setLoginConfig(data))
+      .catch(() => {
+        // If status fetch fails, default to open so users aren't locked out by a network error
+        setLoginConfig({ is_open: true, note_message: '', bypass_emails: [] });
+      });
+  }, []);
+
+  // Derived: is the current email in the bypass list?
+  const isBypassUser = Boolean(
+    email && loginConfig?.bypass_emails?.includes(email.trim().toLowerCase())
+  );
+  // Is login effectively closed for this email?
+  const isClosed = loginConfig !== null && !loginConfig.is_open && !isBypassUser;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
     if (isAdminEmail(email)) {
       setError('This looks like an admin account. Please use the Admin Portal to log in.');
+      return;
+    }
+
+    // Frontend gate: block submission if login is closed and not bypassed
+    if (isClosed) {
+      setShowClosedModal(true);
       return;
     }
 
@@ -57,7 +91,12 @@ export default function LoginPage() {
         router.push('/form');
       } else {
         const data = await res.json().catch(() => ({}));
-        setError(data.detail ?? 'Invalid username or password. Please try again.');
+        // Backend enforces login gate too — surface a modal for login_closed
+        if (data.code === 'login_closed') {
+          setShowClosedModal(true);
+        } else {
+          setError(data.detail ?? 'Invalid username or password. Please try again.');
+        }
       }
     } catch {
       setError('Could not reach the server. Is the backend running?');
@@ -109,6 +148,19 @@ export default function LoginPage() {
           Sign in with your email and your full admission number as your password.
         </p>
 
+        {/* ── Notice Banner (shown when login is closed) ── */}
+        {loginConfig && !loginConfig.is_open && (
+          <div className="login-notice-banner" role="alert">
+            <span className="login-notice-icon">⚠️</span>
+            <div className="login-notice-content">
+              <span className="login-notice-title">Student Login Closed</span>
+              <span className="login-notice-message">
+                {loginConfig.note_message || 'Student login is currently closed. Please check back later.'}
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Form */}
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-field">
@@ -145,14 +197,39 @@ export default function LoginPage() {
             id="login-submit-btn"
             type="submit"
             className="login-submit-btn"
-            disabled={loading || !email || !password}
+            disabled={loading || !email || !password || isClosed}
+            title={isClosed ? 'Login is currently closed' : undefined}
           >
             {loading ? 'Signing in…' : 'Sign in'}
           </button>
+
+          {/* Bypass hint: shown only if login is closed but current email is a bypass */}
+          {loginConfig && !loginConfig.is_open && isBypassUser && (
+            <p style={{ textAlign: 'center', fontSize: 12, color: 'var(--green)', marginTop: 4 }}>
+              ✓ Your email has bypass access — you may log in.
+            </p>
+          )}
         </form>
-
-
       </div>
+
+      {/* ── Closed Modal Popup ── */}
+      {showClosedModal && (
+        <div className="login-closed-overlay" onClick={() => setShowClosedModal(false)}>
+          <div className="login-closed-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="login-closed-modal-icon">⚠️</div>
+            <div className="login-closed-modal-title">Student Login Closed</div>
+            <div className="login-closed-modal-message">
+              {loginConfig?.note_message || 'Student login is currently closed. Please check back later or contact support.'}
+            </div>
+            <button
+              className="login-closed-modal-btn"
+              onClick={() => setShowClosedModal(false)}
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

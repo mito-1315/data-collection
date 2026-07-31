@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StudentLocation, Student, Department
+from .models import StudentLocation, Student, Department, LoginConfig
 
 
 @admin.register(Department)
@@ -39,3 +39,29 @@ class StudentAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return True
+
+
+@admin.register(LoginConfig)
+class LoginConfigAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'is_open', 'short_note']
+    fieldsets = (
+        ('Login Controls', {
+            'fields': ('is_open', 'note_message')
+        }),
+        ('Bypass Settings', {
+            'fields': ('bypass_emails',),
+            'description': 'Emails listed here can log in even when "Login Open?" is unchecked.',
+        }),
+    )
+
+    def short_note(self, obj):
+        return (obj.note_message[:60] + '...') if len(obj.note_message) > 60 else obj.note_message
+    short_note.short_description = 'Notice Message'
+
+    def has_add_permission(self, request):
+        if LoginConfig.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return False

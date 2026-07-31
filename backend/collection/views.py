@@ -13,7 +13,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from .models import StudentLocation, RoadSegment, Student
+from .models import StudentLocation, RoadSegment, Student, LoginConfig
 from .serializers import StudentLocationSerializer, StudentSerializer
 
 
@@ -57,6 +57,25 @@ def is_admin_authorized(request):
 # ─── Auth ─────────────────────────────────────────────────────────────────────
 
 @csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def login_status_view(request):
+    """
+    GET /api/auth/login-status/
+    Returns the current login gate configuration:
+      { is_open, note_message, bypass_emails }
+    Used by the frontend to conditionally show the notice banner
+    and enable/disable the Sign In button.
+    """
+    config = LoginConfig.get_solo()
+    return Response({
+        'is_open': config.is_open,
+        'note_message': config.note_message,
+        'bypass_emails': config.get_bypass_list(),
+    })
+
+
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login_view(request):
@@ -75,6 +94,7 @@ def login_view(request):
         return Response({'detail': 'Email and password required.'}, status=status.HTTP_400_BAD_REQUEST)
 
     # 1. Check if admin (Django auth.User with is_staff=True)
+    # Admin accounts always bypass the login gate.
     from django.contrib.auth.models import User
     try:
         admin_user = User.objects.get(email__iexact=email)
@@ -91,7 +111,15 @@ def login_view(request):
     except User.DoesNotExist:
         pass
 
-    # 2. Check if student (custom Student model — password = full admission_number)
+    # 2. Check login gate before allowing student authentication
+    config = LoginConfig.get_solo()
+    if not config.is_email_allowed(email):
+        return Response(
+            {'detail': config.note_message, 'code': 'login_closed'},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
+    # 3. Check if student (custom Student model — password = full admission_number)
     try:
         student = Student.objects.get(email__iexact=email)
         if student.check_password(password):

@@ -401,6 +401,18 @@ function ConfirmModal({ onConfirm, onCancel }: { onConfirm: () => void; onCancel
             this entry <strong style={{ color: 'var(--text-primary)' }}>cannot be modified or removed</strong> by you.
             Please verify that the pin on the map is placed at your correct boarding point before proceeding.
           </p>
+          <div style={{
+            display: 'flex', alignItems: 'flex-start', gap: 10,
+            background: 'rgba(245, 158, 11, 0.07)',
+            border: '1px solid rgba(245, 158, 11, 0.28)',
+            borderRadius: 8, padding: '12px 14px',
+          }}>
+            <span style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.3 }}>ℹ️</span>
+            <p style={{ margin: 0, fontSize: 13, color: 'rgba(251,191,36,0.85)', lineHeight: 1.65 }}>
+              <strong style={{ color: '#fbbf24' }}>Please Note:</strong> The preferred boarding point can be changed
+              by the Transport Department to ensure an optimized bus route.
+            </p>
+          </div>
           <div style={{ display: 'flex', gap: 10 }}>
             <button
               id="confirm-cancel-btn"

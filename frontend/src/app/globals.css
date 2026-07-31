@@ -830,3 +830,104 @@ a {
   to   { opacity: 1; transform: translate(-50%, 0); }
 }
 
+
+/* ─── LOGIN NOTICE BANNER (shown when login is closed) ─── */
+.login-notice-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  animation: fadeSlideUp 0.35s ease;
+}
+
+.login-notice-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.login-notice-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.login-notice-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 0.01em;
+}
+
+.login-notice-message {
+  font-size: 13px;
+  color: rgba(251, 191, 36, 0.8);
+  line-height: 1.55;
+}
+
+/* Closed overlay modal */
+.login-closed-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 6, 10, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  padding: 24px;
+  animation: fadeIn 0.25s ease;
+}
+
+.login-closed-modal {
+  background: var(--bg-card);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 16px;
+  padding: 36px 32px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  animation: fadeSlideUp 0.3s ease;
+}
+
+.login-closed-modal-icon {
+  font-size: 40px;
+  margin-bottom: 14px;
+}
+
+.login-closed-modal-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fbbf24;
+  margin-bottom: 10px;
+}
+
+.login-closed-modal-message {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.login-closed-modal-btn {
+  width: 100%;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  color: #fbbf24;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.login-closed-modal-btn:hover {
+  background: rgba(245, 158, 11, 0.25);
+}

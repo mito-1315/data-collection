@@ -87,3 +87,54 @@ class RoadSegment(models.Model):
 
     def __str__(self):
         return f'{self.highway} – {self.name or self.osm_id}'
+
+
+class LoginConfig(models.Model):
+    """
+    Singleton model to control student login access.
+    Managed via Django Admin — only one row should ever exist.
+    """
+    is_open = models.BooleanField(
+        default=False,
+        verbose_name="Login Open?",
+        help_text="Check to open student login. Uncheck to close it."
+    )
+    note_message = models.TextField(
+        default="Student login is currently closed. Please check back later or contact support.",
+        verbose_name="Notice Message",
+        help_text="Message displayed to students when login is closed."
+    )
+    bypass_emails = models.TextField(
+        blank=True,
+        default="",
+        verbose_name="Bypass Emails",
+        help_text="Enter emails (one per line or comma-separated) allowed to log in even when login is closed."
+    )
+
+    class Meta:
+        verbose_name = "Login Configuration"
+        verbose_name_plural = "Login Configuration"
+
+    def __str__(self):
+        return f"Login Status: {'OPEN' if self.is_open else 'CLOSED'}"
+
+    @classmethod
+    def get_solo(cls):
+        """Retrieve or create the single configuration instance."""
+        obj, _ = cls.objects.get_or_create(id=1)
+        return obj
+
+    def get_bypass_list(self):
+        """Return a list of normalised bypass email addresses."""
+        if not self.bypass_emails:
+            return []
+        raw_list = self.bypass_emails.replace(',', '\n').splitlines()
+        return [e.strip().lower() for e in raw_list if e.strip()]
+
+    def is_email_allowed(self, email: str) -> bool:
+        """Return True if login is open, or if the email is in the bypass list."""
+        if self.is_open:
+            return True
+        if not email:
+            return False
+        return email.strip().lower() in self.get_bypass_list()
