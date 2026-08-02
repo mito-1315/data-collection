@@ -89,6 +89,11 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
+            'OPTIONS': {
+                # Wait up to 30 s for write-lock instead of failing immediately.
+                # Essential for concurrent parallel requests on SQLite.
+                'timeout': 30,
+            },
         }
     }
 

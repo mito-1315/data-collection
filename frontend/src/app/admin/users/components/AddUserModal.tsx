@@ -4,29 +4,28 @@ import { useState } from 'react';
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
 
+export interface ParsedStudentRow {
+  email: string;
+  admission_number: string;
+}
+
 interface AddUserModalProps {
   onClose: () => void;
   onRefresh: () => void;
+  onStartImport: (rows: ParsedStudentRow[]) => void;
 }
 
-interface DuplicateEntry {
-  roll_number: string;
-  name: string;
-  email: string;
-  department: string;
-}
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) {
+export default function AddUserModal({ onClose, onRefresh, onStartImport }: AddUserModalProps) {
   const [mode, setMode] = useState<'single' | 'multiple'>('multiple');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [duplicates, setDuplicates] = useState<DuplicateEntry[]>([]);
 
-  // Single mode state — only email and admission_number
+  // Single mode
   const [form, setForm] = useState({ email: '', admission_number: '' });
 
-  // Validate admission number: digits only, any length >= 4
   const validateAdmissionNumber = (num: string): string | null => {
     if (!num) return 'Admission number is required.';
     if (!/^\d+$/.test(num)) return 'Admission number must contain only digits.';
@@ -36,95 +35,81 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
   const handleSingleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setDuplicates([]);
 
     const admError = validateAdmissionNumber(form.admission_number);
     if (admError) { setError(admError); return; }
 
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/students/`, {
+      const res = await fetch(`${API_BASE}/api/students/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
       });
       const data = await res.json();
       if (res.ok) {
-        setSuccess(`Student added! Password: ${form.admission_number} (full admission number)`);
+        setSuccess(`✅ Student added! Password: ${form.admission_number}`);
         onRefresh();
-        setTimeout(onClose, 2500);
+        setTimeout(onClose, 2000);
       } else if (res.status === 409 && data.duplicate) {
-        // Duplicate found — display it neatly
-        setDuplicates([data.duplicate]);
-        setError('This student already exists in the system.');
+        setError(`Duplicate: ${data.duplicate.email} (${data.duplicate.roll_number}) already exists.`);
       } else {
-        setError(JSON.stringify(data));
+        // Show all error details
+        const msgs = Object.entries(data as Record<string, unknown>)
+          .flatMap(([field, errs]) =>
+            Array.isArray(errs) ? errs.map(m => `${field}: ${m}`) : [`${field}: ${String(errs)}`]
+          )
+          .join('\n');
+        setError(msgs || JSON.stringify(data));
       }
     } catch {
-      setError('Failed to create student.');
+      setError('Failed to create student. Check your connection.');
     } finally {
       setLoading(false);
     }
   };
 
-  const processRows = async (rows: Record<string, string>[]) => {
+  // Parse file rows, validate, then hand off to parent for background import
+  const processRows = (rows: Record<string, string>[]) => {
     setError('');
 
-    // Required columns
+    if (rows.length === 0) {
+      setError('The file is empty.');
+      return;
+    }
+
     const required = ['email', 'admission_number'];
     const firstRow = rows[0] || {};
     const missing = required.filter(col => !(col in firstRow));
     if (missing.length > 0) {
-      setError(`Missing columns: ${missing.join(', ')}. Only "email" and "admission_number" columns are required.`);
+      setError(`Missing columns: ${missing.join(', ')}. Required: "email" and "admission_number".`);
       return;
     }
 
-    // Validate all rows
+    // Validate all rows upfront
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
       const admError = validateAdmissionNumber(String(row.admission_number || '').trim());
       if (admError) {
-        setError(`Row ${i + 1}: ${admError} (value: "${row.admission_number}")`);
+        setError(`Row ${i + 1}: ${admError} (got: "${row.admission_number}")`);
         return;
       }
       if (!row.email || !row.email.includes('@')) {
-        setError(`Row ${i + 1}: Invalid email address "${row.email}".`);
+        setError(`Row ${i + 1}: Invalid email "${row.email}".`);
         return;
       }
     }
 
-    setLoading(true);
-    try {
-      const payload = rows.map(r => ({
-        email: String(r.email).trim(),
-        admission_number: String(r.admission_number).trim(),
-      }));
+    const parsed: ParsedStudentRow[] = rows.map(r => ({
+      email: String(r.email).trim(),
+      admission_number: String(r.admission_number).trim(),
+    }));
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/students/bulk/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (res.ok && data.errors?.length === 0) {
-        setSuccess(`Successfully added ${data.created} students. Passwords = full admission number for each student.`);
-        onRefresh();
-        setTimeout(onClose, 2500);
-      } else {
-        setError(`Added ${data.created}. Errors: ${JSON.stringify(data.errors)}`);
-        onRefresh();
-      }
-    } catch {
-      setError('Failed to upload students.');
-    } finally {
-      setLoading(false);
-    }
+    // Hand off to parent — modal closes immediately, progress shown on main page
+    onStartImport(parsed);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,32 +122,34 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
       Papa.parse(file, {
         header: true,
         skipEmptyLines: true,
-        complete: async (results) => {
-          await processRows(results.data as Record<string, string>[]);
-        }
+        complete: (results) => {
+          processRows(results.data as Record<string, string>[]);
+        },
       });
     } else if (ext === 'xlsx' || ext === 'xls') {
       const reader = new FileReader();
-      reader.onload = async (ev) => {
+      reader.onload = (ev) => {
         try {
           const data = ev.target?.result;
           const workbook = XLSX.read(data, { type: 'array' });
           const sheet = workbook.Sheets[workbook.SheetNames[0]];
           const rows = XLSX.utils.sheet_to_json<Record<string, string>>(sheet, { defval: '' });
-          await processRows(rows);
+          processRows(rows);
         } catch {
           setError('Failed to read Excel file. Please use a valid .xlsx or .xls file.');
         }
       };
       reader.readAsArrayBuffer(file);
     } else {
-      setError('Unsupported file type. Please upload a .csv, .xlsx, or .xls file.');
+      setError('Unsupported file type. Please upload .csv, .xlsx, or .xls.');
     }
+
+    e.target.value = '';
   };
 
   const downloadSampleCSV = () => {
-    const csvContent = 'email,admission_number\nluffy@example.com,230701184\nnami@example.com,230701185\n';
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const csv = 'email,admission_number\nluffy@example.com,230701184\nnami@example.com,230701185\n';
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -184,26 +171,24 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
     XLSX.writeFile(wb, 'sample_students.xlsx');
   };
 
-  const passwordPreview = form.admission_number || 'full admission number';
-
   return (
     <div style={{
       position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100
+      display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100,
     }}>
       <div style={{
         background: 'var(--bg-card)', padding: 32, borderRadius: 16,
-        width: '100%', maxWidth: duplicates.length > 0 ? 680 : 520,
+        width: '100%', maxWidth: 520,
         border: '1px solid var(--accent-border)',
         maxHeight: '90vh', overflowY: 'auto',
-        transition: 'max-width 0.25s ease',
       }}>
+        {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
           <h2 style={{ margin: 0, color: '#fff' }}>Add Students</h2>
           <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: 20 }}>✕</button>
         </div>
 
-        {/* Password info banner */}
+        {/* Password info */}
         <div style={{
           background: 'rgba(155,89,245,0.1)', border: '1px solid rgba(155,89,245,0.3)',
           borderRadius: 8, padding: '10px 14px', marginBottom: 20, fontSize: 13,
@@ -213,90 +198,69 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
           <span>
             Password is automatically set to the{' '}
             <strong style={{ color: '#fff' }}>full admission number</strong>.{' '}
-            Example: admission <code style={{ color: '#9b59f5' }}>01202519421</code> → password:{' '}
+            Example: <code style={{ color: '#9b59f5' }}>01202519421</code> → password:{' '}
             <code style={{ color: '#9b59f5' }}>01202519421</code>
           </span>
         </div>
 
         {/* Mode tabs */}
         <div style={{ display: 'flex', gap: 8, background: 'rgba(255,255,255,0.05)', padding: 4, borderRadius: 8, marginBottom: 24 }}>
-          <button
-            style={{ flex: 1, padding: '8px 0', border: 'none', borderRadius: 4, background: mode === 'multiple' ? 'var(--accent)' : 'transparent', color: mode === 'multiple' ? '#fff' : 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600 }}
-            onClick={() => setMode('multiple')}
-          >Multiple (CSV / Excel)</button>
-          <button
-            style={{ flex: 1, padding: '8px 0', border: 'none', borderRadius: 4, background: mode === 'single' ? 'var(--accent)' : 'transparent', color: mode === 'single' ? '#fff' : 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600 }}
-            onClick={() => setMode('single')}
-          >Single Form</button>
+          {(['multiple', 'single'] as const).map(m => (
+            <button
+              key={m}
+              style={{
+                flex: 1, padding: '8px 0', border: 'none', borderRadius: 4,
+                background: mode === m ? 'var(--accent)' : 'transparent',
+                color: mode === m ? '#fff' : 'var(--text-secondary)',
+                cursor: 'pointer', fontWeight: 600, fontFamily: 'var(--font)',
+              }}
+              onClick={() => setMode(m)}
+            >
+              {m === 'multiple' ? 'Multiple (CSV / Excel)' : 'Single Form'}
+            </button>
+          ))}
         </div>
 
-        {error && <div style={{ color: '#ff5555', background: 'rgba(255,85,85,0.1)', padding: 12, borderRadius: 8, marginBottom: 16, fontSize: 13 }}>{error}</div>}
-        {success && <div style={{ color: '#50fa7b', background: 'rgba(80,250,123,0.1)', padding: 12, borderRadius: 8, marginBottom: 16, fontSize: 13 }}>{success}</div>}
-
-        {/* ── Duplicates Panel ── */}
-        {duplicates.length > 0 && (
+        {/* Alerts */}
+        {error && (
           <div style={{
-            background: 'rgba(255,184,108,0.06)',
-            border: '1px solid rgba(255,184,108,0.3)',
-            borderRadius: 10,
-            marginBottom: 20,
-            overflow: 'hidden',
+            color: '#ff5555', background: 'rgba(255,85,85,0.1)', padding: 12,
+            borderRadius: 8, marginBottom: 16, fontSize: 13, whiteSpace: 'pre-line',
           }}>
-            <div style={{
-              padding: '10px 16px',
-              borderBottom: '1px solid rgba(255,184,108,0.2)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              background: 'rgba(255,184,108,0.08)',
-            }}>
-              <span style={{ fontSize: 16 }}>⚠️</span>
-              <strong style={{ color: '#ffb86c', fontSize: 13 }}>
-                {duplicates.length} Duplicate{duplicates.length !== 1 ? 's' : ''} Found — Already in System
-              </strong>
-            </div>
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
-                <thead>
-                  <tr style={{ background: 'rgba(255,255,255,0.02)' }}>
-                    <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left', whiteSpace: 'nowrap' }}>Admission Number</th>
-                    <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left' }}>Name</th>
-                    <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left' }}>Email</th>
-                    <th style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'left' }}>Department</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {duplicates.map((d, i) => (
-                    <tr key={i} style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-                      <td style={{ padding: '8px 14px', color: '#ffb86c', fontFamily: 'monospace', fontWeight: 600 }}>{d.roll_number}</td>
-                      <td style={{ padding: '8px 14px', color: 'var(--text-primary)' }}>{d.name}</td>
-                      <td style={{ padding: '8px 14px', color: 'var(--text-secondary)' }}>{d.email}</td>
-                      <td style={{ padding: '8px 14px', color: 'var(--text-secondary)' }}>{d.department}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            {error}
+          </div>
+        )}
+        {success && (
+          <div style={{ color: '#50fa7b', background: 'rgba(80,250,123,0.1)', padding: 12, borderRadius: 8, marginBottom: 16, fontSize: 13 }}>
+            {success}
           </div>
         )}
 
-        {mode === 'multiple' ? (
+        {/* ── Multiple mode ── */}
+        {mode === 'multiple' && (
           <div>
-            <div style={{ border: '2px dashed var(--accent-border)', padding: 40, textAlign: 'center', borderRadius: 8, position: 'relative' }}>
+            <div style={{
+              border: '2px dashed var(--accent-border)', padding: 40,
+              textAlign: 'center', borderRadius: 8, position: 'relative',
+            }}>
               <input
                 type="file"
                 accept=".csv,.xlsx,.xls"
                 onChange={handleFileUpload}
-                disabled={loading}
                 style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', width: '100%', height: '100%' }}
               />
-              <div style={{ fontSize: 24, marginBottom: 8 }}>📁</div>
-              <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Click or drag CSV / Excel file to upload</div>
-              <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 4 }}>
+              <div style={{ fontSize: 32, marginBottom: 10 }}>📁</div>
+              <div style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: 15 }}>
+                Click or drag CSV / Excel file here
+              </div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 6 }}>
                 Required columns: <code>email</code>, <code>admission_number</code>
               </div>
-              <div style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 4 }}>
-                Supports .csv, .xlsx, .xls — No password column needed
+              <div style={{
+                marginTop: 12, padding: '8px 14px', borderRadius: 6, fontSize: 12,
+                background: 'rgba(139,92,246,0.08)', color: '#a78bfa', display: 'inline-block',
+              }}>
+                ⚡ Upload starts instantly with 5 parallel workers — track progress on the main page
               </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginTop: 16 }}>
@@ -308,7 +272,10 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
               </button>
             </div>
           </div>
-        ) : (
+        )}
+
+        {/* ── Single mode ── */}
+        {mode === 'single' && (
           <form onSubmit={handleSingleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div className="form-field" style={{ marginBottom: 0 }}>
               <label className="form-label">Email Address</label>
@@ -333,12 +300,11 @@ export default function AddUserModal({ onClose, onRefresh }: AddUserModalProps) 
                 inputMode="numeric"
               />
             </div>
-            {/* Live password preview */}
             <div style={{
               background: 'rgba(155,89,245,0.08)', borderRadius: 6, padding: '8px 12px',
               fontSize: 12, color: 'var(--text-secondary)',
             }}>
-              🔑 Password will be: <strong style={{ color: '#9b59f5' }}>{passwordPreview}</strong>
+              🔑 Password will be: <strong style={{ color: '#9b59f5' }}>{form.admission_number || 'full admission number'}</strong>
             </div>
             <button type="submit" className="btn-submit" disabled={loading} style={{ marginTop: 8 }}>
               {loading ? 'Adding...' : 'Add Student'}

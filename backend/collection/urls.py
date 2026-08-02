@@ -26,6 +26,7 @@ urlpatterns = [
     path('students/',              views.student_list,        name='student-list'),
     path('students/bulk/',         views.student_bulk,        name='student-bulk'),
     path('students/bulk_delete/',  views.student_bulk_delete, name='student-bulk-delete'),
+    path('students/clear_all/',    views.student_clear_all,   name='student-clear-all'),
     path('students/<int:pk>/',     views.student_detail,      name='student-detail'),
 
     # ── Departments ────────────────────────────────────────────────

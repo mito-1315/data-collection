@@ -654,10 +654,9 @@ def student_bulk(request):
     POST /api/students/bulk/
     Receives JSON array of students to create.
 
-    Only 'email' and 'admission_number' are required per row.
-    Password is NOT required in the payload. It is auto-set to the
-    full admission_number for each student.
-    Any 'password' field present in the payload is silently ignored.
+    Uses bulk_create() so the entire batch is inserted in a single SQL
+    statement rather than one INSERT per student. This avoids SQLite
+    'database is locked' errors when multiple parallel requests arrive.
 
     Returns:
       { created: int, duplicates: [{roll_number, name, email, department}], errors: [...] }
@@ -669,38 +668,65 @@ def student_bulk(request):
     if not isinstance(students_data, list):
         return Response({'detail': 'Expected a list of objects.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    created_count = 0
-    duplicates = []
-    errors = []
+    # Strip password from every item upfront
+    clean_items = [{k: v for k, v in item.items() if k != 'password'} for item in students_data]
 
-    for item in students_data:
-        # Strip any password from incoming data — we derive it ourselves
-        clean_item = {k: v for k, v in item.items() if k != 'password'}
+    # ── Step 1: Bulk-check existing records in 2 queries (not N×2) ──────────
+    incoming_rolls  = [str(item.get('admission_number', '')).strip() for item in clean_items]
+    incoming_emails = [str(item.get('email', '')).strip() for item in clean_items]
 
-        # Check for duplicates by admission_number or email before attempting create
-        roll = str(clean_item.get('admission_number', '')).strip()
-        email = str(clean_item.get('email', '')).strip()
-        existing = Student.objects.filter(admission_number=roll).first() or Student.objects.filter(email=email).first()
-        if existing:
+    existing_rolls  = set(Student.objects.filter(admission_number__in=incoming_rolls)
+                                         .values_list('admission_number', flat=True))
+    existing_emails = set(Student.objects.filter(email__in=incoming_emails)
+                                         .values_list('email', flat=True))
+
+    # ── Step 2: Build Student objects in Python (zero DB hits in this loop) ──
+    to_create   = []
+    duplicates  = []
+    errors      = []
+    seen_rolls  = set(existing_rolls)   # also catch within-batch duplicates
+    seen_emails = set(existing_emails)
+
+    for item in clean_items:
+        roll  = str(item.get('admission_number', '')).strip()
+        email = str(item.get('email', '')).strip()
+
+        if roll in seen_rolls or email in seen_emails:
             duplicates.append({
-                'roll_number': existing.admission_number,
+                'roll_number': roll,
                 'name': '',
-                'email': existing.email,
+                'email': email,
                 'department': '',
             })
             continue
 
-        serializer = StudentSerializer(data=clean_item)
-        if serializer.is_valid():
-            student = serializer.save()
-            default_pwd = get_default_password(student.admission_number)
-            student.set_password(default_pwd)
-            student.save()
-            created_count += 1
-        else:
-            errors.append({'admission_number': item.get('admission_number'), 'errors': serializer.errors})
+        serializer = StudentSerializer(data=item)
+        if not serializer.is_valid():
+            errors.append({'admission_number': roll, 'errors': serializer.errors})
+            continue
+
+        # Build object in memory — set_password() does NOT touch the DB
+        student = Student(
+            email=serializer.validated_data['email'],
+            admission_number=serializer.validated_data['admission_number'],
+        )
+        default_pwd = get_default_password(student.admission_number)
+        student.set_password(default_pwd)
+
+        to_create.append(student)
+        seen_rolls.add(roll)    # prevent within-batch duplicates
+        seen_emails.add(email)
+
+    # ── Step 3: Single bulk INSERT — holds the write lock for milliseconds ───
+    created_count = 0
+    if to_create:
+        from django.db import transaction
+        with transaction.atomic():
+            created_objs = Student.objects.bulk_create(to_create, batch_size=500)
+            created_count = len(created_objs)
 
     return Response({'created': created_count, 'duplicates': duplicates, 'errors': errors})
+
 
 
 @csrf_exempt
@@ -727,3 +753,26 @@ def student_bulk_delete(request):
         StudentLocation.objects.filter(roll_no__in=admission_numbers).delete()
 
     return Response({'deleted': deleted_count})
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def student_clear_all(request):
+    """
+    POST /api/students/clear_all/
+    Admin-only: deletes ALL students and ALL their location entries atomically.
+    Returns { deleted: int }
+    """
+    if not is_admin_authorized(request):
+        return Response({'detail': 'Admin auth required.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    from django.db import transaction
+    with transaction.atomic():
+        admission_numbers = list(Student.objects.values_list('admission_number', flat=True))
+        count = Student.objects.count()
+        Student.objects.all().delete()
+        if admission_numbers:
+            StudentLocation.objects.filter(roll_no__in=admission_numbers).delete()
+
+    return Response({'deleted': count})
