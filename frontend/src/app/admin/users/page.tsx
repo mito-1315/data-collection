@@ -36,9 +36,9 @@ interface ImportJob {
   errors: ImportError[];
   duplicates: DuplicateEntry[];
   showErrors: boolean;
+  batchSize: number;
 }
 
-const BATCH_SIZE = 100;
 const CONCURRENCY = 5; // 5 parallel requests at a time
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
@@ -128,11 +128,11 @@ export default function UsersPage() {
   };
 
   // ── Background batch import (5 parallel workers) ────────────────────────────
-  const startBatchImport = async (rows: ParsedStudentRow[]) => {
-    // Build batches of BATCH_SIZE
+  const startBatchImport = async (rows: ParsedStudentRow[], batchSize: number) => {
+    // Build batches of batchSize
     const batches: ParsedStudentRow[][] = [];
-    for (let i = 0; i < rows.length; i += BATCH_SIZE) {
-      batches.push(rows.slice(i, i + BATCH_SIZE));
+    for (let i = 0; i < rows.length; i += batchSize) {
+      batches.push(rows.slice(i, i + batchSize));
     }
 
     // Mutable job object — we spread into state after each group so React re-renders
@@ -147,6 +147,7 @@ export default function UsersPage() {
       errors: [],
       duplicates: [],
       showErrors: false,
+      batchSize,
     };
 
     setImportJob({ ...job });
@@ -324,7 +325,7 @@ export default function UsersPage() {
                   <span className="import-banner-spinner" />
                 )}
                 {importJob.status === 'running'
-                  ? `Importing ${importJob.totalRows.toLocaleString()} students (${CONCURRENCY} parallel workers)…`
+                  ? `Importing ${importJob.totalRows.toLocaleString()} students (batch ${importJob.batchSize}, ${CONCURRENCY} workers)…`
                   : importJob.status === 'cancelled'
                   ? '⛔ Import cancelled'
                   : `✅ Import complete — ${importJob.created.toLocaleString()} students added`}
@@ -525,9 +526,9 @@ export default function UsersPage() {
         <AddUserModal
           onClose={() => setShowAddModal(false)}
           onRefresh={fetchUsers}
-          onStartImport={(rows) => {
-            setShowAddModal(false);     // Close modal immediately
-            startBatchImport(rows);     // Run import in background
+          onStartImport={(rows, batchSize) => {
+            setShowAddModal(false);            // Close modal immediately
+            startBatchImport(rows, batchSize); // Run import in background
           }}
         />
       )}
