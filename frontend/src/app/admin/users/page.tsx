@@ -154,33 +154,30 @@ export default function UsersPage() {
     <div>
       <header className="admin-page-header">
         <h1>Users Management</h1>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <button className="btn-submit" style={{ width: 'auto', padding: '10px 16px', background: 'var(--bg-card)', border: '1px solid var(--accent-border)' }} onClick={exportData}>
+        <div className="admin-page-actions">
+          <button className="admin-btn admin-btn-secondary" onClick={exportData}>
             📥 Export Data
           </button>
-          <button className="btn-submit" style={{ width: 'auto', padding: '10px 16px' }} onClick={() => setShowAddModal(true)}>
+          <button className="admin-btn admin-btn-primary" onClick={() => setShowAddModal(true)}>
             + Add User
           </button>
         </div>
       </header>
 
-      <div style={{ padding: 32 }}>
-        {/* Toolbar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <div className="admin-page-body">
+        <div className="admin-toolbar">
+          <div className="admin-toolbar-filters">
             <input
               type="text"
-              className="form-input"
+              className="form-input admin-search-input"
               placeholder="Search by email or admission no..."
               value={search}
               onChange={e => { setSearch(e.target.value); setPage(1); }}
-              style={{ width: 300 }}
             />
             <select
-              className="form-input"
+              className="form-input admin-filter-select"
               value={filterStatus}
               onChange={e => { setFilterStatus(e.target.value); setPage(1); }}
-              style={{ width: 150 }}
             >
               <option value="ALL">All Status</option>
               <option value="FILLED">Filled</option>
@@ -190,16 +187,7 @@ export default function UsersPage() {
               id="load-roads-btn"
               onClick={handleLoadRoads}
               disabled={loadingRoads}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 7,
-                padding: '10px 16px',
-                background: loadingRoads ? 'rgba(155,89,245,0.3)' : 'rgba(155,89,245,0.15)',
-                border: '1px solid rgba(155,89,245,0.5)',
-                color: '#c084fc',
-                borderRadius: 8, cursor: loadingRoads ? 'not-allowed' : 'pointer',
-                fontWeight: 600, fontSize: 13, whiteSpace: 'nowrap',
-                transition: 'background 0.2s',
-              }}
+              className="admin-load-roads-btn"
             >
               {loadingRoads ? (
                 <><div className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} /> Loading…</>
@@ -208,96 +196,73 @@ export default function UsersPage() {
               )}
             </button>
             {roadsMsg && (
-              <span style={{
-                fontSize: 13, fontWeight: 500,
-                color: roadsMsg.ok ? '#50fa7b' : '#ff5555',
-                background: roadsMsg.ok ? 'rgba(80,250,123,0.08)' : 'rgba(255,85,85,0.08)',
-                border: `1px solid ${roadsMsg.ok ? 'rgba(80,250,123,0.25)' : 'rgba(255,85,85,0.25)'}`,
-                borderRadius: 6, padding: '6px 12px',
-              }}>{roadsMsg.text}</span>
+              <span className={`admin-roads-msg ${roadsMsg.ok ? 'admin-roads-msg-ok' : 'admin-roads-msg-err'}`}>
+                {roadsMsg.text}
+              </span>
             )}
           </div>
 
           {selectedIds.size > 0 && (
-            <button className="btn-submit" style={{ width: 'auto', background: '#ff5555', color: '#fff', padding: '8px 16px' }} onClick={handleBulkDelete}>
+            <button className="admin-btn admin-btn-danger" onClick={handleBulkDelete}>
               🗑️ Delete Selected ({selectedIds.size})
             </button>
           )}
         </div>
 
-        {/* Table */}
-        <div style={{ background: 'var(--bg-card)', borderRadius: 12, border: '1px solid var(--accent-border)', overflow: 'hidden' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+        <div className="admin-table-wrap">
+          <table className="admin-table">
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--accent-border)' }}>
-                <th style={{ padding: '16px', width: 40 }}>
+              <tr>
+                <th className="admin-table-check">
                   <input
                     type="checkbox"
                     checked={paginatedUsers.length > 0 && selectedIds.size === paginatedUsers.length}
                     onChange={toggleSelectAll}
                   />
                 </th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Admission Number</th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Email</th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Password</th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Status</th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Latitude</th>
-                <th style={{ padding: '16px', color: 'var(--text-secondary)', fontWeight: 500 }}>Longitude</th>
+                <th>Admission Number</th>
+                <th>Email</th>
+                <th className="admin-table-hide-sm">Password</th>
+                <th>Status</th>
+                <th className="admin-table-hide-xs">Latitude</th>
+                <th className="admin-table-hide-xs">Longitude</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={7} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>Loading users...</td></tr>
+                <tr><td colSpan={7} className="admin-table-empty">Loading users...</td></tr>
               ) : paginatedUsers.length === 0 ? (
-                <tr><td colSpan={7} style={{ padding: 32, textAlign: 'center', color: 'var(--text-secondary)' }}>No users found.</td></tr>
+                <tr><td colSpan={7} className="admin-table-empty">No users found.</td></tr>
               ) : (
                 paginatedUsers.map(u => (
-                  <tr key={u.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <td style={{ padding: '16px' }}>
+                  <tr key={u.id}>
+                    <td className="admin-table-check">
                       <input type="checkbox" checked={selectedIds.has(u.id)} onChange={() => toggleSelect(u.id)} />
                     </td>
-                    <td style={{ padding: '16px', color: '#fff', fontFamily: 'monospace' }}>{u.admission_number}</td>
-                    <td style={{ padding: '16px', color: 'var(--text-primary)' }}>{u.email}</td>
-                    <td style={{ padding: '16px', color: 'var(--text-secondary)', fontFamily: 'monospace', fontSize: 13 }}>
-                      {u.admission_number}
-                    </td>
-                    <td style={{ padding: '16px' }}>
-                      <span style={{
-                        padding: '4px 10px',
-                        borderRadius: 20,
-                        fontSize: 12,
-                        fontWeight: 600,
-                        background: u.status === 'FILLED' ? 'rgba(80,250,123,0.1)' : 'rgba(255,184,108,0.1)',
-                        color: u.status === 'FILLED' ? '#50fa7b' : '#ffb86c'
-                      }}>
+                    <td className="admin-table-mono">{u.admission_number}</td>
+                    <td>{u.email}</td>
+                    <td className="admin-table-mono admin-table-hide-sm">{u.admission_number}</td>
+                    <td>
+                      <span className={`admin-status-badge ${u.status === 'FILLED' ? 'admin-status-filled' : 'admin-status-unfilled'}`}>
                         {u.status}
                       </span>
                     </td>
-                    <td style={{ padding: '16px', color: 'var(--text-secondary)', fontSize: 13 }}>{u.lat ?? '-'}</td>
-                    <td style={{ padding: '16px', color: 'var(--text-secondary)', fontSize: 13 }}>{u.lng ?? '-'}</td>
+                    <td className="admin-table-muted admin-table-hide-xs">{u.lat ?? '-'}</td>
+                    <td className="admin-table-muted admin-table-hide-xs">{u.lng ?? '-'}</td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
 
-          {/* Pagination */}
           {!loading && totalPages > 1 && (
-            <div style={{ padding: '16px', borderTop: '1px solid var(--accent-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ color: 'var(--text-secondary)', fontSize: 14 }}>
+            <div className="admin-pagination">
+              <div className="admin-pagination-info">
                 Showing {(page - 1) * perPage + 1} to {Math.min(page * perPage, filteredUsers.length)} of {filteredUsers.length}
               </div>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <button
-                  disabled={page === 1}
-                  onClick={() => setPage(p => p - 1)}
-                  style={{ padding: '6px 12px', background: 'var(--bg)', border: '1px solid var(--accent-border)', color: '#fff', borderRadius: 4, cursor: page === 1 ? 'not-allowed' : 'pointer' }}
-                >Prev</button>
-                <button
-                  disabled={page === totalPages}
-                  onClick={() => setPage(p => p + 1)}
-                  style={{ padding: '6px 12px', background: 'var(--bg)', border: '1px solid var(--accent-border)', color: '#fff', borderRadius: 4, cursor: page === totalPages ? 'not-allowed' : 'pointer' }}
-                >Next</button>
+              <div className="admin-pagination-btns">
+                <button disabled={page === 1} onClick={() => setPage(p => p - 1)}>Prev</button>
+                <button disabled={page === totalPages} onClick={() => setPage(p => p + 1)}>Next</button>
               </div>
             </div>
           )}

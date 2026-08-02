@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
@@ -178,7 +179,12 @@ export default function LoginPage() {
           </div>
 
           <div className="form-field">
-            <label className="login-field-label" htmlFor="password">Password</label>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+              <label className="login-field-label" htmlFor="password">Password</label>
+              <Link href="/forgot-password" className="login-forgot-link">
+                Forgot password?
+              </Link>
+            </div>
             <input
               id="password"
               type="password"

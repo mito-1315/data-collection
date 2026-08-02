@@ -19,4 +19,4 @@ RUN mkdir -p log && python manage.py collectstatic --noinput
 
 EXPOSE 8001
 
-CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8001 --workers 2 --timeout 60"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8001 --workers 8 --timeout 60 --keep-alive 5 --worker-connections 1000"]

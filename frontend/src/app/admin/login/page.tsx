@@ -38,8 +38,8 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)' }}>
-      <div className="login-card" style={{ width: 400 }}>
+    <div className="admin-login-page">
+      <div className="login-card admin-login-card">
         <div className="login-logo">
           <div className="login-icon">🛡️</div>
           <h2>Admin Portal Login</h2>

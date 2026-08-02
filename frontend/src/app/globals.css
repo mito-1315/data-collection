@@ -201,6 +201,25 @@ a {
   color: var(--red);
 }
 
+.login-success {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--green);
+}
+
+.login-forgot-link {
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.login-forgot-link:hover {
+  text-decoration: underline;
+}
+
 /* Slideshow dots */
 .login-dots {
   display: flex;

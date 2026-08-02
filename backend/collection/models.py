@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
+from django.utils import timezone
 
 
 class Department(models.Model):
@@ -46,6 +49,28 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.admission_number} – {self.email}'
+
+
+class PasswordReset(models.Model):
+    CODE_TTL = timedelta(minutes=15)
+    MAX_ATTEMPTS = 5
+
+    student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='password_reset')
+    code = models.CharField(max_length=10)
+    new_password = models.CharField(max_length=128)
+    created_at = models.DateTimeField(default=timezone.now)
+    attempts = models.PositiveIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if self.new_password and not self.new_password.startswith('bcrypt') and not self.new_password.startswith('pbkdf2'):
+            self.new_password = make_password(self.new_password)
+        super().save(*args, **kwargs)
+
+    def is_expired(self):
+        return timezone.now() > self.created_at + self.CODE_TTL
+
+    def __str__(self):
+        return f'Password reset for {self.student.email}'
 
 
 class StudentLocation(models.Model):

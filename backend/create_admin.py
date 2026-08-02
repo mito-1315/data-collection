@@ -25,7 +25,7 @@ Usage:
 Configure via environment variables (or .env file):
     PORTAL_ADMIN_USERNAME   — defaults to 'admin'
     PORTAL_ADMIN_EMAIL      — defaults to 'admin@example.com'
-    PORTAL_ADMIN_PASSWORD   — defaults to 'admin123'  ← CHANGE THIS IN PRODUCTION
+    PORTAL_ADMIN_PASSWORD   — required, no default
 """
 
 import os
@@ -41,7 +41,11 @@ def create_admin():
     User = get_user_model()
     username = os.environ.get('PORTAL_ADMIN_USERNAME', 'admin')
     email = os.environ.get('PORTAL_ADMIN_EMAIL', 'admin@example.com')
-    password = os.environ.get('PORTAL_ADMIN_PASSWORD', 'admin123')
+    # No default: a well-known fallback password on a publicly reachable
+    # admin panel is a standing invitation.
+    password = os.environ.get('PORTAL_ADMIN_PASSWORD')
+    if not password:
+        raise SystemExit('PORTAL_ADMIN_PASSWORD must be set (no default is provided).')
 
     if User.objects.filter(username=username).exists():
         print(f"Admin user '{username}' already exists. Updating password and email...")

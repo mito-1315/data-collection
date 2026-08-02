@@ -9,11 +9,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    // If we're on the login page, don't check for auth or render sidebar
     if (pathname === '/admin/login') {
-      setIsAdmin(true); // Allow render
+      setIsAdmin(true);
       return;
     }
 
@@ -40,12 +40,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           localStorage.removeItem('token');
           router.replace('/admin/login');
         }
-      } catch (e) {
+      } catch {
         router.replace('/admin/login');
       }
     };
     checkAuth();
   }, [pathname, router]);
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     localStorage.removeItem('token');
@@ -60,17 +65,32 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return <div className="admin-loading">Checking authorization...</div>;
   }
 
-  // Login page doesn't get the sidebar
   if (pathname === '/admin/login') {
     return <>{children}</>;
   }
 
   return (
     <div className="admin-layout">
-      {/* Sidebar */}
-      <aside className="admin-sidebar">
+      {sidebarOpen && (
+        <button
+          type="button"
+          className="admin-sidebar-backdrop"
+          aria-label="Close menu"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <aside className={`admin-sidebar ${sidebarOpen ? 'admin-sidebar-open' : ''}`}>
         <div className="admin-sidebar-header">
           <div className="admin-logo">🛡️ Admin Portal</div>
+          <button
+            type="button"
+            className="admin-sidebar-close"
+            aria-label="Close menu"
+            onClick={() => setSidebarOpen(false)}
+          >
+            ✕
+          </button>
         </div>
         <nav className="admin-nav">
           <Link href="/admin/users" className={`admin-nav-item ${pathname === '/admin/users' ? 'active' : ''}`}>
@@ -82,10 +102,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="admin-main-content">
-        {children}
-      </main>
+      <div className="admin-main-wrap">
+        <header className="admin-mobile-topbar">
+          <button
+            type="button"
+            className="admin-menu-btn"
+            aria-label="Open menu"
+            onClick={() => setSidebarOpen(true)}
+          >
+            ☰
+          </button>
+          <span className="admin-mobile-title">Admin Portal</span>
+        </header>
+        <main className="admin-main-content">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

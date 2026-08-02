@@ -5,16 +5,22 @@ from pathlib import Path
 from django.conf import settings
 from django.contrib.auth import login, logout
 from django.http import HttpResponse, JsonResponse
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, throttle_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from .models import StudentLocation, RoadSegment, Student, LoginConfig
+from django.utils.crypto import constant_time_compare
+from django.utils.crypto import get_random_string
+
+from .models import StudentLocation, RoadSegment, Student, LoginConfig, PasswordReset
 from .serializers import StudentLocationSerializer, StudentSerializer
+from .throttling import LoginIPThrottle, LoginEmailThrottle, PasswordResetIPThrottle, PasswordResetEmailThrottle
+from .email_utils import send_email
 
 
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -54,6 +60,20 @@ def is_admin_authorized(request):
     return payload is not None and payload.get('role') == 'admin'
 
 
+def admin_only(request):
+    """Guard for endpoints exposing every student's data.
+
+    Returns an error Response when the caller is not an admin, else None.
+    A plain student token must never reach bulk reads, edits or exports —
+    students read their own submission via /api/auth/my-entry/.
+    """
+    if not get_jwt_payload(request):
+        return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
+    if not is_admin_authorized(request):
+        return Response({'detail': 'Administrator access required.'}, status=status.HTTP_403_FORBIDDEN)
+    return None
+
+
 # ─── Auth ─────────────────────────────────────────────────────────────────────
 
 @csrf_exempt
@@ -63,21 +83,22 @@ def login_status_view(request):
     """
     GET /api/auth/login-status/
     Returns the current login gate configuration:
-      { is_open, note_message, bypass_emails }
-    Used by the frontend to conditionally show the notice banner
-    and enable/disable the Sign In button.
+      { is_open, note_message }
+    Used by the frontend to show the notice banner. The bypass list is
+    deliberately withheld — it enumerates privileged accounts. Whether a given
+    email may bypass the gate is decided by the backend during login.
     """
     config = LoginConfig.get_solo()
     return Response({
         'is_open': config.is_open,
         'note_message': config.note_message,
-        'bypass_emails': config.get_bypass_list(),
     })
 
 
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
+@throttle_classes([LoginIPThrottle, LoginEmailThrottle])
 def login_view(request):
     """
     POST /api/auth/login/
@@ -95,10 +116,11 @@ def login_view(request):
 
     # 1. Check if admin (Django auth.User with is_staff=True)
     # Admin accounts always bypass the login gate.
+    # Iterate rather than .get(): duplicate accounts sharing an email would
+    # otherwise raise MultipleObjectsReturned and 500 the login endpoint.
     from django.contrib.auth.models import User
-    try:
-        admin_user = User.objects.get(email__iexact=email)
-        if admin_user.check_password(password) and admin_user.is_staff:
+    for admin_user in User.objects.filter(email__iexact=email, is_staff=True, is_active=True):
+        if admin_user.check_password(password):
             token = RefreshToken.for_user(admin_user)
             token['role'] = 'admin'
             token['email'] = email
@@ -108,8 +130,6 @@ def login_view(request):
                 'access': str(token.access_token),
                 'refresh': str(token)
             })
-    except User.DoesNotExist:
-        pass
 
     # 2. Check login gate before allowing student authentication
     config = LoginConfig.get_solo()
@@ -143,6 +163,102 @@ def login_view(request):
     return Response(
         {'detail': 'Invalid email or password.'},
         status=status.HTTP_401_UNAUTHORIZED,
+    )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@throttle_classes([PasswordResetIPThrottle, PasswordResetEmailThrottle])
+def forgot_password_view(request):
+    """
+    POST /api/auth/forgot_password/
+    Request reset: { email, password }
+    Confirm reset: { email, token }
+    """
+    if request.data.get('token'):
+        return _confirm_password_reset(
+            request.data.get('email', ''),
+            request.data.get('token', ''),
+        )
+
+    email = (request.data.get('email') or '').strip()
+    password = request.data.get('password') or ''
+
+    if not email or not password:
+        return Response(
+            {'detail': 'Both email and new password are required.', 'code': 'missing_credentials'},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    try:
+        student = Student.objects.get(email__iexact=email)
+    except Student.DoesNotExist:
+        return Response(
+            {'detail': 'No account found with this email.', 'code': 'user_not_found'},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    verification_code = get_random_string(length=8)
+    reset, _ = PasswordReset.objects.get_or_create(student=student)
+    reset.code = verification_code
+    reset.new_password = password
+    reset.created_at = timezone.now()
+    reset.attempts = 0
+    reset.save()
+
+    try:
+        send_email(
+            subject='Password Reset — REC Transport',
+            to_email=student.email,
+            context={'verification_code': verification_code},
+            template_name='forgot_password.html',
+        )
+    except Exception:
+        return Response(
+            {'detail': 'Could not send verification email. Please try again later.', 'code': 'email_failed'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )
+
+    return Response(
+        {'detail': 'Verification code sent to your email.', 'code': 'reset_email_sent'},
+        status=status.HTTP_200_OK,
+    )
+
+
+def _confirm_password_reset(email, token):
+    invalid = Response(
+        {'detail': 'Invalid or expired code.', 'code': 'invalid_code'},
+        status=status.HTTP_400_BAD_REQUEST,
+    )
+
+    email = (email or '').strip()
+    token = (token or '').strip()
+    if not email or not token:
+        return invalid
+
+    try:
+        student = Student.objects.get(email__iexact=email)
+        reset = PasswordReset.objects.get(student=student)
+    except (Student.DoesNotExist, PasswordReset.DoesNotExist):
+        return invalid
+
+    if reset.is_expired() or reset.attempts >= PasswordReset.MAX_ATTEMPTS:
+        reset.delete()
+        return invalid
+
+    if not constant_time_compare(reset.code, token):
+        reset.attempts += 1
+        reset.save(update_fields=['attempts'])
+        return invalid
+
+    student.password = reset.new_password
+    student.save(update_fields=['password'])
+    reset.delete()
+
+    return Response(
+        {'detail': 'Password reset successful. You can now sign in.', 'code': 'reset_success'},
+        status=status.HTTP_200_OK,
     )
 
 
@@ -230,6 +346,9 @@ def student_location_list(request):
         return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     if request.method == 'GET':
+        denied = admin_only(request)
+        if denied:
+            return denied
         entries = StudentLocation.objects.all()
         serializer = StudentLocationSerializer(entries, many=True)
         return Response(serializer.data)
@@ -273,9 +392,9 @@ def student_location_detail(request, pk):
     PUT    /api/entries/<pk>/  – update (overwrite) an entry
     DELETE /api/entries/<pk>/  – delete an entry
     """
-    portal_user = _require_portal_auth(request)
-    if not portal_user:
-        return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
+    denied = admin_only(request)
+    if denied:
+        return denied
 
     try:
         entry = StudentLocation.objects.get(pk=pk)
@@ -307,9 +426,9 @@ def export_csv(request):
     GET /api/entries/export/
     Streams all entries as a CSV file download.
     """
-    portal_user = _require_portal_auth(request)
-    if not portal_user:
-        return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
+    denied = admin_only(request)
+    if denied:
+        return denied
 
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="student_locations.csv"'
@@ -338,9 +457,9 @@ def export_csv(request):
 @permission_classes([AllowAny])
 def stats_view(request):
     """GET /api/stats/ – basic counts for a dashboard."""
-    portal_user = _require_portal_auth(request)
-    if not portal_user:
-        return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
+    denied = admin_only(request)
+    if denied:
+        return denied
 
     return Response({
         'total_entries': StudentLocation.objects.count(),
@@ -382,7 +501,7 @@ def load_roads_view(request):
 
     if not road_geojson_path().exists():
         return Response(
-            {'detail': f'GeoJSON file not found on server: {road_geojson_path()}'},
+            {'detail': 'Road GeoJSON dataset is not available on the server.'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
 
