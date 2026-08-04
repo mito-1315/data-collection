@@ -168,7 +168,7 @@ def login_view(request):
             has_submitted = StudentLocation.objects.filter(roll_no=student.admission_number).exists()
             token = RefreshToken()
             token['user_id'] = f"student_{student.id}"
-            token['email'] = email
+            token['email'] = student.email
             token['role'] = 'student'
             return Response({
                 'email': email,
@@ -307,7 +307,7 @@ def me_view(request):
         admission_number = None
         if role == 'student':
             try:
-                student = Student.objects.get(email=email)
+                student = Student.objects.get(email__iexact=email)
                 has_submitted = StudentLocation.objects.filter(roll_no=student.admission_number).exists()
                 admission_number = student.admission_number
             except Student.DoesNotExist:
@@ -341,7 +341,7 @@ def my_entry_view(request):
         return Response({'detail': 'Only students can access this endpoint.'}, status=status.HTTP_403_FORBIDDEN)
 
     try:
-        student = Student.objects.get(email=email)
+        student = Student.objects.get(email__iexact=email)
     except Student.DoesNotExist:
         return Response({'detail': 'Student not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -381,7 +381,7 @@ def student_location_list(request):
     if payload and payload.get('role') == 'student':
         email = payload.get('email')
         try:
-            student = Student.objects.get(email=email)
+            student = Student.objects.get(email__iexact=email)
             # Enforce one-submission rule
             if StudentLocation.objects.filter(roll_no=student.admission_number).exists():
                 existing = StudentLocation.objects.get(roll_no=student.admission_number)
@@ -611,7 +611,7 @@ def student_list(request):
     # Check for duplicates before attempting creation
     roll = str(data.get('admission_number', '')).strip()
     email_val = str(data.get('email', '')).strip()
-    existing = Student.objects.filter(admission_number=roll).first() or Student.objects.filter(email=email_val).first()
+    existing = Student.objects.filter(admission_number=roll).first() or Student.objects.filter(email__iexact=email_val).first()
     if existing:
         return Response({
             'detail': 'Student already exists.',
