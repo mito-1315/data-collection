@@ -34,6 +34,27 @@ def get_default_password(admission_number: str) -> str:
     return admission_number.strip()
 
 
+def _admission_password_candidates(raw_password: str) -> list[str]:
+    """Accept admission numbers with or without a leading zero."""
+    pwd = raw_password.strip()
+    if not pwd:
+        return []
+    stripped = pwd.lstrip('0') or '0'
+    candidates = [pwd]
+    if stripped != pwd:
+        candidates.append(stripped)
+    if len(stripped) == 10:
+        candidates.append(stripped.zfill(11))
+    return candidates
+
+
+def check_student_password(student, raw_password: str) -> bool:
+    for candidate in _admission_password_candidates(raw_password):
+        if student.check_password(candidate):
+            return True
+    return False
+
+
 def get_jwt_payload(request):
     """Manually decode our custom JWT without using DRF's authenticator."""
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
@@ -142,7 +163,7 @@ def login_view(request):
     # 3. Check if student (custom Student model — password = full admission_number)
     try:
         student = Student.objects.get(email__iexact=email)
-        if student.check_password(password):
+        if check_student_password(student, password):
             # Check if student has already submitted a location entry
             has_submitted = StudentLocation.objects.filter(roll_no=student.admission_number).exists()
             token = RefreshToken()
